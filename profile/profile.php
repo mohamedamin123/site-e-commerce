@@ -12,9 +12,6 @@
 
 <body>
 
-
-
-
     <section class="vh-150 gradient-custom">
         <div class="container py-5 h-150">
             <div class="row d-flex justify-content-center align-items-center h-150">
@@ -31,8 +28,8 @@
                                     <div class="position-relative">
                                         <!-- IMAGE-->
                                         <img src="../assets/images/user.png" alt="User photo" class="rounded-circle img-thumbnail" style="width: 250px; height: 250px;">
-
                                     </div>
+                                <form id="myForm" action="testProfile.php" method="post">
                                 </div>
                                 <div class="form-outline form-white mb-4 mt-3">
 
@@ -90,13 +87,13 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     <button onclick="valider()" class="btn btn-outline-light btn-lg me-3" type="button" style="width: 350px; height: 50px;">Sauvegarde</button>
                                 </div>
-
+                                </form>
+                                <form action="../new_pass/new_pass.php" method="get">
                                 <div class="d-flex justify-content-center align-items-center mt-4 ">
-                                    <button (click)="change()" class="btn btn-outline-light btn-lg me-3" type="submit" style="width: 350px; height: 50px;">Change mot de passe</button>
+                                    <button onclick="change();" class="btn btn-outline-light btn-lg me-3" type="submit" style="width: 350px; height: 50px;">Change mot de passe</button>
                                 </div>
-
+                                </form>
                                 <div class="small text-success mt-2" id="msgSuccess" style="font-weight: bold; font-size: 1.2rem"></div>
-
                             </div>
                         </div>
                     </div>

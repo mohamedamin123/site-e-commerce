@@ -59,7 +59,7 @@
                                 </div>
 
 
-                                <p class="small mb-2 pb-lg-2"><a class="text-white-50" href="/mot-de-passe-oublié">Mot de passe oublié ?</a></p>
+                                <p class="small mb-2 pb-lg-2"><a class="text-white-50" href="../oublier/oublier.php">Mot de passe oublié ?</a></p>
 
                                 <button class="btn btn-outline-light btn-lg px-5 mb-4" type="button" onclick="valideCompte();"  style="width: 350px; height: 50px;">Login</button>
 
@@ -68,7 +68,7 @@
                                 <div class="border-bottom mx-0 mt-3"></div>
                                 <div>
                                     <p class="mt-5 mb-0">Vous n'avez pas de compte ?</p>
-                                    <a href="/register" class="text-white-50 fw-bold">Construire un nouveau compte</a>
+                                    <a href="../register/register.php" class="text-white-50 fw-bold">Construire un nouveau compte</a>
                                 </div>
                                 <div>
                                     <p class="mt-5 mb-0">Voulez vous accéder à la page d'accueil</p>

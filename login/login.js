@@ -13,7 +13,7 @@ function valideCompte() {
         errorEmail.textContent = "saisir votre email";
     }
     else if (!/@/.test(userEmail)) {
-        errorEmail.textContent = "Votre email doit contenir le caractere @";
+        errorEmail.textContent = "Votre email incorrect";
     }
     else if(userPass.trim()=='') {
         errorPass.textContent = "Saisir votre mot de passe";
