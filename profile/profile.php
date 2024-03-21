@@ -50,7 +50,7 @@
                                         <span class="input-group-text">
                                             <i class="fas fa-user"></i>
                                         </span>
-                                        <input type="text" id="typPrenom" class="form-control form-control-lg" placeholder="Prenom" />
+                                        <input type="text" id="typePrenom" class="form-control form-control-lg" placeholder="Prenom" />
                                     </div>
                                     <div class="small text-danger mt-2" id="prenomError"></div>
                                 </div>
@@ -61,7 +61,7 @@
                                         <span class="input-group-text">
                                             <i class="fas fa-user"></i>
                                         </span>
-                                        <input type="email" id="typeemail" class="form-control form-control-lg" placeholder="Email" value=<?php echo isset($_GET["email"]) ? $_GET["email"] : ''; ?> readonly/>
+                                        <input type="email" id="typeEmail" class="form-control form-control-lg" placeholder="Email" value=<?php echo isset($_GET["email"]) ? $_GET["email"] : ''; ?> readonly/>
                                     </div>
                                 </div>
 
@@ -88,7 +88,7 @@
 
                                 <div class="border-bottom  mb-4"></div>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <button (click)="change()" class="btn btn-outline-light btn-lg me-3" type="submit" style="width: 350px; height: 50px;">Sauvegarde</button>
+                                    <button onclick="valider()" class="btn btn-outline-light btn-lg me-3" type="button" style="width: 350px; height: 50px;">Sauvegarde</button>
                                 </div>
 
                                 <div class="d-flex justify-content-center align-items-center mt-4 ">
