@@ -1,0 +1,32 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #a358e8;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    }
+
+    .input-group .password-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+    
+    .input-group .password-icon.hide {
+        display: none;
+    }
+    .asl-google-signin-button {
+        width: 500px !important;
+    }
+            
+
+    #googlebutton.custom-google-button button {
+        height: 50px; /* Remplacez la valeur par la hauteur souhaitée */
+        width: 350px; /* Remplacez la valeur par la largeur souhaitée */
+    }
+    
