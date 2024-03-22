@@ -1,3 +1,22 @@
+let showPasswordIcon = document.getElementById("showPassword");
+let hidePasswordIcon = document.getElementById("hidePassword");
+let passwordInput = document.getElementById("typePass"); 
+
+
+
+
+showPasswordIcon.addEventListener("click", function() {
+    showPasswordIcon.style.display = "none";
+    hidePasswordIcon.style.display = "block";
+    passwordInput.type = "password";
+});
+
+hidePasswordIcon.addEventListener("click", function() {
+    hidePasswordIcon.style.display = "none";
+    showPasswordIcon.style.display = "block";
+    passwordInput.type = "text";
+});
+
 
 function valider() {
     nb=true;

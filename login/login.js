@@ -1,3 +1,23 @@
+let showPasswordIcon = document.getElementById("showPassword");
+let hidePasswordIcon = document.getElementById("hidePassword");
+let passwordInput = document.getElementById("typePasswordX"); 
+
+
+
+
+showPasswordIcon.addEventListener("click", function() {
+    showPasswordIcon.style.display = "none";
+    hidePasswordIcon.style.display = "block";
+    passwordInput.type = "password";
+});
+
+hidePasswordIcon.addEventListener("click", function() {
+    hidePasswordIcon.style.display = "none";
+    showPasswordIcon.style.display = "block";
+    passwordInput.type = "text";
+});
+
+
 function valideCompte() {
 
     let userPass = document.getElementById('typePasswordX').value;
@@ -6,7 +26,7 @@ function valideCompte() {
     let userEmail = document.getElementById('typeEmailX').value;
     let errorEmail = document.getElementById('emailError');
 
-    errorEmail.textContent = "";
+    z.textContent = "";
     errorPass.textContent = "";
 
     if(userEmail.trim()=='') {

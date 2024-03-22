@@ -7,6 +7,7 @@
     <title>Oublier mot de passe</title>
     <link rel="stylesheet" href="oublier.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="oublier.js"></script>
 </head>
 
@@ -31,7 +32,7 @@
                                         <span class="input-group-text">
                                             <i class="fas fa-envelope"></i>
                                         </span>
-                                        <input type="email" id="typeEmailX" class="form-control form-control-lg" placeholder="Email" />
+                                        <input type="email" name="email" id="typeEmailX" class="form-control form-control-lg" placeholder="Email" />
                                     </div>
                                     <div class="small text-danger mt-2" id="emailError"></div>
                                 </div>

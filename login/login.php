@@ -7,7 +7,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <script src="login.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -48,9 +48,10 @@
                                         </span>
                                         <input type="password" id="typePasswordX" class="form-control form-control-lg" name="pass" placeholder="Mot de passe" style="padding-right: 40px;" required/>
                                         <div style=" padding: 20px; background-color: white;">
-                                            <div class="input-group" style="position: absolute; top: 50%; right:2px; transform: translateY(-50%);">
-                                                <i class="far fa-eye password-icon" id="showPasswordIcon" style="cursor: pointer; color: black;"></i>
-                                                <i class="far fa-eye-slash password-icon" id="hidePasswordIcon" style="cursor: pointer; color: black; display: none;"></i>
+                                        <div class="input-group" style="position: absolute; top: 50%; right: 2px; transform: translateY(-50%);">
+                                                <!-- Utilisation d'éléments <i> pour les icônes et de l'attribut onclick pour gérer les événements -->
+                                                <i id="showPassword" class="far fa-eye password-icon" style="display: none;"></i>
+                                                <i id="hidePassword" class="far fa-eye-slash password-icon" style="display: block;"></i>
                                             </div>
                                         </div>
 
@@ -81,6 +82,7 @@
             </div>
         </div>
     </section>
+    <script src="login.js"></script>
 
 </body>
 

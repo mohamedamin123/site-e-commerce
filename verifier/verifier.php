@@ -7,7 +7,7 @@
     <title>Verifier</title>
     <link rel="stylesheet" href="verifier.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <script src="verifier.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -24,18 +24,48 @@
                                 <p class="text-white-50 ">Veuillez saisir le code qui a été envoyé dans votre email </p><br>
 
                                 <img src="../assets/images/security.png" alt="" width="250" height="250">
-                                <div class="pin-input-container mt-4">
-                                    <input min="0" max="9" type="number" class="pin-input" #input1 maxlength="1" (input)="onInput(input1)" (keydown)="onBackspace($event, input1)" pattern="[0-9]* " onpaste="return false;">
-                                    <input  min="0" max="9" type="number" class="pin-input" #input2 maxlength="1" (input)="onInput(input2)" (keydown)="onBackspace($event, input2)" pattern="[0-9]*" onpaste="return false;" />
-                                    <input  min="0" max="9" type="number" class="pin-input" #input3 maxlength="1" (input)="onInput(input3)" (keydown)="onBackspace($event, input3)" pattern="[0-9]*" onpaste="return false;" />
-                                    <input  min="0" max="9" type="number" class="pin-input" #input4 maxlength="1" (input)="onInput(input4)" (keydown)="onBackspace($event, input4)" pattern="[0-9]*" onpaste="return false;" />
-                                    <input  min="0" max="9" type="number" class="pin-input" #input5 maxlength="1" (input)="onInput(input5)" (keydown)="onBackspace($event, input5)" pattern="[0-9]*" onpaste="return false;" />
-                                    <input  min="0" max="9" type="text" class="pin-input" #input6 maxlength=1 (input)="onInput(input6)" (keydown)="onBackspace($event, input6)" pattern="[0-9]*" onpaste="return false;" />
-                                </div>
-                                <div class="small text-danger mt-2" id="codeError"></div>
+                                <form action="" method="post">
+                                    <div class="pin-input-container mt-4">
+                                        <?php for ($i = 1; $i <= 6; $i++) { ?>
+                                            <input type="text" class="pin-input" id="input<?= $i ?>" name="input<?= $i ?>" maxlength="1" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                        <?php } ?>
+                                    </div>
+                                    <div class="small text-danger mt-2" id="codeError"></div>
 
+                                    <button class="btn btn-outline-light btn-lg px-5 mb-4 mt-4" type="submit" style="width: 350px; height: 50px;">Continuer</button>
+                                </form>
 
-                                <button  class="btn btn-outline-light btn-lg px-5 mb-4 mt-4" type="submit" style="width: 350px; height: 50px;">Continuer</button>
+                                <?php
+                                session_start(); // Démarrer la session si ce n'est pas déjà fait
+
+                                // Vérifier si le formulaire a été soumis
+                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                    // Récupérer les données de la session
+                                    if (isset($_SESSION['email']) && isset($_SESSION['number'])) {
+                                        $userEmail = $_SESSION['email'];
+                                        $number = $_SESSION['number'];
+                                        $code = "";
+                                        echo"$number";
+
+                                        // Concaténer les valeurs des inputs dans la chaîne
+                                        for ($i = 1; $i <= 6; $i++) {
+                                            $code .= $_POST["input$i"];
+                                        }
+
+                                        // Vérifier si le code est correct
+                                        if ($code == $number) {
+                                            echo "<div style='color: green;'>Le code est correct : $code</div>";
+                                            // Faire quelque chose avec $userEmail
+                                            // Par exemple, afficher ou utiliser l'e-mail
+                                        } else {
+                                            echo "<div style='color: red;'>Le code est incorrect. Veuillez réessayer.</div>";
+                                        }
+                                    } else {
+                                        // Gérer le cas où les données de session ne sont pas définies
+                                    }
+                                }
+                                ?>
+
 
                                 <div class="border-bottom mx-0 mt-3"></div>
                                 <div>
