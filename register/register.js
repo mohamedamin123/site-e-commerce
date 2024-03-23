@@ -17,6 +17,9 @@ hidePasswordIcon.addEventListener("click", function() {
     passwordInput.type = "text";
 });
 
+function signup() {
+    location.href="../login/login.php";
+}
 
 function valider() {
     nb=true;

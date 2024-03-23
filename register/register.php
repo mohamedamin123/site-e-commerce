@@ -8,114 +8,139 @@
     <link rel="stylesheet" href="register.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <section class="vh-120 gradient-custom">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                        <div class="card-body p-5 text-center">
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo">
+                <p>titre de boutique</p>
+                <img src="../assets/images/logo.jpeg" alt="" width="50" height="50" ">
+            </div>
+            <div class=" nav-button">
+                <button class="btn " onclick="signup();" id="loginBtn">Sign In</button>
+                <button class="btn white-btn" id="registerBtn">Sign Up</button>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu"></i>
+            </div>
+        </nav>
+        <div class="card-body p-5">
 
-                            <div class="mb-md-5 mt-md-1 pb-5">
+            <div class="mb-md-2 mt-md-3 ">
 
-                                <h2 class="fw-bold mb-2">S'inscrire</h2>
-                                <p class="text-white-50 ">Veuillez remplir tous les champs</p><br>
+                <h2 class="fw-bold mb-2 titre ">S'inscrire</h2>
+                <p class="text-white-50 text text-center">Veuillez remplir tous les champs</p><br>
 
-                                <img src="../assets/images/logo.jpeg" alt="" width="250" height="175" style="margin-bottom:10px; ">
-                                </div>
-                                <div class="form-outline form-white mb-4 mt-3">
-                                <form id="myForm"action="testRegister.php" method="post">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-user"></i>
-                                        </span>
-                                        <input type="text" id="typeNom" name="nom" class="form-control form-control-lg" placeholder="Nom" />
-                                    </div>
-                                    <div class="small text-danger mt-2" id="nomError"></div>
-                                </div>
+            </div>
 
-                                <div class="form-outline form-white mb-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-user"></i>
-                                        </span>
-                                        <input type="text" id="typePrenom" name="prenom" class="form-control form-control-lg" placeholder="Prenom" />
-                                    </div>
-                                    <div class="small text-danger mt-2" id="prenomError"></div>
-                                </div>
+            <form id="myForm"action="testRegister.php" method="post">
+                <!-----------------------------------NOM------------------------------------->
 
-                                <div class="form-outline form-white mb-4 mt-3">
+                <div class=" form-white   ">
+                    <div class="input-group ">
+                        <div class="input-box d-block mx-auto  ">
 
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-user"></i>
-                                        </span>
-                                        <input type="email" id="typeEmail" name="email" class="form-control form-control-lg" placeholder="Email"/>
-                                    </div>
-                                    <div class="small text-danger mt-2" id="emailError"></div>
-
-                                </div>
-
-
-                                <div class="form-outline form-white mb-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </span>
-                                        <input type="date" id="typeDate" name="date" class="form-control form-control-lg" placeholder="Date de naissance" />
-                                    </div>
-                                    <div class="small text-danger mt-2" id="dateError"></div>
-                                </div>
-                                <div class="form-outline form-white mb-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-phone"></i>
-                                        </span>
-                                        <input type="number" id="typeTel" name="tel" class="form-control form-control-lg" placeholder="Téléphone" />
-                                    </div>
-                                    <div class="small text-danger " id="telError"></div>
-                                </div>
-
-
-                                <div class="form-outline form-white mb-4 mt-3">
-
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-user"></i>
-                                        </span>
-                                        <input type="password" name="pass" id="typePass" class="form-control form-control-lg" placeholder="mot de passe"/>
-                                        <div style=" padding: 20px; background-color: white;">
-                                            <div class="input-group" style="position: absolute; top: 50%; right: 2px; transform: translateY(-50%);">
-                                                <!-- Utilisation d'éléments <i> pour les icônes et de l'attribut onclick pour gérer les événements -->
-                                                <i id="showPassword" class="far fa-eye password-icon" style="display: none;"></i>
-                                                <i id="hidePassword" class="far fa-eye-slash password-icon" style="display: block;"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="small text-danger mt-2" id="passError"></div>
-
-                                </div>
-                                <div class="border-bottom  mb-4"></div>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <button onclick="valider()" class="btn btn-outline-light btn-lg me-3" type="button" style="width: 350px; height: 50px;">Sauvegarde</button>
-                                </div>
-                                <div class="border-bottom mx-0 mt-3"></div>
-                                </form>
-                                <div>
-                                    <p class="mt-5 mb-0">Vous avez contient un compte ?</p>
-                                    <a href="/login/login.php" class="text-white-50 fw-bold">Connecter</a>
-                                </div>
-
-                            </div>
-
+                            <input type="text" id="typeNom" name="nom" class="input-field input-field-long " placeholder="Nom" size="35" required />
+                            <i class="bx bx-user"></i>
                         </div>
                     </div>
+                    <div class="small text-danger mt-2 mb-2 text text-center" id="nomError"></div>
                 </div>
+                <!-----------------------------------/NOM------------------------------------->
+
+                <!-----------------------------------PRENOM------------------------------------->
+
+                <div class=" form-white ">
+                    <div class="input-group" style="position: relative; ">
+                        <div class="input-box d-block mx-auto ">
+                            <input type="text" id="typePrenom" name="prenom" class="input-field input-field-long" placeholder="Prenom" size="35" required />
+                            <i class="bx bx-user"></i>
+                        </div>
+                    </div>
+                    <div class="small text-danger mt-2 mb-2 text text-center" id="prenomError"></div>
+                </div>
+                <!-----------------------------------/PRENOM------------------------------------->
+
+                <!-----------------------------------EMAIL------------------------------------->
+
+                <div class="form-outline form-white ">
+                    <div class="input-group">
+                        <div class="input-box d-block mx-auto ">
+                            <input type="email" name="email" id="typeEmail" class="input-field input-field-long" placeholder="Email" size="35" required>
+                            <i class="bx bx-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="small text-danger mt-2 mb-2 text text-center" id="emailError"></div>
+                </div>
+                <!-----------------------------------/EMAIL------------------------------------->
+
+
+                <!-----------------------------------DATE------------------------------------->
+
+                <div class="form-outline form-white mb-4 ">
+                    <div class="input-group">
+                        <div class="input-box mx-auto ">
+                            <i class="bx bx-calendar" style="position:absolute; left:605px;top:20px;"></i>
+                            <input type="date" id="typeDate" name="date" class="input-field input-field-long" placeholder="Date de naissance" size="35" required />
+                        </div>
+                    </div>
+                    <div class="small text-danger mt-2 mb-2 text text-center" id="dateError"></div>
+                </div>
+
+                <!-----------------------------------/DATE------------------------------------->
+
+                <!-----------------------------------TEL------------------------------------->
+
+
+                <div class="form-outline form-white mb-4">
+                    <div class="input-group">
+                        <div class="input-box d-block mx-auto ">
+                            <i class="bx bx-phone" style="position:absolute; left:605px;top:20px;"></i>
+                            <input type="number" id="typeTel" name="tel" class="input-field input-field-long" placeholder="Téléphone" />
+                        </div>
+                    </div>
+                    <div class="small text-danger mt-2 mb-2 text text-center" id="telError"></div>
+                </div>
+
+                <!-----------------------------------/TEL------------------------------------->
+
+                <!-----------------------------------/PASSWORD------------------------------------->
+
+
+                <div class="form-outline form-white mb-4" style="position: relative;">
+                    <div class="input-group" style="position: relative;">
+                        <div class="input-box d-block mx-auto  ">
+
+                            <input type="password" name="pass" id="typePass" class="input-field input-field-long" placeholder="mot de passe" size="35" />
+                            <i class="bx bx-lock-alt"></i>
+                        </div>
+                        <span class="input-group-password">
+                            <i id="showPassword" class="bx bxs-show" style="display: none; "></i>
+                            <i id="hidePassword" class="bx bxs-hide" style="display: block;"></i>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="small text-danger mt-2 mb-2 text text-center" id="passError"></div>
+
+                <!-----------------------------------/PASSWORD------------------------------------->
+
+
+                <div class="border-bottom  mb-4"></div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button onclick="valider()" class="btn btn-outline-light btn-lg me-3" type="button" style="width: 350px; height: 50px;">Sauvegarde</button>
+                </div>
+                <div class="border-bottom mx-0 mt-3"></div>
+            </form>
+            <div>
+                <p class="mt-4 mb-0 text-white-50 text text-center fw-bold ">Vous avez contient un compte ?</p>
+                <a href="/login/login.php" class="text-bleu-50 fw-bold d-block mx-auto text-center">Connecter</a>
             </div>
         </div>
-    </section>
+
+    </div>
     <script src="register.js"></script>
 
 </body>
