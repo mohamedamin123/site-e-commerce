@@ -108,7 +108,7 @@
 
                 <!-----------------------------------/PASSWORD------------------------------------->
 
-
+<!--
                 <div class="form-outline form-white mb-4" style="position: relative;">
                     <div class="input-group" style="position: relative;">
                         <div class="input-box d-block mx-auto  ">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 <div class="small text-danger mt-2 mb-2 text text-center" id="passError"></div>
-
+-->
                 <!-----------------------------------/PASSWORD------------------------------------->
 
 

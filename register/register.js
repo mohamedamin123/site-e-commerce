@@ -1,10 +1,10 @@
-let showPasswordIcon = document.getElementById("showPassword");
-let hidePasswordIcon = document.getElementById("hidePassword");
-let passwordInput = document.getElementById("typePass"); 
+//let showPasswordIcon = document.getElementById("showPassword");
+//let hidePasswordIcon = document.getElementById("hidePassword");
+//let passwordInput = document.getElementById("typePass"); 
 
 
 
-
+/*
 showPasswordIcon.addEventListener("click", function() {
     showPasswordIcon.style.display = "none";
     hidePasswordIcon.style.display = "block";
@@ -16,7 +16,7 @@ hidePasswordIcon.addEventListener("click", function() {
     showPasswordIcon.style.display = "block";
     passwordInput.type = "text";
 });
-
+*/
 function signup() {
     location.href="../login/login.php";
 }
@@ -28,7 +28,7 @@ function valider() {
     let email = document.getElementById("typeEmail").value.trim();
     let tel = document.getElementById("typeTel").value.trim();
     let date = document.getElementById("typeDate").value.trim();
-    let pass = document.getElementById("typePass").value.trim();
+   // let pass = document.getElementById("typePass").value.trim();
 
 
     let nomE = document.getElementById("nomError");
@@ -36,7 +36,7 @@ function valider() {
     let telE = document.getElementById("telError");
     let dateE = document.getElementById("dateError");
     let emailE = document.getElementById("emailError");
-    let passE = document.getElementById("passError");
+   // let passE = document.getElementById("passError");
 
     nom = nom.charAt(0).toUpperCase() + nom.slice(1);
     prenom = prenom.charAt(0).toUpperCase() + prenom.slice(1);
@@ -47,7 +47,7 @@ function valider() {
     telE.textContent = "";
     dateE.textContent = "";
     emailE.textContent = "";
-    passE.textContent = "";
+   // passE.textContent = "";
 
 
     if (nom == '') {
@@ -76,7 +76,7 @@ function valider() {
         telE.textContent = "Votre numéro de téléphone est incorrect";
         nb=false;
     }
-
+    /*
     if(pass=='') {
         passE.textContent = "Saisir votre mot de passe";
         nb=false;
@@ -91,7 +91,7 @@ function valider() {
         passE.textContent = "Le mot de passe doit contenir au moins un chiffre.";
         nb=false;
     }
-
+    */
     if(nb) {
         document.getElementById('myForm').submit();
     }

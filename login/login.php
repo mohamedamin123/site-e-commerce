@@ -42,29 +42,29 @@
                 <div class="form-outline form-white mb-3" style="position: relative;">
                     <div class="input-group" style="position: relative;">
                         <div class="input-box ">
-                        <input type="email" name="email" id="typeEmailX" class="input-field input-field-long" placeholder="Email" size="30" required>
-                        <i class="bx bx-envelope"></i>
-                    </div>
+                            <input type="email" name="email" id="typeEmailX" class="input-field input-field-long" placeholder="Email" size="30" required>
+                            <i class="bx bx-envelope"></i>
+                        </div>
                     </div>
                     <div class="small text-danger " id="emailError"></div>
                 </div>
 
 
-                <div class="form-outline form-white mb-4" style="position: relative;">
-    <div class="input-group" style="position: relative;">
-    <div class="input-box ">
+                <div class="form-outline form-white mb-2" style="position: relative;">
+                    <div class="input-group" style="position: relative;">
+                        <div class="input-box ">
 
-    <input type="password" id="typePasswordX" class="input-field input-field-long " name="pass" placeholder="Mot de passe" style="padding-right: 40px;" size="28" required />
-        <i class="bx bx-lock-alt"></i>
+                            <input type="password" id="typePasswordX" class="input-field input-field-long " name="pass" placeholder="Mot de passe" style="padding-right: 40px;" size="28" required />
+                            <i class="bx bx-lock-alt"></i>
+                        </div>
+                        <span class="input-group-password">
+                            <i id="showPassword" class="bx bxs-show" style="display: none; position:relative; top:50%; margin-bottom:20px"></i>
+                            <i id="hidePassword" class="bx bxs-hide" style="display: block; position:relative; top:50%; margin-bottom:20px"></i>
+                        </span>
+
                     </div>
-                    <span class="input-group-password">
-    <i id="showPassword" class="bx bxs-show" style="display: none; position:relative; top:50%; margin-bottom:20px"></i>
-    <i id="hidePassword" class="bx bxs-hide" style="display: block; position:relative; top:50%; margin-bottom:20px"></i>
-</span>
-
-    </div>
-    <div class="small text-danger " id="passwordError"></div>
-</div>
+                    <div class="small text-danger " id="passwordError"></div>
+                </div>
 
 
 
@@ -76,12 +76,12 @@
 
             <div class="border-bottom mx-0 mt-3"></div>
             <div>
-                <p class="mt-5 mb-0 text-black-50 text text-center fw-bold " >Vous n'avez pas de compte ?</p>
+                <p class="mt-5 mb-0 text-black-50 text text-center fw-bold ">Vous n'avez pas de compte ?</p>
                 <a href="../register/register.php" class="text-blue-50 fw-bold d-block mx-auto text-center">Construire un nouveau compte</a>
             </div>
             <div>
                 <p class="mt-5 mb-0 text-black-50 text text-center fw-bold ">Voulez vous accéder à la page d'accueil</p>
-                <a href="/home" class="text-bleu-50 fw-bold d-block mx-auto text-center">Accéder à l'accueil</a>
+                <a href="../home/index.php" class="text-bleu-50 fw-bold d-block mx-auto text-center">Accéder à l'accueil</a>
             </div>
         </div>
     </div>

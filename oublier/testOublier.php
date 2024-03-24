@@ -1,4 +1,12 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../phpMailer/src/Exception.php';
+require '../phpMailer/src/PHPMailer.php';
+require '../phpMailer/src/SMTP.php';
+
+
 if (
     empty($_POST["email"])
 ) {
@@ -20,7 +28,34 @@ if (
         // Stocker les données dans la session
         $_SESSION['email'] = $userEmail;
         $_SESSION['number'] = $randomNumber;
+        $mail = new PHPMailer(true);
+        try {
+        
+            $mail->isSMTP();
+            $mail->Host='smtp.gmail.com';
+            $mail->SMTPAuth=true;
+            $mail->Username='mohamedaming146@gmail.com';
+            $mail->Password='nyqq atil npai frcr';
+            $mail->SMTPSecure='ssl';
+            $mail->Port=465;
+            $mail->setFrom('mohamedaming146@gmail.com');
+            $mail->addAddress($userEmail);
+            $mail->isHTML(true);
 
+            $mail->Subject="Code de verification";
+            $mail->Body="votre code est ".$randomNumber;
+
+            $mail->send();
+    
+    
+            // Redirection vers la page de destination
+            header("Location: ../verifier/verifier.php");
+    
+            // Redirection avec les données de l'utilisateur
+            exit();
+        }  catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
 
         // Redirection vers la page de destination
         header("Location: ../verifier/verifier.php");

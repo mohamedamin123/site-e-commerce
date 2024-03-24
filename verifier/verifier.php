@@ -18,8 +18,8 @@
                 <img src="../assets/images/logo.jpeg" alt="" width="50" height="50" ">
             </div>
             <div class=" nav-button">
-                <button class="btn " onclick="signup();" id="loginBtn">Sign In</button>
-                <button class="btn white-btn" id="registerBtn">Sign Up</button>
+                <button class="btn " onclick="signip();" id="loginBtn">Sign In</button>
+                <button class="btn "onclick="signup()" id="registerBtn">Sign Up</button>
             </div>
             <div class="nav-menu-btn">
                 <i class="bx bx-menu"></i>
@@ -34,8 +34,9 @@
             <form action="" method="post">
                 <div class="pin-input-container mt-4">
                     <?php for ($i = 1; $i <= 6; $i++) { ?>
-                        <input type="text" class="pin-input" id="input<?= $i ?>" name="input<?= $i ?>" maxlength="1" pattern="[0-9]*" oninput="moveToNextInput(this, <?= $i ?>);">
-                    <?php } ?>
+                        <input type="text" class="pin-input" id="input<?= $i ?>" name="input<?= $i ?>" maxlength="1" pattern="[0-9]*"  oninput="moveToNextInput(this, <?= $i ?>);">
+                        
+                        <?php } ?>
                 </div>
                 <div class="small text-danger mt-2" id="codeError"></div>
 
@@ -60,9 +61,19 @@
 
                     // Vérifier si le code est correct
                     if ($code == $number) {
-                        echo "<div style='color: green;'>Le code est correct : $code</div>";
                         // Faire quelque chose avec $userEmail
                         // Par exemple, afficher ou utiliser l'e-mail
+                        session_start(); // Démarrer la session si ce n'est pas déjà fait
+
+                        // Stocker les données dans la session
+                        $_SESSION['email'] = $userEmail;
+                                
+                        // Redirection vers la page de destination
+                        header("Location: ../new_pass/new_pass.php");
+                        exit();
+
+
+
                     } else {
                         echo "<div style='color: red;'>Le code est incorrect. Veuillez réessayer.</div>";
                     }

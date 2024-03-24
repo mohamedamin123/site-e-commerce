@@ -8,75 +8,76 @@
     <link rel="stylesheet" href="new_pass.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
 </head>
 
 <body>
-    <section class="vh-120 gradient-custom">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                        <div class="card-body p-5 text-center">
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo">
+                <p>titre de boutique</p>
+                <img src="../assets/images/logo.jpeg" alt="" width="50" height="50" ">
+            </div>
+            <div class=" nav-button">
+                <button class="btn " onclick="signip()" id="loginBtn">Sign In</button>
+                <button onclick="signup()" class="btn" id="registerBtn">Sign Up</button>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu"></i>
+            </div>
+        </nav>
 
-                            <div class="mb-md-5 mt-md-1 pb-5">
+        <div class="mb-md-5 mt-md-1 pb-5">
 
-                                <h2 class="fw-bold mb-2">Nouveau mot de passe</h2>
-                                <p class="text-white-50 ">Veuillez saisir votre nouveau mot de passe !</p><br>
+            <h2 class="fw-bold mb-2 text text-center">Nouveau mot de passe</h2>
+            <p class="text-white-50 text-center">Veuillez saisir votre nouveau mot de passe !</p><br>
 
-                                <img src="../assets/images/logo.jpeg" alt="" width="350" height="350" style="margin-bottom:10px; ">
+            <form id="myForm" action="testNew_pass.php" method="post">
 
-                                <form id="myForm" action="testNew_pass.php" method="post">
+                <div class="form-outline form-white " style="position: relative;">
+                    <div class="input-group" style="position: relative;">
+                        <div class="input-box d-block mx-auto  ">
 
-                                <div class="form-outline form-white mb-4 mt-4" style="position: relative;">
-                                    <div class="input-group" style="border-radius: 50%;">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                        <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Mot de passe" style="padding-right: 40px;" />
-                                        <div style=" padding: 20px; background-color: white;">
-                                            <div class="input-group" style="position: absolute; top: 50%; right: 2px; transform: translateY(-50%);">
-                                                <!-- Utilisation d'éléments <i> pour les icônes et de l'attribut onclick pour gérer les événements -->
-                                                <i id="showPassword" class="far fa-eye password-icon" style="display: none;"></i>
-                                                <i id="hidePassword" class="far fa-eye-slash password-icon" style="display: block;"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="small text-danger mt-2" id="passwordError"></div>
-                                </div>
-
-
-                                <div class="form-outline form-white mb-4" style="position: relative;">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                        <input type="password" id="typePasswordComfirmeX" class="form-control form-control-lg" placeholder="Nouveau mot de passe" style="padding-right: 40px;" />
-                                        <div style=" padding: 20px; background-color: white;">
-                                        <div class="input-group" style="position: absolute; top: 50%; right: 2px; transform: translateY(-50%);">
-                                                <!-- Utilisation d'éléments <i> pour les icônes et de l'attribut onclick pour gérer les événements -->
-                                                <i id="showPasswordComfirme" class="far fa-eye password-icon" style="display: none;"></i>
-                                                <i id="hidePasswordComfirme" class="far fa-eye-slash password-icon" style="display: block;"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="small text-danger mt-2" id="passwordErrorComfirme"></div>
-                                </div>
-
-
-                                <button  id="myLogin"class="btn btn-outline-light btn-lg px-5 mb-4" type="button" style="width: 350px; height: 50px;">Login</button>
-                                </form>
-                                <div class="border-bottom mx-0 mt-3"></div>
-                                <div>
-                                    <p class="mt-5 mb-0">Vous n'avez pas de compte ?</p>
-                                    <a href="../register/register.php" class="text-white-50 fw-bold">Construire un nouveau compte</a>
-                                </div>
-                            </div>
+                            <input type="password" name="pass" id="typePasswordX" class="input-field input-field-long" placeholder="mot de passe" size="35" />
+                            <i class="bx bx-lock-alt"></i>
                         </div>
+                        <span class="input-group-password">
+                            <i id="showPassword" class="bx bxs-show" style="display: none; "></i>
+                            <i id="hidePassword" class="bx bxs-hide" style="display: block;"></i>
+                        </span>
+
                     </div>
                 </div>
+                <div class="small text-danger text text-center mb-2" id="passwordError"></div>
+
+
+                <div class="form-outline form-white " style="position: relative;">
+                    <div class="input-group" style="position: relative;">
+                        <div class="input-box d-block mx-auto  ">
+
+                            <input type="password" name="pass" id="typePasswordComfirmeX" class="input-field input-field-long" placeholder="mot de passe" size="35" />
+                            <i class="bx bx-lock-alt"></i>
+                        </div>
+                        <span class="input-group-password">
+                            <i id="showPasswordComfirme" class="bx bxs-show" style="display: none; "></i>
+                            <i id="hidePasswordComfirme" class="bx bxs-hide" style="display: block;"></i>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="small text-danger  mb-2 text text-center" id="passwordErrorComfirme"></div>
+
+                <button id="myLogin" class="btn btn-outline-light btn-lg px-5 mb-4 d-block mx-auto" type="button" style="width: 350px; height: 50px;">Login</button>
+            </form>
+            <div class="border-bottom mx-0 mt-3"></div>
+            <div class=" text text-center">
+                <p class="mt-2 mb-0">Vous n'avez pas de compte ?</p>
+                <a href="../register/register.php" class="text-white-50 fw-bold" style="color: blue;">Construire un nouveau compte</a>
             </div>
         </div>
-    </section>
+    </div>
+
     <script src="new_pass.js"></script>
 
 </body>
