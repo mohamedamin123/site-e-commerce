@@ -1,0 +1,33 @@
+body {
+    background-color: purple;
+    margin: 30px;
+    border-radius: 30%;
+}
+.admin {
+    height: fit-content;
+    width: fit-content;
+    background-color: aliceblue;
+}
+
+.admin-icon {
+    width: 350px;
+    height: 350px;
+    margin: 50px; /* shorthand for top, right, bottom, left */
+    border: 5px black solid;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+.admin-icon-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+img {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
