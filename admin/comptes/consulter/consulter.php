@@ -12,6 +12,44 @@
 </head>
 
 <body style="background-color: #eee;">
+
+
+    <?php
+    session_start();
+    // On inclut la connexion à la base
+    require_once('../../../bd/connect.php');
+    require_once('../../../class/client.php');
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+        $id = strip_tags($_GET['id']);
+        // On écrit notre requête
+        $sql = 'SELECT * FROM `Client` WHERE `idClient`=:id';
+        // On prépare la requête
+        $query = $db->prepare($sql);
+        // On attache les valeurs
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        // On exécute la requête
+        $query->execute();
+        // On stocke le résultat dans un tableau associatif
+        $produit = $query->fetch();
+        $client = new Client();
+        $client->setNom($produit['nom']); // Supposons que 'nom' est un champ de la table Client
+        $client->setPrenom($produit['prenom']); // Supposons que 'prenom' est un champ de la table Client
+        $client->setEmail($produit['email']); // Supposons que 'email' est un champ de la table Client
+        $client->setTel($produit['tel']); // Supposons que 'tel' est un champ de la table Client
+        $client->setStatut($produit['statut']); // Supposons que 'statut' est un champ de la table Client
+        $client->setDate($produit['date']); // Supposons que 'statut' est un champ de la table Client
+
+
+        if (!$produit) {
+            header('Location: ../compte/comptes.php');
+        }
+    } else {
+        header('Location: ../compte/comptes.php');
+    }
+    require_once('../../../bd/close.php');
+    ?>
+
     <section>
         <div class="container py-5">
             <div class="row">
@@ -73,7 +111,7 @@
                                     <p class="mb-0">Nom</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">Gana</p>
+                                    <p class="text-muted mb-0"> <?php echo $client->getNom()?></p>
                                 </div>
                             </div>
                             <hr>
@@ -82,7 +120,7 @@
                                     <p class="mb-0">Prenom</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">Mohamed Amin</p>
+                                    <p class="text-muted mb-0"> <?php echo $client->getPrenom()?></p>
                                 </div>
                             </div>
                             <hr>
@@ -91,7 +129,7 @@
                                     <p class="mb-0">Email</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">example@example.com</p>
+                                    <p class="text-muted mb-0"> <?php echo $client->getEmail() ?></p>
                                 </div>
                             </div>
                             <hr>
@@ -100,7 +138,7 @@
                                     <p class="mb-0">Telephone</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">(216) 234-5678</p>
+                                    <p class="text-muted mb-0"> <?php echo $client->getTel() ?></p>
                                 </div>
                             </div>
                             <hr>
@@ -109,7 +147,7 @@
                                     <p class="mb-0">Date de naissance</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">13/06/2001</p>
+                                    <p class="text-muted mb-0"> <?php echo $client->getdate() ?></p>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +160,14 @@
                                         <p class="mb-0">Status</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">Activer</p>
+                                        <?php
+                                        $statut = $client->getStatut();
+                                        if ($statut == 1) {
+                                            echo "<p class='text-muted mb-0'>Bloque</p>";
+                                        } else {
+                                            echo "<p class='text-muted mb-0'>Active</p>";
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <hr>
