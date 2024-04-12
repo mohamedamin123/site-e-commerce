@@ -19,7 +19,7 @@
             </div>
             <div class=" nav-button">
                 <button class="btn " onclick="signip();" id="loginBtn">Sign In</button>
-                <button class="btn "onclick="signup()" id="registerBtn">Sign Up</button>
+                <button class="btn " onclick="signup()" id="registerBtn">Sign Up</button>
             </div>
             <div class="nav-menu-btn">
                 <i class="bx bx-menu"></i>
@@ -34,9 +34,9 @@
             <form action="" method="post">
                 <div class="pin-input-container mt-4">
                     <?php for ($i = 1; $i <= 6; $i++) { ?>
-                        <input type="text" class="pin-input" id="input<?= $i ?>" name="input<?= $i ?>" maxlength="1" pattern="[0-9]*"  oninput="moveToNextInput(this, <?= $i ?>);">
-                        
-                        <?php } ?>
+                        <input type="text" class="pin-input" id="input<?= $i ?>" name="input<?= $i ?>" maxlength="1" pattern="[0-9]*" oninput="moveToNextInput(this, <?= $i ?>);">
+
+                    <?php } ?>
                 </div>
                 <div class="small text-danger mt-2" id="codeError"></div>
 
@@ -44,15 +44,22 @@
             </form>
 
             <?php
+            require '../class/client.php';
+
             session_start(); // Démarrer la session si ce n'est pas déjà fait
 
             // Vérifier si le formulaire a été soumis
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Récupérer les données de la session
-                if (isset($_SESSION['email']) && isset($_SESSION['number'])) {
+                if (isset($_SESSION['email']) && isset($_SESSION['number']) && isset($_SESSION['clientData'])) {
                     $userEmail = $_SESSION['email'];
                     $number = $_SESSION['number'];
                     $code = "";
+
+
+                    // Désérialisez les données de l'objet Client
+
+
 
                     // Concaténer les valeurs des inputs dans la chaîne
                     for ($i = 1; $i <= 6; $i++) {
@@ -65,15 +72,18 @@
                         // Par exemple, afficher ou utiliser l'e-mail
                         session_start(); // Démarrer la session si ce n'est pas déjà fait
 
+                        $clientData = unserialize($_SESSION['clientData']);
+
+
                         // Stocker les données dans la session
                         $_SESSION['email'] = $userEmail;
-                                
+
+                        $_SESSION['clientData'] = serialize($clientData);
+
+
                         // Redirection vers la page de destination
                         header("Location: ../new_pass/new_pass.php");
                         exit();
-
-
-
                     } else {
                         echo "<div style='color: red;'>Le code est incorrect. Veuillez réessayer.</div>";
                     }
@@ -95,7 +105,7 @@
             </div>
         </div>
     </div>
-            <script src="verifier.js"></script>
+    <script src="verifier.js"></script>
 </body>
 
 </html>
