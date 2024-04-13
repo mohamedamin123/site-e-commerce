@@ -1,0 +1,28 @@
+.form-control.rounded-pill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: none;
+}
+
+.custom-margin {
+    margin-right: -50px;
+    /* Ajustez la valeur selon vos besoins */
+    margin-left: 50px;
+
+}
+
+.custom-bg-color {
+    background-color: #a358e8;
+}
+
+#login:hover {
+    color: red;
+    cursor: pointer;
+}

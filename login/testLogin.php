@@ -23,6 +23,9 @@ if((isset($_POST["email"])) && (!empty($_POST["email"])) && (isset($_POST["pass"
     // Vérifiez si un utilisateur correspondant a été trouvé
     if ($result) {
         // Redirection vers la page d'accueil si l'utilisateur existe
+        session_start(); // Démarrer la session si ce n'est pas déjà fait
+
+        $_SESSION['email'] = $userEmail;
         header("Location: ../home");
         exit();
     } else {
