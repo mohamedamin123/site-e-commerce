@@ -26,7 +26,13 @@ if((isset($_POST["email"])) && (!empty($_POST["email"])) && (isset($_POST["pass"
         session_start(); // Démarrer la session si ce n'est pas déjà fait
 
         $_SESSION['email'] = $userEmail;
-        header("Location: ../home");
+
+        
+        if ($result['statut'] == 1) {
+            header("Location: ../home");
+        } else {
+            header("Location: ../bloque/bloque.php");
+        }
         exit();
     } else {
         // Redirection vers la page de connexion si l'utilisateur n'existe pas

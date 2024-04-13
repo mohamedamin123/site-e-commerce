@@ -18,7 +18,7 @@
             <div class="row">
                 <!-- Left -->
                 <div class="col-3 d-flex justify-content-start align-items-center">
-                    <img src="../assets/images/logo.jpeg" style="margin-top: 10px;" alt="" height="100px" width="100px" class="d-flex justify-content-start align-items-center">
+                    <img src="../assets/images/logo.jpeg" style="margin-top: 10px; margin-right:10px" alt="" height="100px" width="100px" class="d-flex justify-content-start align-items-center">
                     <span class="gauche" style="font-weight:bold ;color: aliceblue; margin-top: 20px;"> titre </span>
                 </div>
 
@@ -61,7 +61,6 @@
                             echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
                         }
 
-                        require_once('../bd/close.php');
                         ?>
 
                     </span>
@@ -70,6 +69,41 @@
         </div>
         <div class="border-bottom mb-0 mt-3"></div>
     </header>
+    <nav class="navbar navbar-light">
+        <a class="navbar-brand" href="#">Home</a>
+        <a class="navbar-brand" href="#">Favoris</a>
+        <a class="navbar-brand" href="#">Mon produits</a>
+        <a class="navbar-brand" href="#">Panier</a>
+        <a class="navbar-brand" href="#">Ajouter</a>
+    </nav>
+    <section>
+    <div class="box">
+        <?php
+        
+        $sql1 = 'SELECT * FROM `Article`';
+        // On prépare la requête
+        $query = $db->prepare($sql1);
+
+        // On exécute la requête
+        $query->execute();
+        // On stocke le résultat dans un tableau associatif
+
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($result as $article) {
+            // Récupérer les données binaires de l'image depuis la base de données
+            $imageData = base64_encode($article["photo"]); // Supposons que "photo" contient les données binaires de l'image
+            echo '<p>' . $article["titre"] . '</p>';
+            // Afficher l'image encodée en base64
+            echo '<img class="img_principal" src="data:image/jpeg;base64,' . $imageData . '" alt="Image">';
+            echo '</div>';
+        }
+        
+        require_once('../bd/close.php');
+        ?>
+    </div>
+</section>
+
     <script src="../home/script.js"></script>
 </body>
 
