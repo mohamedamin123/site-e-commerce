@@ -15,9 +15,9 @@ function updateSearchResults() {
     }
 
     // Effectuer une requête AJAX pour récupérer les résultats de la recherche
-    fetch('search.php', {
+    fetch('recherche.php', {
             method: 'POST',
-            body: new FormData(searchForm) // Soumettre le formulaire de recherche
+            body: new URLSearchParams({ search: searchValue }) // Envoyer le terme de recherche dans le corps de la requête
         })
         .then(response => response.text())
         .then(data => {

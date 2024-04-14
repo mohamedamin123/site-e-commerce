@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des articles</title>
+    <title>Ajouter article</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../home/style.css">
 </head>
 
 <body>
@@ -23,12 +23,12 @@
 
                 <!-- Center -->
                 <div class="col-6 d-flex align-items-center justify-content-center">
-                    <form id="searchForm" method="POST" action="">
-                        <div class="input-group w-100">
-                            <input id="searchInput" style="margin-top: 20px; border-radius: 50px;" type="search" class="form-control" placeholder="Rechercher" name="search">
-                        
-                        </div>
-                    </form>
+                    <div class="input-group w-100">
+                        <input style="margin-top: 20px; border-radius: 50px;" type="search" class="form-control" placeholder="Rechercher">
+                        <button style="margin-left: 10px; margin-top: 20px;" class="btn rounded-circle bg-danger border-0">
+                            <span class="fas fa-search text-light "></span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Right -->
@@ -67,16 +67,11 @@
         <div class="border-bottom mb-0 mt-3"></div>
     </header>
     <nav class="navbar navbar-light">
-        <a class="navbar-brand" href="#" style="color: green;">Home</a>
+        <a class="navbar-brand" href="../home/index.php">Home</a>
         <a class="navbar-brand" href="../favoris/favoris.php">Favoris</a>
         <a class="navbar-brand" href="../my_produit/myProduit.php">Mon produits</a>
-        <a class="navbar-brand" href="../panier/panier.php">Panier</a>
+        <a class="navbar-brand" href="../panier/panier.php" style="color: green;">Panier</a>
         <a class="navbar-brand" href="../article/ajouter.php">Ajouter</a>
     </nav>
-    <section>
-        <div class="box" id="searchResults">
-        </div>
-    </section>
-    <script src="script.js"></script>
 </body>
 </html>

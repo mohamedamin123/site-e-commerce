@@ -29,7 +29,10 @@ if((isset($_POST["email"])) && (!empty($_POST["email"])) && (isset($_POST["pass"
 
         
         if ($result['statut'] == 1) {
+            if($result['role']=='client')
             header("Location: ../home");
+            else
+            header("Location: ../../../admin/home/adminHome.php");
         } else {
             header("Location: ../bloque/bloque.php");
         }

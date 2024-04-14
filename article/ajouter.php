@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des articles</title>
+    <title>Ajouter article</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../home/style.css">
 </head>
 
 <body>
@@ -23,12 +23,12 @@
 
                 <!-- Center -->
                 <div class="col-6 d-flex align-items-center justify-content-center">
-                    <form id="searchForm" method="POST" action="">
-                        <div class="input-group w-100">
-                            <input id="searchInput" style="margin-top: 20px; border-radius: 50px;" type="search" class="form-control" placeholder="Rechercher" name="search">
-                        
-                        </div>
-                    </form>
+                    <div class="input-group w-100">
+                        <input style="margin-top: 20px; border-radius: 50px;" type="search" class="form-control" placeholder="Rechercher">
+                        <button style="margin-left: 10px; margin-top: 20px;" class="btn rounded-circle bg-danger border-0">
+                            <span class="fas fa-search text-light "></span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Right -->
@@ -67,16 +67,59 @@
         <div class="border-bottom mb-0 mt-3"></div>
     </header>
     <nav class="navbar navbar-light">
-        <a class="navbar-brand" href="#" style="color: green;">Home</a>
+        <a class="navbar-brand" href="../home/index.php">Home</a>
         <a class="navbar-brand" href="../favoris/favoris.php">Favoris</a>
         <a class="navbar-brand" href="../my_produit/myProduit.php">Mon produits</a>
         <a class="navbar-brand" href="../panier/panier.php">Panier</a>
-        <a class="navbar-brand" href="../article/ajouter.php">Ajouter</a>
+        <a class="navbar-brand" href="../article/ajouter.php" style="color: green;">Ajouter</a>
     </nav>
-    <section>
-        <div class="box" id="searchResults">
-        </div>
-    </section>
-    <script src="script.js"></script>
+
+    <main class="main d-block mx-auto ">
+        <?php
+        if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
+            echo '<h1 class="titre">Veuillez remplir le formulaire</h1>';
+            echo '<div class="d-block mx-auto text">';
+            echo '<h2 class="">Ajouter un article</h2>';
+            echo '<form action="traitement.php" method="post" enctype="multipart/form-data">';
+            echo '<label for="image">Image:</label>';
+            echo '<input type="file" name="image" id="image" class="form-control" required>';
+            echo '<label>Type</label>';
+            echo '<select name="categories" id="" class="form-control">';
+            require_once('../bd/connect.php');
+            $sql = 'SELECT * FROM `Categories`';
+            // On prépare la requête
+            $query = $db->prepare($sql);
+            // On exécute la requête
+            $query->execute();
+            // On stocke le résultat dans un tableau associatif
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            require_once('../bd/close.php');
+
+            foreach ($result as $user) {
+                echo "<option value='" . $user['titre'] . "'>" . $user['titre'] . "</option>";
+            }
+            echo '</select>';
+            echo '<label>Titre</label>';
+            echo '<input type="text" name="titre" class="form-control">';
+            echo '<label>Prix</label>';
+            echo '<input type="number" name="prix" class="form-control">';
+            echo '<label>Description</label>';
+            echo '<textarea name="description" cols="15" rows="5" class="form-control"></textarea>';
+            echo '<input class="mb-2 mt-4 btn btn-primary" type="submit" value="Ajouter" name="ajouter">';
+            echo '<input class="btn btn-danger" type="reset" value="supprimer" name="supp">';
+            echo '<input type="hidden" name="session_data" value="' . htmlspecialchars(json_encode($_SESSION)) . '">';
+            echo '</form>';
+            echo '</div>';
+        } else {
+            echo '<div class="d-block mx-auto text text-center" >';
+            echo '<p class="p1">Créer un compte svp!</p>';
+            echo '<button class="btn btn-danger" onclick="login()">Créer un compte</button>';
+            echo '</div>';
+        }
+
+        ?>
+    </main>
+    <script src="ajouter.js"></script>
 </body>
+
 </html>
