@@ -70,3 +70,10 @@ gap: 20px;
     font-size: 13px;
     margin-top: 10px;
 }
+.deconexion {
+    margin-left: 50px;
+}
+.deconexion:hover {
+    color: red;
+    cursor: pointer;
+}

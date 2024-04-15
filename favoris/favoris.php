@@ -23,13 +23,13 @@
 
                 <!-- Center -->
                 <div class="col-6 d-flex align-items-center justify-content-center">
-                    <div class="input-group w-100">
-                        <input style="margin-top: 20px; border-radius: 50px;" type="search" class="form-control" placeholder="Rechercher">
-                        <button style="margin-left: 10px; margin-top: 20px;" class="btn rounded-circle bg-danger border-0">
-                            <span class="fas fa-search text-light "></span>
-                        </button>
-                    </div>
+                    <form id="searchForm" method="POST" action="">
+                        <div class="input-group w-100">
+                            <input id="searchInput" style="margin-top: 20px; border-radius: 50px;" type="search" class="form-control" placeholder="Rechercher" name="search">
+                        </div>
+                    </form>
                 </div>
+
 
                 <!-- Right -->
                 <div class="col-3 d-flex align-items-center justify-content-end">
@@ -55,7 +55,9 @@
                             $query->execute();
                             // On stocke le résultat dans un tableau associatif
                             $produit = $query->fetch();
-                            echo "<i>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
+                            echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
+                            echo "<i class='deconexion'> Déconnecte </i>";
+
                         } else {
                             echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
                         }
@@ -73,5 +75,6 @@
         <a class="navbar-brand" href="../panier/panier.php">Panier</a>
         <a class="navbar-brand" href="../article/ajouter.php">Ajouter</a>
     </nav>
+    <script src="script.js"></script>
 </body>
 </html>

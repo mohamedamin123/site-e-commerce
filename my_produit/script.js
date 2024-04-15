@@ -50,3 +50,12 @@ searchInput.addEventListener('input', function() {
 
 // Appel initial pour charger tous les articles au chargement de la page
 window.onload = fetchAllArticles;
+document.addEventListener('DOMContentLoaded', function() {
+    var profileLink = document.getElementById('login');
+    if (profileLink) {
+        profileLink.addEventListener('click', function() {
+            // Rediriger vers profile.php
+            window.location.href = '../profile/profile.php?email=<?php echo urlencode($email); ?>';
+        });
+    }
+});

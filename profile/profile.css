@@ -1,32 +1,142 @@
-.gradient-custom {
-    /* fallback for old browsers */
-    background: #a358e8;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    }
 
-    .input-group .password-icon {
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        cursor: pointer;
-    }
-    
-    .input-group .password-icon.hide {
-        display: none;
-    }
-    .asl-google-signin-button {
-        width: 500px !important;
-    }
-            
+.form-control.rounded-pill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
 
-    #googlebutton.custom-google-button button {
-        height: 50px; /* Remplacez la valeur par la hauteur souhaitée */
-        width: 350px; /* Remplacez la valeur par la largeur souhaitée */
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: none;
+}
+
+.custom-margin {
+    margin-right: -50px;
+    /* Ajustez la valeur selon vos besoins */
+    margin-left: 50px;
+
+}
+
+.custom-bg-color {
+    background-color: #a358e8;
+}
+
+#login:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.navbar {
+    background-color: #a258c9;
+    padding: 10px !important;
+
+}
+
+.navbar a:hover {
+    color: red;
+}
+
+section {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 20rem);
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 50px;
+    width: 100%;
+    gap: 20px;
+}
+
+.box {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.img_principal {
+    width: 100%;
+    object-fit: cover;
+    height: 200px;
+}
+
+.delete_btn {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+}
+
+.delete_btn img {
+    width: 40px;
+    height: 40px;
+}
+
+.box div {
+    font-size: 13px;
+    margin-top: 10px;
+}
+.titre {
+    color: red;
+    text-align: center;
+    padding: 10px;
+}
+@keyframes anime{
+    from{
+        transform: translateY(-50px);
     }
-    
+}
+.form{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 6px;
+}
+label{
+    margin: 10px;
+}
+::-webkit-file-upload-button{
+    background-image: -o-linear-gradient(to right , #e91e63 ,#f44336);
+    padding: 5px 25px;
+    color: #fff;
+    border-radius: 6px;
+    border: 0;
+    cursor: pointer;
+}
+input , textarea{
+    margin-bottom: 7px;
+    padding: 10px;
+    resize: none;
+    outline: 0;
+    border-radius: 6px;
+}
+input[type='file']{
+    padding: 10px 0 ;
+}
+input[type='submit']{
+    margin-bottom: 0;
+    color:#fff;
+    border: 0;
+}
+.p1 {
+    margin-top: 200px;
+}
+.deconexion {
+    margin-left: 50px;
+}
+.success {
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.deconexion:hover {
+    color: red;
+    cursor: pointer;
+}
+.recherche {
+    padding: 0px;
+}

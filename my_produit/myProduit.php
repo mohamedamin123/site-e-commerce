@@ -55,7 +55,9 @@
                             $query->execute();
                             // On stocke le résultat dans un tableau associatif
                             $produit = $query->fetch();
-                            echo "<i>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
+                            echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
+                            echo "<i class='deconexion'> Déconnecte </i>";
+
                         } else {
                             echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
                         }

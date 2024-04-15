@@ -26,7 +26,6 @@
                     <form id="searchForm" method="POST" action="">
                         <div class="input-group w-100">
                             <input id="searchInput" style="margin-top: 20px; border-radius: 50px;" type="search" class="form-control" placeholder="Rechercher" name="search">
-                        
                         </div>
                     </form>
                 </div>
@@ -55,7 +54,9 @@
                             $query->execute();
                             // On stocke le résultat dans un tableau associatif
                             $produit = $query->fetch();
-                            echo "<i>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
+                            echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
+                            echo "<i class='deconexion'> Déconnecte </i>";
+
                         } else {
                             echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
                         }

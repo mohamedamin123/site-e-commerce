@@ -8,100 +8,134 @@
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="profile.js"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
+    <header class="custom-bg-color">
+        <div class="container">
+            <div class="row">
+                <!-- Left -->
+                <div class="col-3 d-flex justify-content-start align-items-center">
+                    <img src="../assets/images/logo.jpeg" style="margin-top: 10px; margin-right:10px" alt="" height="100px" width="100px" class="d-flex justify-content-start align-items-center">
+                    <span class="gauche" style="font-weight:bold ;color: aliceblue; margin-top: 20px;"> titre </span>
+                </div>
 
-    <section class="vh-150 gradient-custom">
-        <div class="container py-5 h-150">
-            <div class="row d-flex justify-content-center align-items-center h-150">
-                <div class="col-12 col-md-8 col-lg-8 col-xl-5">
-                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                        <div class="card-body p-5 text-center">
-
-                            <div class="mb-md-5 mt-md-1 pb-5">
-
-                                <h2 class="fw-bold mb-2">Données personnelles</h2>
-                                <p class="text-white-50 ">Voici votre données</p><br>
-
-                                <div class="d-flex justify-content-center mb-4">
-                                    <div class="position-relative">
-                                        <!-- IMAGE-->
-                                        <img src="../assets/images/user.png" alt="User photo" class="rounded-circle img-thumbnail" style="width: 250px; height: 250px;">
-                                    </div>
-                                <form id="myForm" action="testProfile.php" method="post">
-                                </div>
-                                <div class="form-outline form-white mb-4 mt-3">
-
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-user"></i>
-                                        </span>
-                                        <input type="text" id="typeNom" class="form-control form-control-lg" placeholder="Nom" />
-                                    </div>
-                                    <div class="small text-danger mt-2" id="nomError"></div>
-                                </div>
-
-                                <div class="form-outline form-white mb-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-user"></i>
-                                        </span>
-                                        <input type="text" id="typePrenom" class="form-control form-control-lg" placeholder="Prenom" />
-                                    </div>
-                                    <div class="small text-danger mt-2" id="prenomError"></div>
-                                </div>
-
-                                <div class="form-outline form-white mb-4 mt-3">
-
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-user"></i>
-                                        </span>
-                                        <input type="email" id="typeEmail" class="form-control form-control-lg" placeholder="Email" value=<?php echo isset($_GET["email"]) ? $_GET["email"] : ''; ?> readonly/>
-                                    </div>
-                                </div>
-
-
-                                <div class="form-outline form-white mb-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </span>
-                                        <input type="date" id="typeDate" class="form-control form-control-lg" placeholder="Date de naissance" />
-                                    </div>
-                                    <div class="small text-danger mt-2" id="dateError"></div>
-                                </div>
-                                <div class="form-outline form-white mb-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-phone"></i>
-                                        </span>
-                                        <input type="number" id="typeTel" class="form-control form-control-lg" placeholder="Téléphone" />
-                                    </div>
-                                    <div class="small text-danger " id="telError"></div>
-                                </div>
-
-
-                                <div class="border-bottom  mb-4"></div>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <button onclick="valider()" class="btn btn-outline-light btn-lg me-3" type="button" style="width: 350px; height: 50px;">Sauvegarde</button>
-                                </div>
-                                </form>
-                                <form action="../new_pass/new_pass.php" method="get">
-                                <div class="d-flex justify-content-center align-items-center mt-4 ">
-                                    <button onclick="change();" class="btn btn-outline-light btn-lg me-3" type="submit" style="width: 350px; height: 50px;">Change mot de passe</button>
-                                </div>
-                                </form>
-                                <div class="small text-success mt-2" id="msgSuccess" style="font-weight: bold; font-size: 1.2rem"></div>
-                            </div>
-                        </div>
+                <!-- Center -->
+                <div class="col-6 d-flex align-items-center justify-content-center">
+                <form id="searchForm" method="POST" action="">
+                    <div class="input-group w-100">
+                        <input style="margin-top: 20px; border-radius: 50px;" type="search" class="form-control" placeholder="Rechercher">
                     </div>
+                </form>
+                </div>
+
+                <!-- Right -->
+                <div class="col-3 d-flex align-items-center justify-content-end">
+                    <span style="margin-top: 20px;" class="form-control rounded-pill">
+                        <i class="fas fa-user"></i>
+                    </span>
+
+                    <span style="margin-top: 20px; margin-left:20px">
+                        <!--User name -->
+                        <?php
+                        session_start();
+                        require_once('../bd/connect.php');
+
+                        if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
+                            $email = strip_tags($_SESSION['email']);
+                            // On écrit notre requête
+                            $sql = 'SELECT * FROM `Client` WHERE `email`=:email';
+                            // On prépare la requête
+                            $query = $db->prepare($sql);
+                            // On attache les valeurs
+                            $query->bindValue(':email', $email, PDO::PARAM_STR);
+                            // On exécute la requête
+                            $query->execute();
+                            // On stocke le résultat dans un tableau associatif
+                            $produit = $query->fetch();
+                            echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
+                            echo "<i class='deconexion'> Déconnecte </i>";
+                        } else {
+                            echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
+                        }
+                        require_once('../bd/close.php');
+                        ?>
+                    </span>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="border-bottom mb-0 mt-3"></div>
+    </header>
+    <nav class="navbar navbar-light">
+        <a class="navbar-brand" href="../home/index.php">Home</a>
+        <a class="navbar-brand" href="../favoris/favoris.php">Favoris</a>
+        <a class="navbar-brand" href="../my_produit/myProduit.php">Mon produits</a>
+        <a class="navbar-brand" href="../panier/panier.php">Panier</a>
+        <a class="navbar-brand" href="../article/ajouter.php" >Ajouter</a>
+    </nav>
+
+    <main class="main d-block mx-auto ">
+        <h1 class="titre">Votre Profile</h1>
+        <div class="d-block mx-auto text">
+            <form action="traitement.php" method="post" enctype="multipart/form-data" id="myForm" class="form">
+
+                <!-----------------------------------NOM------------------------------------->
+                <label for="nom">Nom:</label>
+                <input type="text" name="nom" id="nom" class="form-control" value="<?php echo $produit['nom'] ?>" required>
+                <div class="small text-danger mt-2 mb-2 text text-center" id="nomError"></div>
+                <!-----------------------------------/NOM------------------------------------->
+
+
+
+
+                <!-----------------------------------PRENOM------------------------------------->
+                <label for="prenom">Prenom:</label>
+                <input type="text" name="prenom" id="prenom" class="form-control" value="<?php echo $produit['prenom'] ?>" required>
+                <div class="small text-danger mt-2 mb-2 text text-center" id="prenomError"></div>
+                <!-----------------------------------/PRENOM------------------------------------->
+
+
+
+
+                <!-----------------------------------EMAIL------------------------------------->
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" class="form-control" value="<?php echo $produit['email'] ?>" readonly>
+                <div class="small text-danger mt-2 mb-2 text text-center" id="nomError"></div>
+                <!-----------------------------------/EMAIL------------------------------------->
+
+
+                <!-----------------------------------DATE------------------------------------->
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date" class="form-control" value="<?php echo $produit['date'] ?>" required>
+                <div class="small text-danger mt-2 mb-2 text text-center" id="dateError"></div>
+                <!-----------------------------------/DATE------------------------------------->
+
+                <!-----------------------------------TEL------------------------------------->
+                <label for="tel">Tel:</label>
+                <input type="tel" name="tel" id="tel" class="form-control" value="<?php echo $produit['tel'] ?>" required>
+                <div class="small text-danger mt-2 mb-2 text text-center" id="telError"></div>
+                <!-----------------------------------/TEL------------------------------------->
+
+                <input class="mb-2 mt-4 btn btn-danger" onclick="valider()" type="button" value="Ajouter" name="ajouter">
+
+            </form>
+            <?php
+            session_start();
+
+            // Vérification si la session de succès est définie
+            if (isset($_SESSION['success'])) {
+                // Affichage du message de succès
+                echo "<p class='text text-center success' >{$_SESSION['success']}</p>";
+                // Suppression de la session de succès pour éviter l'affichage répété
+                unset($_SESSION['success']);
+            }
+            ?>
+
+        </div>
+    </main>
+
+    <script src="profile.js"></script>
 </body>
 
 </html>

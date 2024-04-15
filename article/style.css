@@ -88,7 +88,7 @@ section {
         transform: translateY(-50px);
     }
 }
-form{
+.form{
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -123,4 +123,11 @@ input[type='submit']{
 }
 .p1 {
     margin-top: 200px;
+}
+.deconexion {
+    margin-left: 50px;
+}
+.deconexion:hover {
+    color: red;
+    cursor: pointer;
 }

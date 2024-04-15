@@ -3,11 +3,11 @@ function valider() {
 
     nb=true;
 
-    let nom = document.getElementById("typeNom").value.trim();
-    let prenom = document.getElementById("typePrenom").value.trim();
-    let email = document.getElementById("typeEmail").value.trim();
-    let tel = document.getElementById("typeTel").value.trim();
-    let date = document.getElementById("typeDate").value.trim();
+    let nom = document.getElementById("nom").value.trim();
+    let prenom = document.getElementById("prenom").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let tel = document.getElementById("tel").value.trim();
+    let date = document.getElementById("date").value.trim();
 
     let nomE = document.getElementById("nomError");
     let prenomE = document.getElementById("prenomError");

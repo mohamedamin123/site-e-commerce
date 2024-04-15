@@ -30,7 +30,7 @@ if((isset($_POST["email"])) && (!empty($_POST["email"])) && (isset($_POST["pass"
         
         if ($result['statut'] == 1) {
             if($result['role']=='client')
-            header("Location: ../home");
+            header("Location: ../home/index.php");
             else
             header("Location: ../../../admin/home/adminHome.php");
         } else {
@@ -39,7 +39,14 @@ if((isset($_POST["email"])) && (!empty($_POST["email"])) && (isset($_POST["pass"
         exit();
     } else {
         // Redirection vers la page de connexion si l'utilisateur n'existe pas
+
         header("Location: login.php");
+
+        session_start();
+        $_SESSION['email'] = $userEmail;
+        $_SESSION['pass'] = $userPass;
+        $_SESSION['error'] = 'Mot de passe ou email incorrect';
+
         exit();
     }
 } else {
