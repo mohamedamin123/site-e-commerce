@@ -154,3 +154,9 @@ header {
     width: 100%;
     /* ou une largeur spécifique en pixels ou en pourcentage */
 }
+.success {
+    margin-top: 10px;
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+}

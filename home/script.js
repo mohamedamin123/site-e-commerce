@@ -64,3 +64,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+function showSelectedAvatar(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+            // Mettre à jour l'image avec la photo choisie
+            document.getElementById('avatar').src = e.target.result;
+        }
+        
+        reader.readAsDataURL(input.files[0]); // Lire l'image en tant que Data URL
+    }
+}
+
+function uploadAvatar(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('avatar').setAttribute('src', e.target.result);
+            document.getElementById('avatar_form').submit(); // Envoie automatique du formulaire
+        };
+        reader.readAsDataURL(input.files[0]);
+        document.getElementById('myForm').submit();
+
+    }
+}
+

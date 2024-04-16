@@ -2,6 +2,7 @@
 function login() {
     location.href = "../login/login.php";
 }
+
 document.addEventListener('DOMContentLoaded', function() {
     var profileLink = document.getElementById('login');
     if (profileLink) {

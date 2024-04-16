@@ -56,7 +56,7 @@
                             // On stocke le résultat dans un tableau associatif
                             $produit = $query->fetch();
                             echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
-                            echo "<i class='deconexion'> Déconnecte </i>";
+                            echo "<i class='deconexion'onclick='login()'> Déconnecte </i>";
 
                         } else {
                             echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
@@ -84,7 +84,7 @@
             echo '<h2 class="">Ajouter un article</h2>';
             echo '<form action="traitement.php" method="post" enctype="multipart/form-data" class="form">';
             echo '<label for="image">Image:</label>';
-            echo '<input type="file" name="image" id="image" class="form-control" required>';
+            echo '<input type="file" name="photo" id="photo" class="form-control" required>';
             echo '<label>Type</label>';
             echo '<select name="categories" id="" class="form-control">';
             require_once('../bd/connect.php');
