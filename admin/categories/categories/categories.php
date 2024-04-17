@@ -12,7 +12,12 @@
 </head>
 
 <body>
+<?php
+// Incluez le fichier de vérification de session
+require_once('../../../securite/admin_check.php');
 
+// Le reste de votre code pour cette page admin
+?>
     <div class="mt-2 text-center">
         <div style="display: flex; align-items: center;">
             <div style="margin-right: 10px;"><img onclick="retour()" src="../../../assets/images/fleche.png" alt="Flèche"></div>

@@ -26,6 +26,7 @@ if((isset($_POST["email"])) && (!empty($_POST["email"])) && (isset($_POST["pass"
         session_start(); // Démarrer la session si ce n'est pas déjà fait
 
         $_SESSION['email'] = $userEmail;
+        $_SESSION['loggedin'] = true;
 
         
         if ($result['statut'] == 1) {

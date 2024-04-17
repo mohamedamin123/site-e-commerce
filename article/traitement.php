@@ -73,7 +73,8 @@ if(isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     
         // Exécution de la requête
         if ($query->execute()) {
-            echo "L'article a été enregistré avec succès.";
+            header('Location: ../../../my_produit/myProduit.php');
+            exit();
         } else {
             echo "Une erreur s'est produite lors de l'enregistrement de l'article.";
         }
@@ -102,7 +103,8 @@ if(isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     }
     // Le reste de votre traitement...
 } else {
-    echo "Session invalide.";
+    header('Location: ../../../login/login.php');
+    exit();
 }
 
 ?>

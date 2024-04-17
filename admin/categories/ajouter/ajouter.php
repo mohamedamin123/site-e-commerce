@@ -11,6 +11,12 @@
 </head>
 
 <body>
+<?php
+// Incluez le fichier de vérification de session
+require_once('../../../securite/admin_check.php');
+
+// Le reste de votre code pour cette page admin
+?>
 
     <main class="main d-block mx-auto ">
         <div style="margin: 15px;">

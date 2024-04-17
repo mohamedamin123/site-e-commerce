@@ -13,6 +13,13 @@
 
 <body style="background-color: #eee;">
     <?php
+    // Incluez le fichier de vérification de session
+    require_once('../../securite/admin_check.php');
+
+    // Le reste de votre code pour cette page admin
+    ?>
+
+    <?php
     require_once('traitement.php');
 
     ?>
@@ -44,7 +51,6 @@
                                         } else {
                                             // Si la photo n'est pas NULL, afficher la photo de la base de données
                                             echo '<img style="width: 150px; cursor: pointer;" class="rounded-circle img-fluid" src="data:image/jpeg;base64,' . base64_encode($produit["photo"]) . '" alt="Image">';
-
                                         }
                                         ?>
                                     </label>

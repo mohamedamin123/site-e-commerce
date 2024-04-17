@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+// Incluez le fichier de vérification de session
+require_once('../../securite/admin_check.php');
+
+// Le reste de votre code pour cette page admin
+?>
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,11 +40,16 @@
                 <img src="../../assets/images/categories.png" height="300" width="300">
             </div>
         </a>
-        <div class="admin-icon" onclick="logOut()">
+        <form action="logout.php" method="post">
+    <div class="admin-icon">
+        <button type="submit">
             <img src="../../assets/images/logout.png" height="300" width="300">
-        </div>
+        </button>
     </div>
-    <script src="adminHome.js"></script>
+</form>
+
+
+    </div>
 </body>
 
 </html>

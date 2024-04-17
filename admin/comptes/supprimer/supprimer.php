@@ -10,6 +10,14 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
+
+<?php
+// Incluez le fichier de vérification de session
+require_once('../../../securite/admin_check.php');
+
+// Le reste de votre code pour cette page admin
+?>
+
 <?php
     session_start();
     // On inclut la connexion à la base

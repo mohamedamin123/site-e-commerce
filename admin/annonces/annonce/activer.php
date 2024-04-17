@@ -6,28 +6,36 @@ require '../../../phpMailer/src/Exception.php';
 require '../../../phpMailer/src/PHPMailer.php';
 require '../../../phpMailer/src/SMTP.php';
 
+session_start(); // Démarrer la session si ce n'est pas déjà fait
+
 // Vérifiez si le bouton de changement d'état a été soumis
-if (isset($_POST['id'])) {
+if (isset($_POST['id']) ) {
     $id = $_POST['id'];
 
     // Récupérez le statut actuel de l'utilisateur
-    $sqlSelect = 'SELECT * FROM `Client` WHERE `idClient` = :id';
+    $sqlSelect = 'SELECT * FROM `Article` WHERE `idArticle` = :id';
     $querySelect = $db->prepare($sqlSelect);
     $querySelect->execute(array(':id' => $id));
     $resultSelect = $querySelect->fetch(PDO::FETCH_ASSOC);
+
+    $sqlSelect2 = 'SELECT * FROM `Client` WHERE `idClient` = :id2';
+    $querySelect2 = $db->prepare($sqlSelect2);
+    $querySelect2->execute(array(':id2' => $resultSelect["idClient"]));
+    $resultSelect2 = $querySelect2->fetch(PDO::FETCH_ASSOC);
+
+
 
     if ($resultSelect) {
         // Inversez le statut actuel
         $newStatus = ($resultSelect['statut'] == 0) ? 1 : 0;
 
         // Préparez la requête de mise à jour
-        $sqlUpdate = 'UPDATE `Client` SET `statut` = :newStatus WHERE `idClient` = :id';
+        $sqlUpdate = 'UPDATE `Article` SET `statut` = :newStatus WHERE `idArticle` = :id';
         $queryUpdate = $db->prepare($sqlUpdate);
 
         // Exécutez la requête en remplaçant les paramètres par les valeurs appropriées
         $queryUpdate->execute(array(':newStatus' => $newStatus, ':id' => $id));
 
-        header('Location: comptes.php');
 
 
 
@@ -48,17 +56,19 @@ if (isset($_POST['id'])) {
                 $mail->SMTPSecure='ssl';
                 $mail->Port=465;
                 $mail->setFrom('mohamedaming146@gmail.com');
-                $mail->addAddress($resultSelect["email"]);
+                $mail->addAddress($resultSelect2["email"]);
                 $mail->isHTML(true);
     
                 $mail->Subject="Information sur votre compte";
                 if($newStatus==1){
-                    $mail->Body="votre compte est activer ";
+                    $mail->Body="votre article ". $resultSelect["titre"].  "est publiée ";
                 } else {
-                    $mail->Body="votre compte est desactiver ";
+                    $mail->Body="votre article ". $resultSelect["titre"].  "est desactivé ";
                 }
     
                 $mail->send();
+                header('Location: annonce.php');
+
         
             }  catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
