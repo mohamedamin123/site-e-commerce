@@ -13,41 +13,8 @@
 
 <body style="background-color: #eee;">
 
-
     <?php
-    session_start();
-    // On inclut la connexion à la base
-    require_once('../../../bd/connect.php');
-    require_once('../../../class/client.php');
-
-    if (isset($_GET['id']) && !empty($_GET['id'])) {
-        $id = strip_tags($_GET['id']);
-        // On écrit notre requête
-        $sql = 'SELECT * FROM `Client` WHERE `idClient`=:id';
-        // On prépare la requête
-        $query = $db->prepare($sql);
-        // On attache les valeurs
-        $query->bindValue(':id', $id, PDO::PARAM_INT);
-        // On exécute la requête
-        $query->execute();
-        // On stocke le résultat dans un tableau associatif
-        $produit = $query->fetch();
-        $client = new Client();
-        $client->setNom($produit['nom']); // Supposons que 'nom' est un champ de la table Client
-        $client->setPrenom($produit['prenom']); // Supposons que 'prenom' est un champ de la table Client
-        $client->setEmail($produit['email']); // Supposons que 'email' est un champ de la table Client
-        $client->setTel($produit['tel']); // Supposons que 'tel' est un champ de la table Client
-        $client->setStatut($produit['statut']); // Supposons que 'statut' est un champ de la table Client
-        $client->setDate($produit['date']); // Supposons que 'statut' est un champ de la table Client
-
-
-        if (!$produit) {
-            header('Location: ../compte/comptes.php');
-        }
-    } else {
-        header('Location: ../compte/comptes.php');
-    }
-    require_once('../../../bd/close.php');
+    require_once('traitement.php');
     ?>
 
     <section>
@@ -67,38 +34,61 @@
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <img src="../../../assets/images/user.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3">Nom-Prenom</h5>
-                            <p class="text-muted mb-1">Email</p>
+                            <?php
+                            if (!empty($produit["photo"])) {
+                                // Si la photo dans la base de données est disponible, l'afficher
+                                echo '<img id="avatar" src="data:image/jpeg;base64,' . base64_encode($produit["photo"]) . '" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">';
+                            } else {
+                                // Si la photo dans la base de données est vide, afficher l'image par défaut
+                                echo '<img src="../../../assets/images/user.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                                    ';
+                            }
+                            ?>
+                            <h5 class="my-3"><?php echo $client->getPrenom() . " " . $client->getNom(); ?></h5>
+                            <p class="text-muted mb-1"><?php echo $client->getEmail(); ?></p>
                             <div class="d-flex justify-content-center mb-2">
-                                <button type="button" class="btn btn-primary">Bloquer</button>
-                                <button type="button" class="btn btn-danger ms-1">Supprimer</button>
+                                <form action="activer.php" method="post">
+                                    <?php
+                                    // Supposons que $statut contient la valeur du statut
+                                    echo "<input type='hidden' name='id' value=".$client->getId().">";
+                                    if ($produit["statut"] == 1) {
+                                        // Si le statut est égal à 1, affiche "Bloquer"
+                                        echo '<button type="submit" name="submit" class="btn btn-primary">Bloquer</button>';
+                                    } else {
+                                        // Sinon, affiche "Activer"
+                                        echo '<button type="submit" name="submit" class="btn btn-primary">Activer</button>';
+                                    }
+                                    ?>
+                                </form>
+
+                                <form action="supprimer.php" method="POST"> 
+                                <input type='hidden' name='id' value="<?php echo $client->getId(); ?>">
+                                    <button type="submit" name="submit" class="btn btn-danger ms-1">Supprimer</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="card mb-4 mb-lg-0">
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <p class="mb-0">Parfum </p>
-                                    <p class="mb-0">2</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <p class="mb-0">dideron</p>
-                                    <p class="mb-0">10</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <p class="mb-0">Nombre de produit </p>
-                                    <p class="mb-0">15</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <p class="mb-0">Nombre de produit </p>
-                                    <p class="mb-0">15</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <p class="mb-0">Nombre de produit </p>
-                                    <p class="mb-0">15</p>
-                                </li>
+                                <?php
+                                foreach ($produit4 as $categorie) {
+                                    echo '<li class="list-group-item d-flex justify-content-between align-items-center p-3">';
+                                    echo '<p class="mb-0">' . $categorie['titre'] . '</p>';
+                                    $nbr = 0; // Réinitialiser le compteur pour chaque catégorie
+
+                                    foreach ($produit2 as $article) {
+                                        if ($article['idCategories'] == $categorie['idCategories']) {
+                                            $nbr++; // Incrémenter le compteur pour chaque article dans cette catégorie
+                                        }
+                                    }
+
+                                    echo '<p class="mb-0">' . $nbr . '</p>';
+                                    echo '</li>';
+                                }
+                                ?>
+
+
                             </ul>
                         </div>
                     </div>
@@ -111,7 +101,7 @@
                                     <p class="mb-0">Nom</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0"> <?php echo $client->getNom()?></p>
+                                    <p class="text-muted mb-0"> <?php echo $client->getNom() ?></p>
                                 </div>
                             </div>
                             <hr>
@@ -120,7 +110,7 @@
                                     <p class="mb-0">Prenom</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0"> <?php echo $client->getPrenom()?></p>
+                                    <p class="text-muted mb-0"> <?php echo $client->getPrenom() ?></p>
                                 </div>
                             </div>
                             <hr>
@@ -163,9 +153,9 @@
                                         <?php
                                         $statut = $client->getStatut();
                                         if ($statut == 1) {
-                                            echo "<p class='text-muted mb-0'>Bloque</p>";
-                                        } else {
                                             echo "<p class='text-muted mb-0'>Active</p>";
+                                        } else {
+                                            echo "<p class='text-muted mb-0'>BLoque</p>";
                                         }
                                         ?>
                                     </div>
@@ -176,7 +166,7 @@
                                         <p class="mb-0">Nombre de signals</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">0</p>
+                                        <p class="text-muted mb-0"><?php echo $produit3['count(*)']; ?></p>
                                     </div>
                                 </div>
                                 <hr>

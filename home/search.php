@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
     $search = $_POST['search'];
 
     // Requête SQL pour rechercher les articles par titre ou catégorie
-    $sql = "SELECT * FROM `Article` WHERE `titre` LIKE :search OR `idCategories` LIKE :search";
+    $sql = "SELECT * FROM `Article` WHERE (`titre` LIKE :search OR `idCategories` LIKE :search) and statut!=0";
     // Préparer la requête
     $query = $db->prepare($sql);
     // Attacher les valeurs et exécuter la requête

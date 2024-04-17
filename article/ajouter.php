@@ -12,6 +12,10 @@
 </head>
 
 <body>
+<?php
+    session_start();
+    require('traitement2.php');
+    ?>
     <header class="custom-bg-color">
         <div class="container">
             <div class="row">
@@ -33,28 +37,33 @@
 
                 <!-- Right -->
                 <div class="col-3 d-flex align-items-center justify-content-end">
-                    <span style="margin-top: 20px;" class="form-control rounded-pill">
-                        <i class="fas fa-user"></i>
+                <span style="margin-top: 20px;" class="form-control rounded-pill">
+                        <form id="myForm" action="photo.php" method="post" enctype="multipart/form-data" >
+                            <label for="avatar_input">
+                                <?php
+                                if (!empty($produit["photo"])) {
+                                    // Si la photo dans la base de données est disponible, l'afficher
+                                    echo '<img id="avatar" src="data:image/jpeg;base64,' . base64_encode($produit["photo"]) . '" alt="avatar" style="width: 30px; height: 30px; border-radius: 50%;">';
+                                } else {
+                                    // Si la photo dans la base de données est vide, afficher l'image par défaut
+                                    echo '<img id="avatar" src="../assets/images/user.png" alt="avatar" style="width: 30px; height: 30px; border-radius: 50%;">';
+                                }
+                                ?>
+                            </label>
+                            <?php
+                            if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
+                                // Afficher le champ de téléchargement de la photo uniquement si l'utilisateur est connecté
+                                echo '<input type="file" id="avatar_input" name="avatar" style="display: none;" onchange="uploadAvatar(this);">';
+                            }
+                            ?>
+                        </form>
                     </span>
 
                     <span style="margin-top: 20px; margin-left:20px">
                         <!--User name -->
                         <?php
-                        session_start();
-                        require_once('../bd/connect.php');
 
                         if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
-                            $email = strip_tags($_SESSION['email']);
-                            // On écrit notre requête
-                            $sql = 'SELECT * FROM `Client` WHERE `email`=:email';
-                            // On prépare la requête
-                            $query = $db->prepare($sql);
-                            // On attache les valeurs
-                            $query->bindValue(':email', $email, PDO::PARAM_STR);
-                            // On exécute la requête
-                            $query->execute();
-                            // On stocke le résultat dans un tableau associatif
-                            $produit = $query->fetch();
                             echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
                             echo "<i class='deconexion'onclick='login()'> Déconnecte </i>";
 
@@ -83,11 +92,12 @@
             echo '<div class="d-block mx-auto text">';
             echo '<h2 class="">Ajouter un article</h2>';
             echo '<form action="traitement.php" method="post" enctype="multipart/form-data" class="form">';
+
             echo '<label for="image">Image:</label>';
-            echo '<input type="file" name="photo" id="photo" class="form-control" required>';
+            echo '<input type="file" name="image" id="photo" class="form-control" required>';
             echo '<label>Type</label>';
             echo '<select name="categories" id="" class="form-control">';
-            require_once('../bd/connect.php');
+            
             $sql = 'SELECT * FROM `Categories`';
             // On prépare la requête
             $query = $db->prepare($sql);

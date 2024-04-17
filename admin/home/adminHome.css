@@ -1,33 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Arrière-plan coloré pour le corps */
 body {
-    background-color: purple;
-    margin: 30px;
-    border-radius: 30%;
-}
-.admin {
-    height: fit-content;
-    width: fit-content;
-    background-color: aliceblue;
+    background-color: #f0f0f0;
+    /* Couleur d'arrière-plan */
 }
 
-.admin-icon {
-    width: 350px;
-    height: 350px;
-    margin: 50px; /* shorthand for top, right, bottom, left */
-    border: 5px black solid;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-
+/* Style du conteneur principal */
 .admin-icon-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
+    align-items: center;
+    margin-top: 50px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-img {
-    margin-top: 20px;
-    margin-left: 20px;
+/* Style des icônes */
+.admin-icon {
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 4px solid transparent;
 }
 
+.admin-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Style des images dans les icônes */
+.admin-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Style pour le lien de déconnexion */
+.admin-icon:last-child {
+    cursor: pointer;
+}
+
+/* Style pour le lien de déconnexion au survol */
+.admin-icon:last-child:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation pour le lien de déconnexion */
+@keyframes logoutRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Style pour le lien de déconnexion au clic */
+.admin-icon:last-child:active {
+    animation: logoutRotate 0.5s linear;
+}

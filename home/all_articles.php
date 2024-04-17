@@ -3,7 +3,7 @@
 require_once('../bd/connect.php');
 
 // Requête SQL pour récupérer tous les articles
-$sql = 'SELECT * FROM `Article`';
+$sql = 'SELECT * FROM `Article` where statut!=0';
 // Préparer la requête
 $query = $db->prepare($sql);
 // Exécuter la requête

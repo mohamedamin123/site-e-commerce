@@ -30,7 +30,7 @@ function updateSearchResults() {
 // Fonction pour récupérer tous les articles
 function fetchAllACLient() {
     // Effectuer une requête AJAX pour récupérer tous les articles
-    fetch('all_client.php')
+    fetch('all_categories.php')
         .then(response => response.text())
         .then(data => {
             // Mettre à jour la section des résultats de la recherche avec tous les articles
@@ -67,4 +67,7 @@ function modifierUser(user) {
 // Fonction pour retourner à la page d'accueil de l'administrateur
 function retour() {
     location.href = "../../home/adminHome.php";
+}
+function ajouter() {
+    location.href='../ajouter/ajouter.php';
 }

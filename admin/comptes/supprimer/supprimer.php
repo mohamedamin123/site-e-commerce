@@ -29,6 +29,7 @@
         // On stocke le résultat dans un tableau associatif
         $produit = $query->fetch();
         $client = new Client();
+        $client->setId($produit['idClient']); // Supposons que 'statut' est un champ de la table Client
         $client->setNom($produit['nom']); // Supposons que 'nom' est un champ de la table Client
         $client->setPrenom($produit['prenom']); // Supposons que 'prenom' est un champ de la table Client
         $client->setEmail($produit['email']); // Supposons que 'email' est un champ de la table Client
@@ -74,8 +75,9 @@
         </dd>
     </dl>
     
-    <form>
-        <button type="submit" value="Suprrimer" class="btn btn-danger" style="margin-right: 40px;" > Supprimer</button>
+    <form method="post" action="traitement.php">
+        <input type='hidden' name='id' value="<?php echo $client->getId(); ?>">
+        <button type="submit" value="Suprrimer" name="submit" class="btn btn-danger" style="margin-right: 40px;" > Supprimer</button>
         <button onclick="retour();" type="button" value="Retour" class="btn btn-info" style="margin-right: 40px;" > Retour</button>
     </form>
 </div>

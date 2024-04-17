@@ -22,9 +22,14 @@
                 <img src="../../assets/images/profile.png" height="300" width="300">
             </div>
         </a>
-        <a href="../annonces/annonces.php">
+        <a href="../annonces/annonce/annonce.php">
             <div class="admin-icon">
                 <img src="../../assets/images/produits.png" height="300" width="300">
+            </div>
+        </a>
+        <a href="../categories/categories/categories.php">
+            <div class="admin-icon">
+                <img src="../../assets/images/categories.png" height="300" width="300">
             </div>
         </a>
         <div class="admin-icon" onclick="logOut()">

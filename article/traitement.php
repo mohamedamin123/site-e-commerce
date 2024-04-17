@@ -48,7 +48,7 @@ if(isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
         $query_select_client->execute();
         $result_client = $query_select_client->fetch(PDO::FETCH_ASSOC);
         $idClient = $result_client['idClient'];
-
+        $statut=0;
     
         // Requête pour récupérer l'identifiant de la catégorie
         $sql_select_category = "SELECT idCategories FROM Categories WHERE titre = :titre";
@@ -59,7 +59,7 @@ if(isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
         $idCategorie = $result_category['idCategories'];
     
         // Requête d'insertion
-        $sql = "INSERT INTO Article (photo, idCategories, titre, prix, description, idClient) VALUES (:photo, :idCategories, :titre, :prix, :description, :idClient)";
+        $sql = "INSERT INTO Article (photo, idCategories, titre, prix, description, idClient,statut) VALUES (:photo, :idCategories, :titre, :prix, :description, :idClient,:statut)";
         $query = $db->prepare($sql);
         $query->bindParam(':photo', $imageData, PDO::PARAM_LOB);
         $query->bindParam(':idCategories', $idCategorie);
@@ -67,6 +67,8 @@ if(isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
         $query->bindParam(':prix', $prix);
         $query->bindParam(':description', $description);
         $query->bindParam(':idClient', $idClient);
+        $query->bindParam(':statut', $statut);
+
     
     
         // Exécution de la requête

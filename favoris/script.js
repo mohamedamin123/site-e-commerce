@@ -11,3 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+function uploadAvatar(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('avatar').setAttribute('src', e.target.result);
+            document.getElementById('avatar_form').submit(); // Envoie automatique du formulaire
+        };
+        reader.readAsDataURL(input.files[0]);
+        document.getElementById('myForm').submit();
+
+    }
+}
+
