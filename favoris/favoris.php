@@ -71,7 +71,7 @@
                             echo "<i class='deconexion' onclick='login()' > Déconnecte </i>";
 
                         } else {
-                            echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
+                            echo "<i onclick='login()' class='deconexion'> Créer un compte ! </i>";
                         }
                         ?>
                     </span>

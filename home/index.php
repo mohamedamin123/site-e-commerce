@@ -66,10 +66,13 @@
                         <!--User name -->
                         <?php
                         if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
+                            echo '<form action="../admin/home/logout.php" method="post" style="margin-left:40px ">';
                             echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
-                            echo "<i class='deconexion' onclick='login()'> Déconnecte </i>";
+                            echo "<i class='deconexion' onclick='login()' > Déconnecte </i>";
+                            echo '</form ">';
+
                         } else {
-                            echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
+                            echo "<i onclick='login()' class='deconexion'> Créer un compte ! </i>";
                         }
                         ?>
                     </span>
@@ -86,7 +89,8 @@
         <a class="navbar-brand" href="../article/ajouter.php">Ajouter</a>
     </nav>
     <section>
-        <div class="box" id="searchResults">
+        <div id="searchResults">
+            
         </div>
     </section>
     <script src="script.js"></script>

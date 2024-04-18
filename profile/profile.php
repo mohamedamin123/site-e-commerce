@@ -68,7 +68,7 @@
                             echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
                             echo "<i class='deconexion' onclick='login()'> Déconnecte </i>";
                         } else {
-                            echo "<i onclick='login()' id='login'> Créer un compte ! </i>";
+                            echo "<i onclick='login()' class='deconexion'> Créer un compte ! </i>";
                         }
                         require_once('../bd/close.php');
                         ?>
@@ -128,7 +128,7 @@
                 <div class="small text-danger mt-2 mb-2 text text-center" id="telError"></div>
                 <!-----------------------------------/TEL------------------------------------->
 
-                <input class="mb-2 mt-4 btn btn-danger" onclick="valider()" type="button" value="Ajouter" name="ajouter">
+                <input class="mb-2 mt-4 btn btn-danger" onclick="valider()" type="button" value="Mettre a jour" name="ajouter">
 
             </form>
             <?php

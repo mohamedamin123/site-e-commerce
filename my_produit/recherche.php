@@ -34,10 +34,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         // Afficher les résultats sous forme de HTML
-        foreach ($result as $article) {
-            echo '<p>' . $article["titre"] . '</p>';
-            echo '<img class="img_principal" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
+        foreach ($articles as $article) {
+            echo '<div class="admin-icon">';
+            echo '  <img class="img" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
+            echo '  <div class="info">';
+            echo '      <p class="title">' . $article["titre"] . '</p>';
+            echo '      <p class="price">' . $article["prix"] . ' dt</p>';
+            echo '  </div>';
+            echo '</div>';
         }
+        echo '</div>';
+        echo '</div>';
     } else {
         // Gérer le cas où l'utilisateur n'est pas connecté
         echo "Vous n'êtes pas connecté.";

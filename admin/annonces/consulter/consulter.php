@@ -12,11 +12,28 @@
 </head>
 
 <body style="background-color: #eee;">
-<?php
-require_once('../../../securite/admin_check.php');
-?>
+    <?php
+    require_once('../../../securite/admin_check.php');
+    ?>
 
+    <div class="list">
 
+        <div class="admin-icon-container">
+            <div *ngFor="let maison of maisons | rechercheAnnonce: searchText; let i = index" class="admin-icon" (click)="versHome(maison)">
+                <img [src]="photos[i] ? photos[i] : '/assets/images/home/no-photo.png'" width="400px" height="330px">
+                <div style="margin-left: 20px;">
+
+                    <p style=" margin-bottom: 0; font-weight: bold; margin-top: 10px;">{{maison.titre}}</p>
+                    <p style=" margin-bottom: 0; color: grey;">{{maison.prix}} dt <b style="color: black;"> {{duree}}</b> <i class="fas fa-star" style="color: rgb(87, 127, 213); margin-left: 250px; "></i> {{star}}
+
+                    </p>
+
+                    <p style="margin-bottom: 0;">{{maison.description}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </body>
 
