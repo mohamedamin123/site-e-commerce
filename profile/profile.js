@@ -64,4 +64,7 @@ function uploadAvatar(input) {
 
     }
 }
+function retour() {
+    location.href="../home/index.php";
+}
 

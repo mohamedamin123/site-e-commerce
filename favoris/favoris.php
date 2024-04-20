@@ -87,6 +87,14 @@
         <a class="navbar-brand" href="../panier/panier.php">Panier</a>
         <a class="navbar-brand" href="../article/ajouter.php">Ajouter</a>
     </nav>
+    <section>
+        <div id="searchResults">
+            
+        </div>
+    </section>
+
+
+    
     <script src="script.js"></script>
 </body>
 </html>

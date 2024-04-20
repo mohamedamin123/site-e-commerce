@@ -36,13 +36,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
         // Afficher les résultats sous forme de HTML
         echo '<div class="list">';
         echo '<div class="admin-icon-container">';
-        foreach ($result as $article) {
-            echo '<div class="admin-icon">';
-            echo '  <img class="img" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
-            echo '  <div class="info">';
-            echo '      <p class="title">' . $article["titre"] . '</p>';
-            echo '      <p class="price">' . $article["prix"] . ' dt</p>';
-            echo '  </div>';
+        foreach ($articles as $article) {
+            echo '<div class="product" style="margin-right: 20px;">'; // Ajout de la marge à droite
+            echo '<div class="image-product">';
+            echo '<img class="img" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
+            echo '</div>';
+            echo '<div class="content">';
+            echo '<h4 class="name">' . $article["titre"] . '</h4>';
+            echo '<h2 class="price">' . $article["prix"] . 'dt </h2>';
+            echo '<a href="#" class="id_product">Ajouter au panier</a>';
+            echo '</div>';
             echo '</div>';
         }
         echo '</div>';
