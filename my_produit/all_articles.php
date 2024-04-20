@@ -18,17 +18,19 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     $produit = $query->fetch();
 
     // Requête SQL pour récupérer tous les articles du client
-    $sql = 'SELECT * FROM `Article` WHERE `idClient`=:idClient';
+    $sql2 = 'SELECT * FROM `Article` WHERE `idClient`=:idClient';
     // Préparer la requête
-    $query = $db->prepare($sql);
+    $query2 = $db->prepare($sql2);
     // Attacher les valeurs
-    $query->bindValue(':idClient', $produit["idClient"], PDO::PARAM_INT);
+    $query2->bindValue(':idClient', $produit["idClient"], PDO::PARAM_INT);
     // Exécuter la requête
-    $query->execute();
+    $query2->execute();
     // Récupérer les résultats
-    $articles = $query->fetchAll(PDO::FETCH_ASSOC);
+    $articles = $query2->fetchAll(PDO::FETCH_ASSOC);
 
     // Afficher les articles
+    echo '<div class="list">';
+    echo '<div class="admin-icon-container">';
     foreach ($articles as $article) {
         echo '<div class="admin-icon">';
         echo '  <img class="img" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
@@ -42,7 +44,7 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     echo '</div>';
 } else {
     // Gérer le cas où l'utilisateur n'est pas connecté
-    echo "Vous n'êtes pas connecté.";
+    echo "Vous n'êtes pas connecté."; 
 }
 
 // Fermer la connexion à la base de données

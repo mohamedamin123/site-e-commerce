@@ -70,8 +70,6 @@
                             echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
                             echo "<i class='deconexion' > Déconnecte </i>";
                             echo '</form ">';
-
-
                         } else {
                             echo "<i onclick='login()' class='deconexion'> Créer un compte ! </i>";
                         }
@@ -92,33 +90,8 @@
         <a class="navbar-brand" href="../article/ajouter.php">Ajouter</a>
     </nav>
     <section>
-    <div class="box" id="searchResults">
-        <?php
-        
-        $sql1 = 'SELECT * FROM `Article` where idCLient=:id';
-        // On prépare la requête
-        $query = $db->prepare($sql1);
-
-        $query->bindValue(':id', $produit["idClient"], PDO::PARAM_STR);
-
-
-        // On exécute la requête
-        $query->execute();
-        // On stocke le résultat dans un tableau associatif
-
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($result as $article) {
-            // Récupérer les données binaires de l'image depuis la base de données
-            $imageData = base64_encode($article["photo"]); // Supposons que "photo" contient les données binaires de l'image
-            echo '<p>' . $article["titre"] . '</p>';
-            // Afficher l'image encodée en base64
-            echo '<img class="img_principal" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
-            echo '</div>';
-        }
-        
-        require_once('../bd/close.php');
-        ?>
+    <div  id="searchResults">
+    
     </div>
 </section>
 

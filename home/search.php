@@ -18,7 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // Afficher les résultats sous forme de HTML
-    foreach ($articles as $article) {
+    echo '<div class="list">';
+echo '<div class="admin-icon-container">';
+    foreach ($result as $article) {
         echo '<div class="admin-icon">';
         echo '  <img class="img" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
         echo '  <div class="info">';
@@ -33,6 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
     require_once('../bd/close.php');
 } else {
     // Si aucun terme de recherche n'a été fourni, renvoyer une réponse vide
-    echo ''; // ou une autre indication selon vos besoins
+    echo 'aucun user'; // ou une autre indication selon vos besoins
 }
 ?>
