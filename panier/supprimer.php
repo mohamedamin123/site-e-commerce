@@ -1,47 +1,41 @@
 <?php
 require_once('../bd/connect.php');
 
-
 // Vérifiez si le bouton de suppression a été soumis
-if (isset($_POST['id']) && isset($_POST['prix'])) {
-    // Récupérez l'identifiant de l'utilisateur à supprimer
+if (isset($_POST['id']) && isset($_POST['prix']) && isset($_POST['id2'])) {
+    // Récupérez les identifiants de l'article et du panier
     $id = $_POST['id'];
     $prix = $_POST['prix'];
-    $id2 = $_POST['id2'];
+    $idPanier = $_POST['id2'];
 
+    // Supprimez l'article du panier
+    $sqlDeleteArticle = 'DELETE FROM `panier_article` WHERE `id` = :id';
+    $queryDeleteArticle = $db->prepare($sqlDeleteArticle);
+    $queryDeleteArticle->execute(array(':id' => $id));
 
+    // Vérifiez si la suppression de l'article a réussi
+    if ($queryDeleteArticle) {
+        // Mettez à jour le prix total du panier
+        $sqlUpdatePrixTotal = 'UPDATE `panier` SET `prix_total` = `prix_total` - :prix WHERE `idPanier` = :idPanier';
+        $queryUpdatePrixTotal = $db->prepare($sqlUpdatePrixTotal);
+        $queryUpdatePrixTotal->execute(array(':prix' => $prix, ':idPanier' => $idPanier));
 
-    // Supprimer d'abord les articles associés à cet utilisateur
-    $sqlDeleteArticles = 'DELETE FROM `panier_article` WHERE `id` = :id';
-    $queryDeleteArticles = $db->prepare($sqlDeleteArticles);
-    $queryDeleteArticles->execute(array(':id' => $id));
-
-
-    // Vérifiez si les requêtes se sont exécutées avec succès
-    if ($queryDeleteArticles ) {
-        // Redirigez vers la page où vous souhaitez aller après la suppression
-
-        $sqlUpdate = 'UPDATE panier SET prix_total = prix_total - :prix WHERE idPanier = :idPanier';
-        $sqlUpdate = $db->prepare($sqlUpdate);
-        $sqlUpdate->execute(array(':prix' => $prix, ':idPanier' => $id2));
-        
-
-        if($sqlUpdate) {
+        // Vérifiez si la mise à jour du prix total a réussi
+        if ($queryUpdatePrixTotal) {
+            // Redirigez vers la page du panier
             header('Location: panier.php');
             exit();
         } else {
-            echo "update ne marche pas";
+            // Affichez un message d'erreur si la mise à jour du prix total échoue
+            echo "Erreur lors de la mise à jour du prix total.";
         }
-
-
-
     } else {
-        // Affichez un message d'erreur si la suppression échoue
-        echo "Erreur lors de la suppression.";
+        // Affichez un message d'erreur si la suppression de l'article échoue
+        echo "Erreur lors de la suppression de l'article.";
     }
 } else {
-    // Affichez un message si le bouton de suppression n'a pas été soumis
-    echo "Aucun identifiant d'un article";
+    // Affichez un message si les données nécessaires ne sont pas fournies
+    echo "Données manquantes pour la suppression de l'article.";
 }
 
 require_once('../bd/close.php');

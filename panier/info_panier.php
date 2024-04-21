@@ -21,6 +21,7 @@
             require("traitement2.php");
         ?>
     </section>
+    <script src="script.js"></script>
 </body>
 
 </html>

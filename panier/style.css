@@ -144,6 +144,6 @@ tr{
     color: #37a6ff;
     padding: 10px;
 }
-#submitForm {
+.submitForm {
     cursor: pointer;
 }

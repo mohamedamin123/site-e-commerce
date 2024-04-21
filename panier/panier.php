@@ -19,6 +19,7 @@
                 <th>Prix unitaire</th>
                 <th>Quantité</th>
                 <th>Prix total</th>
+                <th>Voir</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
