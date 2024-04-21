@@ -45,25 +45,25 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
             $query4->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
             $query4->execute();
             $article_details = $query4->fetch();
-            $total=$total+$article['quantite']*$panier['prix_unitaire'];
             // Afficher les détails de l'article dans le tableau
-            echo '<tr>';
-            echo '<td><img src="data:image/jpeg;base64,' . base64_encode($article_details["photo"]) . '"></td>';
 
-            echo '<td>' . $article_details['titre'] . '</td>';
-            echo '<td>' . $article_details['prix'] . 'Dt</td>'; // Modification ici pour afficher le prix unitaire
-            echo '<td>' . $article['quantite'] . '</td>';
-            echo '<td>' . $article['quantite']*$article_details['prix'] . 'Dt </td>';
-            echo '<td><a href="info_panier.php"><img src="../assets/images/modifier.png"</a></td>';
-            echo '<form  id="myForm" action="supprimer.php" method="POST">';
-            
-            echo '<td><img id="submitForm" src="../assets/images/souriant.png"</td>';
+            echo '<div  class="product">';
+            echo'<div class="image-product">';
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($article_details["photo"]) . '">';
+            echo '</div>';
+            echo '<div class="content">';
+            echo '<h4 class="name">' . $article['quantite'] ." : ".$article_details['titre'] . '</h4>';
+            echo '<h2 class="price">' . $article['quantite']*$article_details['prix'] . 'Dt</h2>';
+            echo '<a href="#" class="id_product">Voir détails</a> <br> <br> ';
+            echo '<form action="supprimer.php" method="POST">';
+            echo '<button href="#" type="submit" class="btn btn-danger ">Supprimer</button>';
             echo '<input href="#" type="hidden" name="id" value="'.$article["id"].'"/>';
             echo '<input href="#" type="hidden" name="id2" value="'.$panier["idPanier"].'"/>';
             echo '<input href="#" type="hidden" name="prix" value="'.$article['quantite']*$article_details['prix'].'"/>';
 
             echo '</form>';
-            echo '</tr>';
+            echo  '</div>';
+            echo'</div>';
         }
     }
 

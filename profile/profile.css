@@ -1,3 +1,30 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing:border-box;
+}
+body{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #0d2f41;
+    position: relative;
+    flex-direction: column;
+}
+@keyframes anime{
+    from{
+        transform: translateY(-50px);
+    }
+}
+form{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 6px;
+    width: 500px;
+}
 
 .form-control.rounded-pill {
     display: flex;
@@ -9,8 +36,11 @@
 }
 
 .input-group-text {
-    background-color: transparent;
-    border: none;
+    margin-bottom: 7px;
+    padding: 10px;
+    resize: none;
+    outline: 0;
+    border-radius: 6px;
 }
 
 .custom-margin {
@@ -80,24 +110,18 @@ section {
     margin-top: 10px;
 }
 .titre {
-    color: red;
+    color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 0px;
 }
 @keyframes anime{
     from{
         transform: translateY(-50px);
     }
 }
-.form{
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    border-radius: 6px;
-}
+
 label{
-    margin: 10px;
+    margin-bottom: 10px;
 }
 ::-webkit-file-upload-button{
     background-image: -o-linear-gradient(to right , #e91e63 ,#f44336);
@@ -107,13 +131,7 @@ label{
     border: 0;
     cursor: pointer;
 }
-input , textarea{
-    margin-bottom: 7px;
-    padding: 10px;
-    resize: none;
-    outline: 0;
-    border-radius: 6px;
-}
+
 input[type='file']{
     padding: 10px 0 ;
 }

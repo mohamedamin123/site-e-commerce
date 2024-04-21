@@ -26,3 +26,5 @@ function uploadAvatar(input) {
     }
 }
 
+document.getElementById("submitForm").addEventListener("click", function() {
+    document.getElementById("myForm").submit();});
