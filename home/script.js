@@ -132,4 +132,47 @@ function ajouterAuPanier(idArticle) {
     // Soumettre le formulaire
     form.submit();
 }
+function toggleFavorite(index) {
+    var heartIcon = document.getElementById("heartIcon" + index);
+
+    // Enregistrement de la position actuelle de la fenêtre
+    var currentPosition = window.pageYOffset;
+
+    if (heartIcon.classList.contains("far")) {
+        // Si l'icône est vide, le remplacer par une icône pleine
+        heartIcon.classList.remove("far");
+        heartIcon.classList.add("fas");
+        heartIcon.classList.add("text-danger"); // Pour rendre l'icône rouge, si nécessaire
+    } else {
+        // Si l'icône est pleine, le remplacer par une icône vide
+        heartIcon.classList.remove("fas");
+        heartIcon.classList.remove("text-danger"); // Supprimer la couleur rouge, si nécessaire
+        heartIcon.classList.add("far");
+    }
+
+    // Envoi de la requête AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../favoris/ajouter_favoris.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Réponse reçue avec succès
+            
+            // Restauration de la position de la fenêtre
+            window.scrollTo(0, currentPosition);
+            console.log('Mise à jour effectuée avec succès.');
+        } else {
+            // Gérer les erreurs ou autres statuts
+            console.error('Erreur lors de la mise à jour.');
+        }
+    };
+
+    // Vous pouvez envoyer des données supplémentaires au serveur si nécessaire
+    var data = 'index=' + index;
+    xhr.send(data);
+}
+
+
+
+
 

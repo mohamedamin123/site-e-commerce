@@ -67,7 +67,7 @@
 
                         if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
                 
-                            echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
+                            echo "<i id='login' name='profile'>" . $client["prenom"] . " " . $client["nom"] . "</i>";
                             echo "<i class='deconexion' onclick='login()' > Déconnecte </i>";
 
                         } else {
@@ -87,13 +87,23 @@
         <a class="navbar-brand" href="../panier/panier.php">Panier</a>
         <a class="navbar-brand" href="../article/ajouter.php">Ajouter</a>
     </nav>
+    
     <section>
         <div id="searchResults">
             
         </div>
     </section>
 
+    <?php
+session_start();
 
+// Vérifiez si l'article a déjà été ajouté au panier et affichez une alerte si nécessaire
+if (isset($_SESSION['article_deja_ajoute']) && $_SESSION['article_deja_ajoute']) {
+    echo "<script>alert('Cet article est déjà ajouté au panier.');</script>";
+    // Une fois l'alerte affichée, supprimez la variable de session pour éviter qu'elle ne s'affiche à nouveau lors du prochain chargement de la page
+    unset($_SESSION['article_deja_ajoute']);
+}
+?>
     
     <script src="script.js"></script>
 </body>

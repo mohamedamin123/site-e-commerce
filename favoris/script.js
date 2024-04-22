@@ -115,3 +115,41 @@ function uploadAvatar(input) {
 
 
 
+function ajouterAuPanier(idArticle) {
+    // Afficher une boîte de dialogue pour saisir la quantité
+    var quantite = prompt("Entrez la quantité à ajouter au panier:", "1");
+
+    // Vérifier si l'utilisateur a cliqué sur Annuler ou n'a pas saisi de valeur
+    if (quantite === null || quantite === "") {
+        return; // Sortir de la fonction si l'utilisateur a annulé ou n'a pas saisi de valeur
+    }
+
+    // Convertir la quantité en nombre entier
+    quantite = parseInt(quantite);
+
+    // Vérifier si la quantité est valide
+    if (isNaN(quantite) || quantite <= 0) {
+        alert("Veuillez entrer une quantité valide.");
+        return; // Sortir de la fonction si la quantité n'est pas valide
+    }
+
+    // Créer un élément d'entrée hidden pour stocker la quantité
+    var inputQuantite = document.createElement('input');
+    inputQuantite.type = 'hidden';
+    inputQuantite.name = 'quantite'; // Nom du champ dans le formulaire
+    inputQuantite.value = quantite; // Valeur de la quantité saisie
+
+    // Créer un élément d'entrée hidden pour stocker l'identifiant de l'article
+    var inputIdArticle = document.createElement('input');
+    inputIdArticle.type = 'hidden';
+    inputIdArticle.name = 'id'; // Nom du champ dans le formulaire
+    inputIdArticle.value = idArticle; // Utiliser l'identifiant de l'article passé en argument
+
+    // Ajouter les éléments input au formulaire
+    var form = document.getElementById('ajouterPanierForm');
+    form.appendChild(inputQuantite);
+    form.appendChild(inputIdArticle);
+
+    // Soumettre le formulaire
+    form.submit();
+}

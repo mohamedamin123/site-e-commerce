@@ -31,20 +31,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
         $query->execute(array(':search' => '%' . $search . '%', ':idClient' => $produit["idClient"]));
 
         // Récupérer les résultats de la recherche
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 
         // Afficher les résultats sous forme de HTML
         echo '<div class="list">';
         echo '<div class="admin-icon-container">';
-        foreach ($articles as $article) {
-            echo '<div class="product" style="margin-right: 20px;">'; // Ajout de la marge à droite
+        foreach ($articles as $index => $article) {
+            echo '<div class="product" style="margin-right: 20px; position:relative;">';
             echo '<div class="image-product">';
             echo '<img class="img" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
             echo '</div>';
+        
+            echo '</button>';
             echo '<div class="content">';
             echo '<h4 class="name">' . $article["titre"] . '</h4>';
             echo '<h2 class="price">' . $article["prix"] . 'dt </h2>';
-            echo '<a href="#" class="id_product">Ajouter au panier</a>';
+        
+            echo '<form id="ajouterPanierForm" action="../panier/ajouter_panier.php" method="POST">';
+            echo '<input type="button" value="Traiter" class="btn btn-info" style="margin-bottom:20px" onclick="ajouterAuPanier(' . $article["idArticle"] . ');"/> <br>';
+            echo "<input type='hidden' id='idArticle' name='id' value='" . $article["idArticle"] . "'>";
+            echo '</form>';
+        
+        
+            echo '</form>';
             echo '</div>';
             echo '</div>';
         }

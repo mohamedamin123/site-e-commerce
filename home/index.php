@@ -108,7 +108,13 @@ if (isset($_SESSION['article_deja_ajoute']) && $_SESSION['article_deja_ajoute'])
 }
 ?>
 
+
+
+
+
     <script src="script.js"></script>
+
+
 </body>
 
 </html>

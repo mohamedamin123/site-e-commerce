@@ -13,6 +13,6 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     // On exécute la requête
     $query->execute();
     // On stocke le résultat dans un tableau associatif
-    $produit = $query->fetch();
+    $client = $query->fetch();
 
 }

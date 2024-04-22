@@ -183,3 +183,16 @@ section {
     border: 1px solid #ccc;
     z-index: 1;
 }
+
+#favoriteButton {
+    background-color: transparent; /* Définit le fond du bouton comme transparent */
+    border: none; /* Supprime la bordure du bouton si nécessaire */
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.heartIcon {
+    font-size: 30px; /* Taille de l'icône */
+}
+
