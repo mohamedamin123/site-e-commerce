@@ -25,8 +25,4 @@ function uploadAvatar(input) {
 
     }
 }
-function traiter(index) {
-    document.getElementById("myForm" + index).submit();
-}
-
 

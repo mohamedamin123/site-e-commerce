@@ -1,0 +1,97 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing:border-box;
+}
+body{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgb(34, 3, 26);
+    position: relative;
+    flex-direction: column;
+    
+}
+.link{
+    position: absolute;
+    top:20px;
+    left: 20px;
+    background-image: linear-gradient(to right , #e91e63 , #f44336);
+    text-decoration: 0;
+    padding: 10px 25px;
+    border-radius: 6px;
+    color: #ffff;
+}
+
+.modal {
+    background-color: #fff;
+    display: flex;
+    padding: 30px;
+    border-radius: 16px;
+    width: 1000px;
+    height: 850px;
+    position: relative;
+    
+}
+
+/*css de l'affichage de msg*/
+.message-confirmation {
+    color: green; /* Couleur verte pour indiquer le succès */
+    font-weight: bold; /* Gras pour mettre en évidence le message */
+    margin-top: 20px; /* Marge supérieure pour séparer du formulaire */
+}
+
+.message-erreur {
+    color: red; /* Couleur rouge pour indiquer une erreur */
+    font-weight: bold; /* Gras pour mettre en évidence le message */
+    margin-top: 20px; /* Marge supérieure pour séparer du formulaire */
+}
+
+h2 {
+
+    text-align: center;
+    margin: 5px;
+}
+h1 {
+    width: fit-content;
+    text-align: center;
+    color: white;
+}
+label {
+    font-weight: bold;
+    margin: 10px;
+}
+
+
+input {
+    margin-bottom: 7px;
+    padding: 10px;
+    resize: none;
+    outline: 0;
+    border-radius: 6px;
+    size: 10;
+    
+}
+input[type='submit']{
+    margin-bottom: 0;
+    margin-top: 20px; 
+    background-image: linear-gradient(to right , #e91e63 , #f44336);
+    color:#fff;
+    border: 0;
+    padding: 10px 50px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+
+}
+input,textarea {
+    margin: 10px;
+}
+
+.custom-size {
+    width: 20rem; /* ou toute autre valeur que vous souhaitez utiliser */
+}
+.custom-size-area {
+    width: 57rem; /* ou toute autre valeur que vous souhaitez utiliser */
+}

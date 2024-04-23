@@ -11,6 +11,8 @@
 </head>
 <body class="panier">
     <a href="../home/index.php" class="link mb-4">Home</a>
+    <a href="../commande/commande.php" class="link mb-4">Passer la commande</a>
+    
     <section>
         <table>
             <tr>

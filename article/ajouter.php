@@ -92,7 +92,7 @@
         if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
             echo '<h1 class="titre">Veuillez remplir le formulaire</h1>';
             echo '<div class="d-block mx-auto text">';
-            echo '<h2 class="">Ajouter un article</h2>';
+            echo '<h2 class="titre-ajouter">Ajouter un article</h2>';
             echo '<form action="traitement.php" method="post" enctype="multipart/form-data" class="form">';
 
             echo '<label for="image">Image:</label>';

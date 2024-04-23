@@ -11,6 +11,9 @@ $query = $db->prepare($sql);
 $query->execute();
 // Récupérer les résultats
 $articles = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 // Afficher les articles
 echo '<div class="list">';
 echo '<div class="admin-icon-container">';
