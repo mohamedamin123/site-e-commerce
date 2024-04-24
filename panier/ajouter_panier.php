@@ -86,12 +86,12 @@ if (isset($_POST['id']) && isset($_POST['quantite'])) {
 
             // Mettre à jour le prix total du panier
 // Mettre à jour le prix total du panier
-$sql_update_prix_total = 'UPDATE `panier` SET `prix_total` = `prix_total` + ((SELECT `prix` FROM `Article` WHERE `idArticle` = :idArticle) * :quantite) WHERE `idPanier` = :idPanier';
-$query_update_prix_total = $db->prepare($sql_update_prix_total);
-$query_update_prix_total->bindValue(':idArticle', $id, PDO::PARAM_STR);
-$query_update_prix_total->bindValue(':quantite', $q, PDO::PARAM_INT); // Lier la quantité à :quantite
-$query_update_prix_total->bindValue(':idPanier', $idPanier, PDO::PARAM_STR);
-$query_update_prix_total->execute();
+        $sql_update_prix_total = 'UPDATE `panier` SET `prix_total` = `prix_total` + ((SELECT `prix` FROM `Article` WHERE `idArticle` = :idArticle) * :quantite) WHERE `idPanier` = :idPanier';
+        $query_update_prix_total = $db->prepare($sql_update_prix_total);
+        $query_update_prix_total->bindValue(':idArticle', $id, PDO::PARAM_STR);
+        $query_update_prix_total->bindValue(':quantite', $q, PDO::PARAM_INT); // Lier la quantité à :quantite
+        $query_update_prix_total->bindValue(':idPanier', $idPanier, PDO::PARAM_STR);
+        $query_update_prix_total->execute();
 
 
             // Redirection vers la page du panier

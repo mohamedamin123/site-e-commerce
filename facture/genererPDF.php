@@ -1,8 +1,17 @@
 <?php
-require('fpdf.php');
+require('../pdf/fpdf.php');
 require_once('../home/traitement.php');
 require_once('../panier/sqlpanier.php');
+require_once('../panier/updatePanier.php');
 
+
+require '../phpMailer/src/Exception.php';
+require '../phpMailer/src/PHPMailer.php';
+require '../phpMailer/src/SMTP.php';
+require '../class/client.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 // Créer une classe héritant de FPDF
 
 class PDF extends FPDF {
@@ -117,9 +126,70 @@ $pdf->Output($file_name,'F');
 header('Content-Type: application/pdf');
 header('Content-Disposition: attachment; filename="'.$file_name.'"');
 readfile($file_name);
+if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['tel']) && isset($_POST['date']) && isset($_POST['prix-total']) && isset($_POST['modePaiement']) && isset($_POST['message'])) {
+    $prix_total = $_POST['prix-total'];
+    $modePaiement = $_POST['modePaiement'];
+    $message = $_POST['message'];
+
+    echo $prix_total;
+// Convertir la chaîne '2 dt' en un nombre en retirant les caractères non numériques
+$prix_total = filter_var($_POST['prix-total'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+echo $prix_total;
+
+// Insérer la valeur correcte dans la colonne 'total'
+$sql_insert_facture = 'INSERT INTO `facture` (`idClient`, `total`, `mode_paiement`, `commentaire`) VALUES (:idClient, :total, :modePaiement, :commentaire)';
+$query_insert_facture = $db->prepare($sql_insert_facture);
+$query_insert_facture->bindValue(':idClient', $produit["idClient"], PDO::PARAM_STR);
+$query_insert_facture->bindValue(':total', $prix_total, PDO::PARAM_STR); // Utiliser le prix total corrigé
+$query_insert_facture->bindValue(':modePaiement', $modePaiement, PDO::PARAM_STR);
+$query_insert_facture->bindValue(':commentaire', $message, PDO::PARAM_STR);
+$query_insert_facture->execute();
+
+
+
+$mail = new PHPMailer(true);
+        try {
+        
+            $mail->isSMTP();
+            $mail->Host='smtp.gmail.com';
+            $mail->SMTPAuth=true;
+            $mail->Username='mohamedaming146@gmail.com';
+            $mail->Password='nyqq atil npai frcr';
+            $mail->SMTPSecure='ssl';
+            $mail->Port=465;
+            $mail->setFrom('mohamedaming146@gmail.com');
+            $mail->addAddress($produit["email"]);
+            $mail->isHTML(true);
+
+            $mail->Subject = "Votre Facture ";
+            $mail->Body = "Votre facture est attachée à cet e-mail.";
+        
+            // Joindre la facture PDF
+            $mail->addAttachment($file_name);
+            $mail->send();
+        
+            header('Location: ../home/index.php');
+            exit();
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+
+    // Maintenant, utilisez ces données pour générer votre PDF
+    // ...
+} else {
+    // Gérer le cas où une ou plusieurs valeurs sont manquantes
+    header('Location: ../login/login.php');
+
+}
+
+
+
 
 // Afficher le script JavaScript pour ouvrir le PDF dans un nouvel onglet
 echo "<script>window.open('$file_name', '_blank');</script>";
+
+
 
 exit;
 ?>

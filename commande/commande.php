@@ -21,7 +21,7 @@ require_once('../panier/sqlpanier.php');
         <div class="modal-content">
             <h2>Veuillez remplir ce formulaire</h2>
             <div>
-                <form action="../pdf/genererPDF.php" method="post">
+                <form action="../facture/genererPDF.php" method="post">
 
                     <div class="row">
 
