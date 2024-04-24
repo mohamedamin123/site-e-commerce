@@ -40,11 +40,12 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
         echo '<div class="content">';
         echo '<h4 class="name">' . $article["titre"] . '</h4>';
         echo '<h2 class="price">' . $article["prix"] . 'dt </h2>';
-    
-        echo '<form id="ajouterPanierForm" action="../panier/ajouter_panier.php" method="POST">';
-        echo '<input type="button" value="Traiter" class="btn btn-info" style="margin-bottom:20px" onclick="ajouterAuPanier(' . $article["idArticle"] . ');"/> <br>';
-        echo "<input type='hidden' id='idArticle' name='id' value='" . $article["idArticle"] . "'>";
+        
+        echo '<form id="ajouterPanierForm" action="modifierArticle.php" method="POST">';
+        echo '<input type="submit" value="Traiter" class="btn btn-info" style="margin-bottom:20px"/> <br>';
+        echo "<input type='hidden' name='idArticle' value='" . $article["idArticle"] . "'>";
         echo '</form>';
+        
     
     
         echo '</form>';

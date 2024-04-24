@@ -66,7 +66,7 @@
                         if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
                             echo '<form action="../admin/home/adminHome.php" method="post" style="margin-left:40px ">';
                             echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
-                            echo "<i class='deconexion' > Déconnecte </i>";
+                            echo "<i class='deconexion' onclick='login()' > Déconnecte </i>";
                             echo '</form ">';
 
                         } else {

@@ -1,0 +1,177 @@
+
+.form-control.rounded-pill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 45px;
+
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: none;
+}
+
+.custom-margin {
+    margin-right: -50px;
+    /* Ajustez la valeur selon vos besoins */
+    margin-left: 50px;
+
+}
+
+.custom-bg-color {
+    background-color: #a358e8;
+}
+
+#login:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.navbar {
+    background-color: #a258c9;
+    padding: 10px !important;
+
+}
+
+.navbar a:hover {
+    color: red;
+}
+
+section {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 20rem);
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 50px;
+    width: 100%;
+    gap: 20px;
+}
+
+.box {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.img_principal {
+    width: 100%;
+    object-fit: cover;
+    height: 200px;
+}
+
+.delete_btn {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+}
+
+.delete_btn img {
+    width: 40px;
+    height: 40px;
+}
+
+.box div {
+    font-size: 13px;
+    margin-top: 10px;
+}
+/*css ajout article*/
+.main {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgb(212, 197, 210);
+    position: relative;
+    flex-direction: column;  
+    
+}
+.titre {
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 24px;
+}
+.titre-ajouter{
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+@keyframes anime{
+    from{
+        transform: translateY(-50px);
+    }
+}
+.form{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 20px;
+    width: 1000px;
+    margin: 0 auto; 
+    
+}
+label{
+    margin: 10px;
+    
+}
+::-webkit-file-upload-button{
+    background-image: -o-linear-gradient(to right , #e91e63 ,#f44336);
+    padding: 5px 25px;
+    color: #fff;
+    border-radius: 6px;
+    border: 0;
+    cursor: pointer;
+}
+.form-control {
+    margin-bottom: 7px;
+    padding: 10px;
+    resize: none;
+    outline: 0;
+    border: 2px solid black; /* Bordure noire */
+    border-radius: 6px; 
+}
+input[type='file']{
+    padding: 10px  ;
+    border: 2px solid black; 
+    border-radius: 6px;
+}
+input[type='submit']{
+    margin-bottom: 0;
+    background-image: linear-gradient(to right , #e91e63 , #f44336);
+    color:#fff;
+    border: 0;
+    cursor: pointer;
+    border: 2px solid black; 
+    border-radius: 6px;
+}
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 2px solid black; /* Bordure noire */
+    border-radius: 6px; /* Coins arrondis */
+}
+.p1 {
+    margin-top: 200px;
+}
+.deconexion {
+    margin-left: 10px;
+}
+.deconexion:hover {
+    color: red;
+    cursor: pointer;
+}
