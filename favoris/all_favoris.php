@@ -4,7 +4,7 @@ require_once('../bd/connect.php');
 require_once('traitement.php');
 
 // Requête SQL pour récupérer tous les articles favoris d'un client
-$sql = 'SELECT * FROM `Favoris` WHERE idClient = :idClient';
+$sql = 'SELECT * FROM `favoris` WHERE idClient = :idClient';
 
 // Préparer la requête
 $query = $db->prepare($sql);
@@ -23,7 +23,7 @@ foreach ($favoris as $fv) {
         echo '<div class="list" style=width:"400px">';
         echo '<div class="admin-icon-container">';
     // Requête SQL pour récupérer les détails de l'article favori
-    $sql2 = 'SELECT * FROM `Article` WHERE idArticle = :idArticle';
+    $sql2 = 'SELECT * FROM `article` WHERE idArticle = :idArticle';
 
     // Préparer la requête
     $query2 = $db->prepare($sql2);
@@ -51,7 +51,7 @@ foreach ($favoris as $fv) {
         echo "<input type='hidden' name='idArt' value='" . $article["idArticle"] . "'>";
         echo "<input type='hidden' name='idCli' value='" . $client["idClient"] . "'>";
     
-        $sql_check_favoris = 'SELECT * FROM `Favoris` WHERE `idClient`=:idClient AND `idArticle`=:idArticle';
+        $sql_check_favoris = 'SELECT * FROM `favoris` WHERE `idClient`=:idClient AND `idArticle`=:idArticle';
         $query_check_favoris = $db->prepare($sql_check_favoris);
         $query_check_favoris->bindValue(':idClient', $client["idClient"], PDO::PARAM_INT);
         $query_check_favoris->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_INT);

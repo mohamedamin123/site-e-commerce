@@ -7,12 +7,12 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     // Supprimer d'abord les articles associés à cet utilisateur
-    $sqlDeleteArticles = 'DELETE FROM `Categories` WHERE `idCategories` = :id';
+    $sqlDeleteArticles = 'DELETE FROM `categories` WHERE `idCategories` = :id';
     $queryDeleteArticles = $db->prepare($sqlDeleteArticles);
     $queryDeleteArticles->execute(array(':id' => $id));
 
     // Ensuite, supprimez l'utilisateur lui-même
-    $sqlDeleteUser = 'DELETE FROM `Article` WHERE `idCategories` = :id';
+    $sqlDeleteUser = 'DELETE FROM `article` WHERE `idCategories` = :id';
     $queryDeleteUser = $db->prepare($sqlDeleteUser);
     $queryDeleteUser->execute(array(':id' => $id));
 

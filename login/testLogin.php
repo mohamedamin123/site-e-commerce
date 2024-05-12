@@ -9,7 +9,7 @@ if((isset($_POST["email"])) && (!empty($_POST["email"])) && (isset($_POST["pass"
     $userPass = $_POST["pass"];
 
     // Requête SQL pour sélectionner l'utilisateur avec l'email et le mot de passe fournis
-    $sql = 'SELECT * FROM `Client` WHERE `email` = :email AND `password` = :password';
+    $sql = 'SELECT * FROM `client` WHERE `email` = :email AND `password` = :password';
 
     // Préparez la requête
     $query = $db->prepare($sql);

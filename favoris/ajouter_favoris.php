@@ -11,7 +11,7 @@ if (isset($_POST['idCli']) && isset($_POST['idArt'])) {
     $idArt = $_POST['idArt'];
 
     // Requête pour vérifier s'il existe déjà un favoris pour ce client et cet article
-    $sql_favoris = 'SELECT * FROM `Favoris` WHERE `idClient`=:idCli AND `idArticle`=:idArt';
+    $sql_favoris = 'SELECT * FROM `favoris` WHERE `idClient`=:idCli AND `idArticle`=:idArt';
     $query_favoris = $db->prepare($sql_favoris);
     $query_favoris->bindValue(':idCli', $idCli, PDO::PARAM_INT);
     $query_favoris->bindValue(':idArt', $idArt, PDO::PARAM_INT);
@@ -20,7 +20,7 @@ if (isset($_POST['idCli']) && isset($_POST['idArt'])) {
 
     // Si aucun favoris n'existe pour ce client et cet article, en créer un nouveau
     if (!$favoris) {
-        $sql_insert_favoris = 'INSERT INTO `Favoris` (`idClient`, `idArticle`) VALUES (:idCli, :idArt)';
+        $sql_insert_favoris = 'INSERT INTO `favoris` (`idClient`, `idArticle`) VALUES (:idCli, :idArt)';
         $query_insert_favoris = $db->prepare($sql_insert_favoris);
         $query_insert_favoris->bindValue(':idCli', $idCli, PDO::PARAM_INT);
         $query_insert_favoris->bindValue(':idArt', $idArt, PDO::PARAM_INT);
@@ -30,7 +30,7 @@ if (isset($_POST['idCli']) && isset($_POST['idArt'])) {
     } else {
         // Si un favoris existe déjà pour ce client et cet article, supprimer l'article du favoris
         $idFavoris = $favoris['idFavoris'];
-        $sql_delete_favoris = 'DELETE FROM `Favoris` WHERE `idFavoris`=:idFavoris';
+        $sql_delete_favoris = 'DELETE FROM `favoris` WHERE `idFavoris`=:idFavoris';
         $query_delete_favoris = $db->prepare($sql_delete_favoris);
         $query_delete_favoris->bindValue(':idFavoris', $idFavoris, PDO::PARAM_INT);
         $query_delete_favoris->execute();

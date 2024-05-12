@@ -7,7 +7,7 @@ if(isset($_POST['idArticle'])) {
     $idArticle = $_POST['idArticle'];
 
     // Récupérer les données de l'article depuis la base de données
-    $sql = "SELECT * FROM Article WHERE idArticle = :idArticle";
+    $sql = "SELECT * FROM article WHERE idArticle = :idArticle";
     $query = $db->prepare($sql);
     $query->bindParam(':idArticle', $idArticle, PDO::PARAM_INT);
     $query->execute();
@@ -63,7 +63,7 @@ if(isset($_POST['idArticle'])) {
             echo '<label>Type</label>';
             echo '<select name="categories" id="" class="form-control">';
             
-            $sql = 'SELECT * FROM `Categories`';
+            $sql = 'SELECT * FROM `categories`';
             // On prépare la requête
             $query = $db->prepare($sql);
             // On exécute la requête

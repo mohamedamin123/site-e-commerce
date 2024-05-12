@@ -22,7 +22,7 @@
     $idPanier = $panier['idPanier'];
 
     // Mettre à jour le prix total du panier en fonction du prix des articles dans la table Article
-    $sql_update_prix_total = 'UPDATE `panier` SET `prix_total` = (SELECT SUM(`Article`.`prix` * `panier_article`.`quantite`) FROM `Article` INNER JOIN `panier_article` ON `Article`.`idArticle` = `panier_article`.`idArticle` WHERE `panier_article`.`idPanier` = :idPanier) WHERE `idPanier` = :idPanier';
+    $sql_update_prix_total = 'UPDATE `panier` SET `prix_total` = (SELECT SUM(`article`.`prix` * `panier_article`.`quantite`) FROM `article` INNER JOIN `panier_article` ON `article`.`idArticle` = `panier_article`.`idArticle` WHERE `panier_article`.`idPanier` = :idPanier) WHERE `idPanier` = :idPanier';
     $query_update_prix_total = $db->prepare($sql_update_prix_total);
     $query_update_prix_total->bindValue(':idPanier', $idPanier, PDO::PARAM_INT);
     $query_update_prix_total->execute();

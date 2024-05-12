@@ -67,7 +67,7 @@ $data = array();
 
 foreach ($articles as $article) {
     // Récupérer les détails de l'article depuis la base de données
-    $sql4 = 'SELECT * FROM `Article` WHERE `idArticle`=:idArticle';
+    $sql4 = 'SELECT * FROM `article` WHERE `idArticle`=:idArticle';
     $query4 = $db->prepare($sql4);
     $query4->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
     $query4->execute();
@@ -144,6 +144,7 @@ $query_insert_facture->bindValue(':total', $prix_total, PDO::PARAM_STR); // Util
 $query_insert_facture->bindValue(':modePaiement', $modePaiement, PDO::PARAM_STR);
 $query_insert_facture->bindValue(':commentaire', $message, PDO::PARAM_STR);
 $query_insert_facture->execute();
+header('Location: ../home/index.php');
 
 
 
@@ -168,7 +169,6 @@ $mail = new PHPMailer(true);
             $mail->addAttachment($file_name);
             $mail->send();
         
-            header('Location: ../home/index.php');
             exit();
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

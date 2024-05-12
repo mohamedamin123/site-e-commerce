@@ -4,7 +4,7 @@ require_once('../bd/connect.php');
 require_once('traitement.php');
 
 // Requête SQL pour récupérer tous les articles
-$sql = 'SELECT * FROM `Article` where statut!=0';
+$sql = 'SELECT * FROM `article` where statut!=0';
 // Préparer la requête
 $query = $db->prepare($sql);
 // Exécuter la requête
@@ -28,7 +28,7 @@ foreach ($articles as $index => $article) {
     echo "<input type='hidden' name='idArt' value='" . $article["idArticle"] . "'>";
     echo "<input type='hidden' name='idCli' value='" . $produit["idClient"] . "'>";
 
-    $sql_check_favoris = 'SELECT * FROM `Favoris` WHERE `idClient`=:idClient AND `idArticle`=:idArticle';
+    $sql_check_favoris = 'SELECT * FROM `favoris` WHERE `idClient`=:idClient AND `idArticle`=:idArticle';
     $query_check_favoris = $db->prepare($sql_check_favoris);
     $query_check_favoris->bindValue(':idClient', $produit["idClient"], PDO::PARAM_INT);
     $query_check_favoris->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_INT);

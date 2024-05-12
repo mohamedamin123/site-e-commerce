@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
 
     // Valeur de recherche saisie par l'utilisateur
     $search = $_POST['search'];
-    $sql = 'SELECT * FROM `Article` WHERE  (titre LIKE :search OR description LIKE :search ) ORDER BY date DESC';
+    $sql = 'SELECT * FROM `article` WHERE  (titre LIKE :search OR description LIKE :search ) ORDER BY date DESC';
     // On prépare la requête
     $query = $db->prepare($sql);
     // On exécute la requête

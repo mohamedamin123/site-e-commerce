@@ -8,7 +8,7 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
 
     $email = strip_tags($_SESSION['email']);
     // On écrit notre requête
-    $sql = 'SELECT * FROM `Client` WHERE `email`=:email';
+    $sql = 'SELECT * FROM `client` WHERE `email`=:email';
     // On prépare la requête
     $query = $db->prepare($sql);
     // On attache les valeurs
@@ -40,7 +40,7 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
         // Parcourir les articles associés à ce panier
         foreach ($articles as $article) {
             // Récupérer les détails de l'article depuis la base de données
-            $sql4 = 'SELECT * FROM `Article` WHERE `idArticle`=:idArticle';
+            $sql4 = 'SELECT * FROM `article` WHERE `idArticle`=:idArticle';
             $query4 = $db->prepare($sql4);
             $query4->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
             $query4->execute();

@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
 
         $email = strip_tags($_SESSION['email']);
         // On écrit notre requête
-        $sql = 'SELECT * FROM `Client` WHERE `email`=:email';
+        $sql = 'SELECT * FROM `client` WHERE `email`=:email';
         // On prépare la requête
         $query = $db->prepare($sql);
         // On attache les valeurs
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
         $search = $_POST['search'];
 
         // Requête SQL pour rechercher les articles par titre ou catégorie pour le client spécifique
-        $sql = "SELECT * FROM `Article` WHERE (`titre` LIKE :search OR `idCategories` LIKE :search) AND `idClient`=:idClient";
+        $sql = "SELECT * FROM `article` WHERE (`titre` LIKE :search OR `idCategories` LIKE :search) AND `idClient`=:idClient";
         // Préparer la requête
         $query = $db->prepare($sql);
         // Attacher les valeurs et exécuter la requête

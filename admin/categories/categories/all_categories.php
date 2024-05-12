@@ -2,7 +2,7 @@
 // Inclure le fichier de connexion à la base de données
 require_once('../../../bd/connect.php');
 
-$sql = 'SELECT * FROM `Categories` ';
+$sql = 'SELECT * FROM `categories` ';
 // On prépare la requête
 $query = $db->prepare($sql);
 // On exécute la requête

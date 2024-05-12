@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $categorieTitre = $_POST['categories'];
 
         // Récupère l'ID de la catégorie à partir du titre
-        $sql = "SELECT idCategories FROM Categories WHERE titre = :titre";
+        $sql = "SELECT idCategories FROM categories WHERE titre = :titre";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':titre', $categorieTitre);
         $stmt->execute();
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $idCategories = $result['idCategories'];
 
             // Prépare et exécute la requête de mise à jour
-            $sql = "UPDATE Article SET titre = :titre, prix = :prix, description = :description, idCategories = :idCategories WHERE idArticle = :idArticle";
+            $sql = "UPDATE article SET titre = :titre, prix = :prix, description = :description, idCategories = :idCategories WHERE idArticle = :idArticle";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':titre', $titre);
             $stmt->bindParam(':prix', $prix);

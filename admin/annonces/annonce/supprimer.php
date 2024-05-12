@@ -7,13 +7,13 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     // Supprimer d'abord les articles associés à cet utilisateur
-    $sqlDeleteArticles = 'DELETE FROM `Article` WHERE `idArticle` = :id';
+    $sqlDeleteArticles = 'DELETE FROM `article` WHERE `idArticle` = :id';
     $queryDeleteArticles = $db->prepare($sqlDeleteArticles);
     $queryDeleteArticles->execute(array(':id' => $id));
 
 
     // Vérifiez si les requêtes se sont exécutées avec succès
-    if ($queryDeleteArticles ) {
+    if ($queryDeleteArticles) {
         // Redirigez vers la page où vous souhaitez aller après la suppression
         header('Location: annonce.php');
         exit();
@@ -27,4 +27,3 @@ if (isset($_GET['id'])) {
 }
 
 require_once('../../../bd/close.php');
-?>

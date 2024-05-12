@@ -2,7 +2,7 @@
 // Inclure le fichier de connexion à la base de données
 require_once('../../../bd/connect.php');
 
-$sql = 'SELECT * FROM `Article` order by date desc';
+$sql = 'SELECT * FROM `article` order by date desc';
 // On prépare la requête
 $query = $db->prepare($sql);
 // On exécute la requête

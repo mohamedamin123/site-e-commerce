@@ -13,7 +13,7 @@ if (isset($_POST['id']) && isset($_POST['quantite'])) {
     $email = strip_tags($_SESSION['email']);
 
     // Requête pour récupérer l'ID du client à partir de son email
-    $sql_client = 'SELECT * FROM `Client` WHERE `email`=:email';
+    $sql_client = 'SELECT * FROM `client` WHERE `email`=:email';
     $query_client = $db->prepare($sql_client);
     $query_client->bindValue(':email', $email, PDO::PARAM_STR);
     $query_client->execute();
@@ -29,7 +29,7 @@ if (isset($_POST['id']) && isset($_POST['quantite'])) {
     // Si aucun panier en attente n'existe pour ce client, en créer un nouveau
     if (!$panier) {
         // Code pour créer un nouveau panier et ajouter l'article
-        $sql_article = 'SELECT * FROM `Article` WHERE `idArticle`=:idArticle';
+        $sql_article = 'SELECT * FROM `article` WHERE `idArticle`=:idArticle';
         $query_article = $db->prepare($sql_article);
         $query_article->bindValue(':idArticle', $id, PDO::PARAM_STR);
         $query_article->execute();
@@ -86,7 +86,7 @@ if (isset($_POST['id']) && isset($_POST['quantite'])) {
 
             // Mettre à jour le prix total du panier
 // Mettre à jour le prix total du panier
-        $sql_update_prix_total = 'UPDATE `panier` SET `prix_total` = `prix_total` + ((SELECT `prix` FROM `Article` WHERE `idArticle` = :idArticle) * :quantite) WHERE `idPanier` = :idPanier';
+        $sql_update_prix_total = 'UPDATE `panier` SET `prix_total` = `prix_total` + ((SELECT `prix` FROM `article` WHERE `idArticle` = :idArticle) * :quantite) WHERE `idPanier` = :idPanier';
         $query_update_prix_total = $db->prepare($sql_update_prix_total);
         $query_update_prix_total->bindValue(':idArticle', $id, PDO::PARAM_STR);
         $query_update_prix_total->bindValue(':quantite', $q, PDO::PARAM_INT); // Lier la quantité à :quantite

@@ -11,7 +11,7 @@ if (isset($_POST['id'])) {
     $id = $_POST['id'];
 
     // Récupérez le statut actuel de l'utilisateur
-    $sqlSelect = 'SELECT * FROM `Client` WHERE `idClient` = :id';
+    $sqlSelect = 'SELECT * FROM `client` WHERE `idClient` = :id';
     $querySelect = $db->prepare($sqlSelect);
     $querySelect->execute(array(':id' => $id));
     $resultSelect = $querySelect->fetch(PDO::FETCH_ASSOC);
@@ -21,7 +21,7 @@ if (isset($_POST['id'])) {
         $newStatus = ($resultSelect['statut'] == 0) ? 1 : 0;
 
         // Préparez la requête de mise à jour
-        $sqlUpdate = 'UPDATE `Client` SET `statut` = :newStatus WHERE `idClient` = :id';
+        $sqlUpdate = 'UPDATE `client` SET `statut` = :newStatus WHERE `idClient` = :id';
         $queryUpdate = $db->prepare($sqlUpdate);
 
         // Exécutez la requête en remplaçant les paramètres par les valeurs appropriées

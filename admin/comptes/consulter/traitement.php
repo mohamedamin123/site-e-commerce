@@ -8,7 +8,7 @@
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $id = strip_tags($_GET['id']);
         // On écrit notre requête
-        $sql = 'SELECT * FROM `Client` WHERE `idClient`=:id';
+        $sql = 'SELECT * FROM `client` WHERE `idClient`=:id';
         // On prépare la requête
         $query = $db->prepare($sql);
         // On attache les valeurs
@@ -35,18 +35,7 @@
 
 
 
-
-        $sql3 = 'SELECT count(*) FROM `signal` WHERE `idClient`=:id';
-        // On prépare la requête
-        $query3 = $db->prepare($sql3);
-        // On attache les valeurs
-        $query3->bindValue(':id', $id, PDO::PARAM_INT);
-        // On exécute la requête
-        $query3->execute();
-        // On stocke le résultat dans un tableau associatif
-        $produit3 = $query3->fetch();
-
-        $sql2 = 'SELECT * FROM `Article` WHERE `idClient`=:id';
+        $sql2 = 'SELECT * FROM `article` WHERE `idClient`=:id';
         // On prépare la requête
         $query2 = $db->prepare($sql2);
         // On attache les valeurs
@@ -56,7 +45,7 @@
         // On stocke le résultat dans un tableau associatif
         $produit2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 
-        $sql4 = 'SELECT * FROM `Categories` ';
+        $sql4 = 'SELECT * FROM `categories` ';
         // On prépare la requête
         $query4 = $db->prepare($sql4);
         // On exécute la requête

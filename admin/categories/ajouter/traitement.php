@@ -21,7 +21,7 @@ if (
         $desc = $_POST["description"];
 
 
-        $sql = "INSERT INTO Categories (titre, description) VALUES (:titre, :desc)";
+        $sql = "INSERT INTO categories (titre, description) VALUES (:titre, :desc)";
         $query = $db->prepare($sql);
         $query->bindParam(':titre', $titre);
         $query->bindParam(':desc', $desc);

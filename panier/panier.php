@@ -7,7 +7,7 @@ function calculerPrixTotal($articles, $db) {
     $prixTotal = 0;
     foreach ($articles as $article) {
         // Récupérer les détails de l'article depuis la base de données
-        $sql4 = 'SELECT prix FROM Article WHERE idArticle=:idArticle';
+        $sql4 = 'SELECT prix FROM article WHERE idArticle=:idArticle';
         $query4 = $db->prepare($sql4);
         $query4->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
         $query4->execute();
@@ -65,7 +65,7 @@ $query_update_prix_total->execute();
             <?php
             foreach ($articles as $index => $article) {
                 // Récupérer les détails de l'article depuis la base de données
-                $sql4 = 'SELECT * FROM Article WHERE idArticle=:idArticle';
+                $sql4 = 'SELECT * FROM article WHERE idArticle=:idArticle';
                 $query4 = $db->prepare($sql4);
                 $query4->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
                 $query4->execute();

@@ -100,7 +100,7 @@
             echo '<label>Type</label>';
             echo '<select name="categories" id="" class="form-control">';
             
-            $sql = 'SELECT * FROM `Categories`';
+            $sql = 'SELECT * FROM `categories`';
             // On prépare la requête
             $query = $db->prepare($sql);
             // On exécute la requête

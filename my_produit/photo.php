@@ -18,7 +18,7 @@ if (isset($_FILES["avatar"]) && !empty($_FILES["avatar"]["name"])) {
 
 
 
-    $sql = 'UPDATE `Client` SET `photo` = :photo where `email` = :email';
+    $sql = 'UPDATE `client` SET `photo` = :photo where `email` = :email';
 
     // Préparation de la requête
     $query = $db->prepare($sql);

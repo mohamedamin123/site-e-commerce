@@ -27,7 +27,7 @@ if (
         $tel = $_POST["tel"];
         $date = $_POST["date"];
 
-        $sql = 'SELECT idClient FROM `Client` WHERE `email`=:email';
+        $sql = 'SELECT idClient FROM `client` WHERE `email`=:email';
         // On prépare la requête
         $query = $db->prepare($sql);
         // On attache les valeurs
@@ -38,7 +38,7 @@ if (
         $produit = $query->fetch();
 
         // Requête SQL pour mettre à jour les données du client
-        $sql = 'UPDATE `Client` SET `email` = :email, `nom` = :nom, `prenom` = :prenom, `tel` = :tel, `date` = :date WHERE `idClient` = :idClient';
+        $sql = 'UPDATE `client` SET `email` = :email, `nom` = :nom, `prenom` = :prenom, `tel` = :tel, `date` = :date WHERE `idClient` = :idClient';
 
         // Préparation de la requête
         $query = $db->prepare($sql);

@@ -30,7 +30,7 @@ if (
         $date = $_POST["date"];
 
         // Requête SQL pour mettre à jour les données du client
-        $sql = 'UPDATE `Client` SET `nom` = :nom, `prenom` = :prenom, `tel` = :tel, `date` = :date';
+        $sql = 'UPDATE `client` SET `nom` = :nom, `prenom` = :prenom, `tel` = :tel, `date` = :date';
 
         // Si une photo est téléchargée, la traiter
         if (!empty($_FILES["image"]["name"])) {

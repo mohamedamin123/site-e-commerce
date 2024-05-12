@@ -5,7 +5,7 @@ require_once('../bd/connect.php');
 if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     $email = strip_tags($_SESSION['email']);
     // On écrit notre requête
-    $sql = 'SELECT * FROM `Client` WHERE `email`=:email';
+    $sql = 'SELECT * FROM `client` WHERE `email`=:email';
     // On prépare la requête
     $query = $db->prepare($sql);
     // On attache les valeurs

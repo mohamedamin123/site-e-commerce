@@ -27,7 +27,7 @@ require_once('../../../securite/admin_check.php');
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $id = strip_tags($_GET['id']);
         // On écrit notre requête
-        $sql = 'SELECT * FROM `Client` WHERE `idClient`=:id';
+        $sql = 'SELECT * FROM `client` WHERE `idClient`=:id';
         // On prépare la requête
         $query = $db->prepare($sql);
         // On attache les valeurs

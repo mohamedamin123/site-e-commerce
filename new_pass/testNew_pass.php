@@ -24,7 +24,7 @@ if (isset($_SESSION['clientData'])) {
     require_once('../bd/connect.php');
 
     // Préparation de la requête SQL INSERT INTO
-    $sql = "INSERT INTO Client (nom, prenom, email, password, tel, role, statut, date) 
+    $sql = "INSERT INTO client (nom, prenom, email, password, tel, role, statut, date) 
             VALUES (:nom, :prenom, :email, :password, :tel, :role, :statut, :date)";
     $query = $db->prepare($sql);
 

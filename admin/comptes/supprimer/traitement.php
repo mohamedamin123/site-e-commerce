@@ -7,12 +7,12 @@ if (isset($_POST['submit'])) {
     $id = $_POST['id'];
 
     // Supprimer d'abord les articles associés à cet utilisateur
-    $sqlDeleteArticles = 'DELETE FROM `Article` WHERE `idClient` = :id';
+    $sqlDeleteArticles = 'DELETE FROM `article` WHERE `idClient` = :id';
     $queryDeleteArticles = $db->prepare($sqlDeleteArticles);
     $queryDeleteArticles->execute(array(':id' => $id));
 
     // Ensuite, supprimez l'utilisateur lui-même
-    $sqlDeleteUser = 'DELETE FROM `Client` WHERE `idClient` = :id';
+    $sqlDeleteUser = 'DELETE FROM `client` WHERE `idClient` = :id';
     $queryDeleteUser = $db->prepare($sqlDeleteUser);
     $queryDeleteUser->execute(array(':id' => $id));
 

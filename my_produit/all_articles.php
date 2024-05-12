@@ -7,7 +7,7 @@ session_start();
 if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     $email = strip_tags($_SESSION['email']);
     // On écrit notre requête
-    $sql = 'SELECT * FROM `Client` WHERE `email`=:email';
+    $sql = 'SELECT * FROM `client` WHERE `email`=:email';
     // On prépare la requête
     $query = $db->prepare($sql);
     // On attache les valeurs
@@ -18,7 +18,7 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     $produit = $query->fetch();
 
     // Requête SQL pour récupérer tous les articles du client
-    $sql2 = 'SELECT * FROM `Article` WHERE `idClient`=:idClient';
+    $sql2 = 'SELECT * FROM `article` WHERE `idClient`=:idClient';
     // Préparer la requête
     $query2 = $db->prepare($sql2);
     // Attacher les valeurs
