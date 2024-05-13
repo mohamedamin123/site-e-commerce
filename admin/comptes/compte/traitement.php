@@ -1,68 +1,25 @@
 <?php
 require_once('../../../bd/connect.php');
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require '../../../phpMailer/src/Exception.php';
-require '../../../phpMailer/src/PHPMailer.php';
-require '../../../phpMailer/src/SMTP.php';
+require("../requets.php");
+require("../../../utils/email.php");
 
 // Vérifiez si le bouton de changement d'état a été soumis
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
-
-    // Récupérez le statut actuel de l'utilisateur
-    $sqlSelect = 'SELECT * FROM `client` WHERE `idClient` = :id';
-    $querySelect = $db->prepare($sqlSelect);
-    $querySelect->execute(array(':id' => $id));
-    $resultSelect = $querySelect->fetch(PDO::FETCH_ASSOC);
-
+    $resultSelect=selectClient($db,$id);
     if ($resultSelect) {
         // Inversez le statut actuel
         $newStatus = ($resultSelect['statut'] == 0) ? 1 : 0;
 
-        // Préparez la requête de mise à jour
-        $sqlUpdate = 'UPDATE `client` SET `statut` = :newStatus WHERE `idClient` = :id';
-        $queryUpdate = $db->prepare($sqlUpdate);
-
-        // Exécutez la requête en remplaçant les paramètres par les valeurs appropriées
-        $queryUpdate->execute(array(':newStatus' => $newStatus, ':id' => $id));
+        // update statut
+        $queryUpdate=updateStatut($db,$id,$newStatus);
 
         header('Location: comptes.php');
-
-
-
-
-
 
         // Vérifiez si la requête s'est exécutée avec succès
         if ($queryUpdate) {
             // Redirection vers la page comptes.php si la requête réussit
-            $mail = new PHPMailer(true);
-            try {
-            
-                $mail->isSMTP();
-                $mail->Host='smtp.gmail.com';
-                $mail->SMTPAuth=true;
-                $mail->Username='mohamedaming146@gmail.com';
-                $mail->Password='nyqq atil npai frcr';
-                $mail->SMTPSecure='ssl';
-                $mail->Port=465;
-                $mail->setFrom('mohamedaming146@gmail.com');
-                $mail->addAddress($resultSelect["email"]);
-                $mail->isHTML(true);
-    
-                $mail->Subject="Information sur votre compte";
-                if($newStatus==1){
-                    $mail->Body="votre compte est activer ";
-                } else {
-                    $mail->Body="votre compte est desactiver ";
-                }
-    
-                $mail->send();
-        
-            }  catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
+            envoyerCompte($resultSelect["email"],$newStatus);
             exit();
         } else {
             // Affichez un message d'erreur si la requête échoue

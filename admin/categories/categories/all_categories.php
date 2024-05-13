@@ -1,14 +1,10 @@
 <?php
 // Inclure le fichier de connexion à la base de données
 require_once('../../../bd/connect.php');
+require("../requets.php");
 
-$sql = 'SELECT * FROM `categories` ';
-// On prépare la requête
-$query = $db->prepare($sql);
-// On exécute la requête
-$query->execute();
-// On stocke le résultat dans un tableau associatif
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
+$result=select($db);
+
 // Fermer la connexion à la base de données
 require_once('../../../bd/close.php');
 $i = 1;

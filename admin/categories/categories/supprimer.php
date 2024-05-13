@@ -1,23 +1,14 @@
 <?php
 require_once('../../../bd/connect.php');
-
+require("../requets.php");
 // Vérifiez si le bouton de suppression a été soumis
 if (isset($_GET['id'])) {
     // Récupérez l'identifiant de l'utilisateur à supprimer
     $id = $_GET['id'];
 
-    // Supprimer d'abord les articles associés à cet utilisateur
-    $sqlDeleteArticles = 'DELETE FROM `categories` WHERE `idCategories` = :id';
-    $queryDeleteArticles = $db->prepare($sqlDeleteArticles);
-    $queryDeleteArticles->execute(array(':id' => $id));
-
-    // Ensuite, supprimez l'utilisateur lui-même
-    $sqlDeleteUser = 'DELETE FROM `article` WHERE `idCategories` = :id';
-    $queryDeleteUser = $db->prepare($sqlDeleteUser);
-    $queryDeleteUser->execute(array(':id' => $id));
-
+    $delete=supprimerCategories($db,$id);
     // Vérifiez si les requêtes se sont exécutées avec succès
-    if ($queryDeleteArticles && $queryDeleteUser) {
+    if ( $delete) {
         // Redirigez vers la page où vous souhaitez aller après la suppression
         header('Location: categories.php');
         exit();

@@ -1,15 +1,13 @@
 <?php
 require_once('../../../bd/connect.php');
-
+require("../requets.php");
 // Vérifiez si le bouton de suppression a été soumis
 if (isset($_GET['id'])) {
     // Récupérez l'identifiant de l'utilisateur à supprimer
     $id = $_GET['id'];
-
+    $queryDeleteArticles=supprimer($db,$id);
     // Supprimer d'abord les articles associés à cet utilisateur
-    $sqlDeleteArticles = 'DELETE FROM `article` WHERE `idArticle` = :id';
-    $queryDeleteArticles = $db->prepare($sqlDeleteArticles);
-    $queryDeleteArticles->execute(array(':id' => $id));
+
 
 
     // Vérifiez si les requêtes se sont exécutées avec succès

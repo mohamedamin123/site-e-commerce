@@ -13,8 +13,8 @@
 
 <?php
 // Incluez le fichier de vérification de session
-require_once('../../../securite/admin_check.php');
-
+require_once('../../../connexion/securite/admin_check.php');
+require("../requets.php");
 // Le reste de votre code pour cette page admin
 ?>
 
@@ -27,15 +27,7 @@ require_once('../../../securite/admin_check.php');
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $id = strip_tags($_GET['id']);
         // On écrit notre requête
-        $sql = 'SELECT * FROM `client` WHERE `idClient`=:id';
-        // On prépare la requête
-        $query = $db->prepare($sql);
-        // On attache les valeurs
-        $query->bindValue(':id', $id, PDO::PARAM_INT);
-        // On exécute la requête
-        $query->execute();
-        // On stocke le résultat dans un tableau associatif
-        $produit = $query->fetch();
+        $produit=selectClient($bd,$id);
         $client = new Client();
         $client->setId($produit['idClient']); // Supposons que 'statut' est un champ de la table Client
         $client->setNom($produit['nom']); // Supposons que 'nom' est un champ de la table Client

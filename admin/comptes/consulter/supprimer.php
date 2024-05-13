@@ -1,23 +1,15 @@
 <?php
 require_once('../../../bd/connect.php');
-
+require("../requets.php");
 // Vérifiez si le bouton de suppression a été soumis
 if (isset($_POST['submit'])) {
     // Récupérez l'identifiant de l'utilisateur à supprimer
     $id = $_POST['id'];
 
-    // Supprimer d'abord les articles associés à cet utilisateur
-    $sqlDeleteArticles = 'DELETE FROM `article` WHERE `idClient` = :id';
-    $queryDeleteArticles = $db->prepare($sqlDeleteArticles);
-    $queryDeleteArticles->execute(array(':id' => $id));
-
-    // Ensuite, supprimez l'utilisateur lui-même
-    $sqlDeleteUser = 'DELETE FROM `client` WHERE `idClient` = :id';
-    $queryDeleteUser = $db->prepare($sqlDeleteUser);
-    $queryDeleteUser->execute(array(':id' => $id));
+    $queryDeleteUser=supprimerCLient($db,$id);
 
     // Vérifiez si les requêtes se sont exécutées avec succès
-    if ($queryDeleteArticles && $queryDeleteUser) {
+    if ($queryDeleteUser) {
         // Redirigez vers la page où vous souhaitez aller après la suppression
         header('Location: ../compte/comptes.php');
         exit();

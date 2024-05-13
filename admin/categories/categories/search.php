@@ -3,16 +3,9 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_POST['search'])) {
     // Connexion à la base de données
     require_once('../../../bd/connect.php');
-
+    require("../requets.php");
     // Valeur de recherche saisie par l'utilisateur
-    $search = $_POST['search'];
-    $sql = 'SELECT * FROM `categories` WHERE (titre LIKE :search OR description LIKE :search ) ORDER BY date DESC';
-    // On prépare la requête
-    $query = $db->prepare($sql);
-    // On exécute la requête
-    $query->execute(array(':search' => '%' . $search . '%'));
-    // On stocke le résultat dans un tableau associatif
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    $result=selectRecherche($db);
 
     // Vérifier si des résultats ont été trouvés
     if ($result) {

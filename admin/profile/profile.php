@@ -14,7 +14,7 @@
 <body style="background-color: #eee;">
     <?php
     // Incluez le fichier de vérification de session
-    require_once('../../securite/admin_check.php');
+    require_once('../../connexion/securite/admin_check.php');
 
     // Le reste de votre code pour cette page admin
     ?>

@@ -1,14 +1,8 @@
 <?php
 // Inclure le fichier de connexion à la base de données
 require_once('../../../bd/connect.php');
-
-$sql = 'SELECT * FROM `client` where role ="client" order by date desc';
-// On prépare la requête
-$query = $db->prepare($sql);
-// On exécute la requête
-$query->execute();
-// On stocke le résultat dans un tableau associatif
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
+require('../requets.php');
+$result=select($db);
 // Fermer la connexion à la base de données
 require_once('../../../bd/close.php');
 $i=1;

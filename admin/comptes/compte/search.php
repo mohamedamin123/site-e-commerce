@@ -3,17 +3,9 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_POST['search'])) {
     // Connexion à la base de données
     require_once('../../../bd/connect.php');
-
+    require("../requets.php");
     // Valeur de recherche saisie par l'utilisateur
-    $search = $_POST['search'];
-    $sql = 'SELECT * FROM `client` WHERE role = "client" AND (email LIKE :search OR nom LIKE :search OR prenom LIKE :search) ORDER BY date DESC';
-    // On prépare la requête
-    $query = $db->prepare($sql);
-    // On exécute la requête
-    $query->execute(array(':search' => '%' . $search . '%'));
-    // On stocke le résultat dans un tableau associatif
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
+    $result=selectRecherche($db);
     // Vérifier si des résultats ont été trouvés
     if ($result) {
         $i = 1;
