@@ -1,18 +1,15 @@
 <?php
-require('../pdf/fpdf.php');
-require_once('../home/traitement.php');
+require('../../pdf/fpdf.php');
+require("../../bd/connect.php");
+require_once('../requets.php');
 require_once('../panier/sqlpanier.php');
 require_once('../panier/updatePanier.php');
+require("../../utils/email.php");
+require '../../class/client.php';
 
-
-require '../phpMailer/src/Exception.php';
-require '../phpMailer/src/PHPMailer.php';
-require '../phpMailer/src/SMTP.php';
-require '../class/client.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 // Créer une classe héritant de FPDF
+
+$produit=connect($db);
 
 class PDF extends FPDF {
     // En-tête
@@ -146,34 +143,7 @@ $query_insert_facture->bindValue(':commentaire', $message, PDO::PARAM_STR);
 $query_insert_facture->execute();
 header('Location: ../home/index.php');
 
-
-
-$mail = new PHPMailer(true);
-        try {
-        
-            $mail->isSMTP();
-            $mail->Host='smtp.gmail.com';
-            $mail->SMTPAuth=true;
-            $mail->Username='mohamedaming146@gmail.com';
-            $mail->Password='nyqq atil npai frcr';
-            $mail->SMTPSecure='ssl';
-            $mail->Port=465;
-            $mail->setFrom('mohamedaming146@gmail.com');
-            $mail->addAddress($produit["email"]);
-            $mail->isHTML(true);
-
-            $mail->Subject = "Votre Facture ";
-            $mail->Body = "Votre facture est attachée à cet e-mail.";
-        
-            // Joindre la facture PDF
-            $mail->addAttachment($file_name);
-            $mail->send();
-        
-            exit();
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-
+envoyer($produit["email"],$file_name);
 
     // Maintenant, utilisez ces données pour générer votre PDF
     // ...
@@ -183,11 +153,7 @@ $mail = new PHPMailer(true);
 
 }
 
-
-
-
 // Afficher le script JavaScript pour ouvrir le PDF dans un nouvel onglet
-echo "<script>window.open('$file_name', '_blank');</script>";
 
 
 

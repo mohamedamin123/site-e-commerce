@@ -1,5 +1,6 @@
 <?php
-require_once('../bd/connect.php');
+require_once('../../bd/connect.php');
+require("../requets.php");
 session_start();
 
 // Vérifiez si le bouton de soumission a été envoyé
@@ -7,24 +8,15 @@ if (isset($_POST['id']) && isset($_POST['quantite'])) {
     // Récupérez l'identifiant de l'article à ajouter au panier
     $id = $_POST['id'];
     $q = $_POST['quantite'];
+    $client=connect($db);
 
-
-    // Récupérez l'email de l'utilisateur à partir de la session
-    $email = strip_tags($_SESSION['email']);
+    $email = ($_SESSION['email']);
 
     // Requête pour récupérer l'ID du client à partir de son email
-    $sql_client = 'SELECT * FROM `client` WHERE `email`=:email';
-    $query_client = $db->prepare($sql_client);
-    $query_client->bindValue(':email', $email, PDO::PARAM_STR);
-    $query_client->execute();
-    $client = $query_client->fetch();
+    selectCLient($db,$email);
 
     // Requête pour vérifier s'il existe déjà un panier en attente pour ce client
-    $sql_panier = 'SELECT * FROM `panier` WHERE `idClient`=:id AND `statut` = "en attente"';
-    $query_panier = $db->prepare($sql_panier);
-    $query_panier->bindValue(':id', $client["idClient"], PDO::PARAM_STR);
-    $query_panier->execute();
-    $panier = $query_panier->fetch();
+    $panier=selectPanierByIdClient($db,$client["idClient"]);
 
     // Si aucun panier en attente n'existe pour ce client, en créer un nouveau
     if (!$panier) {
@@ -104,5 +96,5 @@ if (isset($_POST['id']) && isset($_POST['quantite'])) {
     echo "Aucun identifiant d'article spécifié.";
 }
 
-require_once('../bd/close.php');
+require_once('../../bd/close.php');
 ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../bd/connect.php');
+require_once('../../bd/connect.php');
 
 if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
 

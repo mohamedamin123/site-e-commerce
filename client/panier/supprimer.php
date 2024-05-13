@@ -1,5 +1,5 @@
 <?php
-require_once('../bd/connect.php');
+require_once('../../bd/connect.php');
 
 // Vérifiez si le bouton de suppression a été soumis
 if (isset($_POST['id']) && isset($_POST['prix']) && isset($_POST['id2'])) {
@@ -38,5 +38,5 @@ if (isset($_POST['id']) && isset($_POST['prix']) && isset($_POST['id2'])) {
     echo "Données manquantes pour la suppression de l'article.";
 }
 
-require_once('../bd/close.php');
+require_once('../../bd/close.php');
 ?>

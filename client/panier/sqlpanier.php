@@ -1,5 +1,6 @@
 <?php
-require_once('../home/traitement.php');
+require_once('../requets.php');
+$produit=connect($db);
 
 $sql2 = 'SELECT * FROM `panier` WHERE `idClient`=:id AND `statut` = "en attente"';
 // On prépare la requête

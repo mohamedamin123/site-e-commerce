@@ -63,4 +63,33 @@ function send($add,$newStatus,$result) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
+
+function envoyer($add,$file_name) {
+    $mail = new PHPMailer(true);
+        try {
+        
+            $mail->isSMTP();
+            $mail->Host='smtp.gmail.com';
+            $mail->SMTPAuth=true;
+            $mail->Username='mohamedaming146@gmail.com';
+            $mail->Password='nyqq atil npai frcr';
+            $mail->SMTPSecure='ssl';
+            $mail->Port=465;
+            $mail->setFrom('mohamedaming146@gmail.com');
+            $mail->addAddress($add);
+            $mail->isHTML(true);
+
+            $mail->Subject = "Votre Facture ";
+            $mail->Body = "Votre facture est attachée à cet e-mail.";
+        
+            // Joindre la facture PDF
+            $mail->addAttachment($file_name);
+            $mail->send();
+        
+            exit();
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+}
 ?>

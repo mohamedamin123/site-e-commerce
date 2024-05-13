@@ -220,3 +220,60 @@ function selectRecherche($db, $search)
     $articles = $query->fetchAll(PDO::FETCH_ASSOC);
     return $articles;
 }
+
+
+function selectAllPanierByIdlient($db,$idC) {
+    $sql2 = 'SELECT * FROM `panier` WHERE `idClient`=:id AND `statut` = "en attente"';
+    // On prépare la requête
+    $query2 = $db->prepare($sql2);
+    // On attache les valeurs
+    $query2->bindValue(':id', $idC, PDO::PARAM_STR);
+    // On exécute la requête
+    $query2->execute();
+    // On stocke le résultat dans un tableau associatif
+    $panier = $query2->fetch();
+
+    $sql3 = 'SELECT * FROM `panier_article` WHERE `idPanier`=:idPanier';
+    $query3 = $db->prepare($sql3);
+    $query3->bindValue(':idPanier', $panier["idPanier"], PDO::PARAM_STR);
+    $query3->execute();
+
+    // Récupération de tous les articles associés à ce panier
+    $articles = $query3->fetchAll();
+    return $articles;
+}
+
+function selectPanierByIdClient($db,$idC) {
+    $sql_panier = 'SELECT * FROM `panier` WHERE `idClient`=:id AND `statut` = "en attente"';
+    $query_panier = $db->prepare($sql_panier);
+    $query_panier->bindValue(':id', $idC, PDO::PARAM_STR);
+    $query_panier->execute();
+    $panier = $query_panier->fetch();
+    return $panier;
+}
+
+// Fonction pour calculer le prix total du panier
+function calculerPrixTotal($articles, $db) {
+    $prixTotal = 0;
+    foreach ($articles as $article) {
+        // Récupérer les détails de l'article depuis la base de données
+        $sql4 = 'SELECT prix FROM article WHERE idArticle=:idArticle';
+        $query4 = $db->prepare($sql4);
+        $query4->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
+        $query4->execute();
+        $article_details = $query4->fetch(PDO::FETCH_ASSOC);
+
+        // Ajouter le prix de chaque article au prix total
+        $prixTotal += $article['quantite'] * $article_details['prix'];
+    }
+    return $prixTotal;
+}
+
+function updatePanier($db,$prix_total,$idP) {
+    // Mettre à jour le prix total dans la base de données
+$sql_update_prix_total = "UPDATE panier SET prix_total = :prix_total WHERE idPanier = :idPanier";
+$query_update_prix_total = $db->prepare($sql_update_prix_total);
+$query_update_prix_total->bindValue(':prix_total', $prix_total, PDO::PARAM_STR);
+$query_update_prix_total->bindValue(':idPanier', $idP, PDO::PARAM_STR);
+$query_update_prix_total->execute();
+}

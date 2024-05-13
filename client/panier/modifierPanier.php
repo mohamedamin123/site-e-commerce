@@ -1,11 +1,11 @@
 <?php
-    require_once('../bd/connect.php');
-    require_once('traitement.php');
+    require_once('../../bd/connect.php');
+    require_once('../requets.php');
 
     $quantite = $_POST['quantite'];
     $idPanierArt = $_POST['id'];
     $idArt = $_POST['idArt'];
-
+    $produit=connect($db);
     // Mettre à jour la quantité du produit dans la table panier_article
     $sql_update_quantite = 'UPDATE `panier_article` SET `quantite` = :quantite WHERE `id` = :id';
     $query_update_quantite = $db->prepare($sql_update_quantite);
@@ -31,5 +31,5 @@
     header('Location: panier.php');
     exit();
 
-    require_once('../bd/close.php');
+    require_once('../../bd/close.php');
 ?>

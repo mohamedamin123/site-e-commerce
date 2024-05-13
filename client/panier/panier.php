@@ -1,33 +1,19 @@
 <?php
 session_start();
-require("traitement.php");
+require("../requets.php");
+require("../../bd/connect.php");
 
-// Fonction pour calculer le prix total du panier
-function calculerPrixTotal($articles, $db) {
-    $prixTotal = 0;
-    foreach ($articles as $article) {
-        // Récupérer les détails de l'article depuis la base de données
-        $sql4 = 'SELECT prix FROM article WHERE idArticle=:idArticle';
-        $query4 = $db->prepare($sql4);
-        $query4->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
-        $query4->execute();
-        $article_details = $query4->fetch(PDO::FETCH_ASSOC);
+$produit=connect($db);
 
-        // Ajouter le prix de chaque article au prix total
-        $prixTotal += $article['quantite'] * $article_details['prix'];
-    }
-    return $prixTotal;
-}
+$panier=selectPanierByIdClient($db,$produit["idClient"]);
+
+$articles=selectAllPanierByIdlient($db,$produit["idClient"]);
+
 
 // Calculer le prix total
 $prix_total = calculerPrixTotal($articles, $db);
 
-// Mettre à jour le prix total dans la base de données
-$sql_update_prix_total = "UPDATE panier SET prix_total = :prix_total WHERE idPanier = :idPanier";
-$query_update_prix_total = $db->prepare($sql_update_prix_total);
-$query_update_prix_total->bindValue(':prix_total', $prix_total, PDO::PARAM_STR);
-$query_update_prix_total->bindValue(':idPanier', $panier["idPanier"], PDO::PARAM_STR);
-$query_update_prix_total->execute();
+updatePanier($db,$prix_total,$panier["idPanier"]) ;
 ?>
 
 <!DOCTYPE html>
@@ -64,12 +50,8 @@ $query_update_prix_total->execute();
             </tr>
             <?php
             foreach ($articles as $index => $article) {
-                // Récupérer les détails de l'article depuis la base de données
-                $sql4 = 'SELECT * FROM article WHERE idArticle=:idArticle';
-                $query4 = $db->prepare($sql4);
-                $query4->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
-                $query4->execute();
-                $article_details = $query4->fetch();
+
+                $article_details = selectArticleByIdArticle($db,$article["idArticle"]);
                 // Afficher les détails de l'article dans le tableau
                 echo '<tr>';
                 echo '<td><img src="data:image/jpeg;base64,' . base64_encode($article_details["photo"]) . '"></td>';
@@ -78,14 +60,14 @@ $query_update_prix_total->execute();
                 echo '<td>' . $article_details['prix'] . 'Dt</td>'; // Modification ici pour afficher le prix unitaire
                 echo '<td>' . $article['quantite'] . '</td>';
                 echo '<td>' . $article['quantite'] * $article_details['prix'] . 'Dt </td>';
-                echo '<td><a href="info_panier.php"><img src="../assets/images/voir.png"</a></td>';
+                echo '<td><a href="info_panier.php"><img src="../../assets/images/voir.png"</a></td>';
                 
                 echo '<form  id="myForm2' . $index . '" action="modifierPanier.php" method="POST">';
-                echo '<td><img onclick="traiter2(' . $article["id"] . ', ' . $article_details['idArticle'] . ');" style="cursor: pointer;" src="../assets/images/modifier.png"></td>';
+                echo '<td><img onclick="traiter2(' . $article["id"] . ', ' . $article_details['idArticle'] . ');" style="cursor: pointer;" src="../../assets/images/modifier.png"></td>';
                 echo '</form>';
 
                 echo '<form  id="myForm' . $index . '" action="supprimer.php" method="POST">';
-                echo '<td><img onclick="traiter(' . $index . ');" src="../assets/images/souriant.png" style="cursor: pointer;"</td>';
+                echo '<td><img onclick="traiter(' . $index . ');" src="../../assets/images/souriant.png" style="cursor: pointer;"</td>';
                 echo '<input href="#" type="hidden" name="id" value="' . $article["id"] . '"/>';
                 echo '<input href="#" type="hidden" name="id2" value="' . $panier["idPanier"] . '"/>';
                 echo '<input href="#" type="hidden" name="prix" value="' . $article['quantite'] * $article_details['prix'] . '"/>';
