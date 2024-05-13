@@ -147,3 +147,11 @@ tr{
 .submitForm {
     cursor: pointer;
 }
+
+.desc {
+    font-size: 17px;
+    color: black;
+    position: absolute;
+    top: 10px; /* Ajustez cette valeur selon votre préférence */
+    left: 10px; /* Ajustez cette valeur selon votre préférence */
+}

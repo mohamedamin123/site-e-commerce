@@ -12,18 +12,24 @@ if (isset($_POST['idCli']) && isset($_POST['idArt'])) {
     echo "client ".$idCli;
     echo "art ".$idArt ;
     $favoris=selectFavoris($db, $idCli, $idArt);
+    $currentURL = $_SERVER['REQUEST_URI'];
+    $page=$_POST["page"];
     // Si aucun favoris n'existe pour ce client et cet article, en créer un nouveau
     if (!$favoris) {
+        
         insertFavoris($db,$idCli,$idArt);
-        header('Location: ../../../client/home/index.php');
-        exit();
     } else {
         // Si un favoris existe déjà pour ce client et cet article, supprimer l'article du favoris
         $idFavoris = $favoris['idFavoris'];
         supprimerFavoris($db,$idFavoris);
-        header('Location: ../../../client/home/index.php');
-        exit();
     }
+    if($page==1) {
+        header('Location: ../../../client/home/index.php');
+    } else {
+        header('Location: ../../../client/favoris/favoris.php');
+    }
+    exit();
+
 } else {
     // Affichez un message si le bouton de soumission n'a pas été envoyé
     echo "Aucun identifiant de client ou d'article spécifié.";

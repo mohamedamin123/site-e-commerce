@@ -6,9 +6,15 @@ session_start();
 
 if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
     $email = ($_SESSION['email']);
+
+
+    $offset = $_SESSION['offset'];
+    $limitLignesPage = $_SESSION['limitLignesPage'] ;
+
+
     $client=selectCLient($db,$email);
 
-    $articles=selectArticle($db,$client["idClient"]);
+    $articles=selectArticle($db,$client["idClient"],$offset,9);
     
     echo '<div class="list">';
     echo '<div class="admin-icon-container">';

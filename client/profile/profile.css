@@ -22,8 +22,8 @@ form{
     display: flex;
     flex-direction: column;
     padding: 15px;
-    border-radius: 6px;
-    width: 500px;
+    border-radius: 16px;
+    width: 1000px;
 }
 
 .form-control.rounded-pill {

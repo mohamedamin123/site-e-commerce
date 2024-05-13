@@ -18,7 +18,38 @@
     require("../../bd/connect.php");
     require_once('../requets.php');
     $produit=connect($db);
+    $limitLignesPage = isset($_SESSION['nbrLignesAffiche']) ? $_SESSION['nbrLignesAffiche'] : 9;
+    // Obtenir le nombre total des 
 
+    $reqSql = "SELECT COUNT(idArticle) AS nbrLignes FROM article WHERE idClient='" . $produit["idClient"] . "'";
+    // On prépare la requête
+    $query = $db->prepare($reqSql);
+    // On exécute
+    $query->execute();
+    // On récupère le nombre d'enregistrements
+    $resultat = $query->fetch(PDO::FETCH_ASSOC);
+    $toutesLignes = (int) $resultat['nbrLignes'];
+    // Calculer le nombre total de pages
+    $totoalPages = ceil($toutesLignes / $limitLignesPage);
+
+    // On détermine sur quelle page on se trouve
+    if (isset($_GET['page']) && !empty($_GET['page'])) {
+        $currentPage = (int) strip_tags($_GET['page']);
+    } else {
+        $currentPage = 1;
+    }
+
+    // Calcul de l'offset pour récupérer les éléments de la page actuelle
+    $offset = ($currentPage - 1) * $limitLignesPage;
+
+    //preparer la requete
+    $requete = "select * from client where role = 'client' limit $offset,$limitLignesPage ";
+    // lancer la requete
+    $resultat = $db->query($requete);
+    $publishers = $resultat->fetchAll(PDO::FETCH_ASSOC);
+
+    $_SESSION['offset'] = $offset;
+    $_SESSION['limitLignesPage'] = $limitLignesPage;
     ?>
     <header class="custom-bg-color">
         <div class="container">
@@ -96,6 +127,47 @@
     
     </div>
 </section>
+
+
+
+<footer class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item <?php if ($currentPage <= 1) {
+                                            echo 'disabled';
+                                        } ?>">
+                    <a class="page-link" href="<?php if ($currentPage <= 1) {
+                                                    echo '#';
+                                                } else {
+                                                    echo '?page=' . ($currentPage - 1);
+                                                } ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Precedent</span>
+                    </a>
+                </li>
+                <?php for ($i = 1; $i <= $totoalPages; $i++) : ?>
+                    <li class="page-item <?php if ($currentPage == $i) {
+                                                echo 'active';
+                                            } ?>">
+                        <a class="page-link" href="?page=<?= $i; ?>"><?= $i ?></a>
+                    </li>
+                <?php endfor; ?>
+
+                <li class="page-item <?php if ($currentPage >= $totoalPages) {
+                                            echo 'disabled';
+                                        } ?>">
+                    <a class="page-link" href="<?php if ($currentPage >= $totoalPages) {
+                                                    echo '#';
+                                                } else {
+                                                    echo '?page=' . ($currentPage + 1);
+                                                } ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Suivant</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
 
     <script src="script.js"></script>
 </body>

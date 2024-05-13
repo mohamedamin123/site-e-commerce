@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="profile.css">
@@ -15,15 +15,20 @@
 <body>
 
 <?php
-        require_once('traitement2.php');
+        require("../../bd/connect.php");
+        require_once('../requets.php');
+        $produit=connect($db);
     ?> 
 
 
 
 <div class="mt-2 text-center">
-        <div style="display: flex; align-items: center;">
-            <div style="margin-right: 10px;"><img onclick="retour()" src="../../../assets/images/fleche.png" alt="Flèche"></div>
-        </div>
+<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="../home/index.php">Retour</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Profile <?php echo $produit['nom'] . " ".$produit['prenom']  ?> </li>
+            </ol>
+        </nav>
     </div>
 
     <main class="main d-block mx-auto ">
@@ -36,8 +41,6 @@
                 <input type="text" name="nom" id="nom" class="form-control" value="<?php echo $produit['nom'] ?>" required>
                 <div class="small text-danger mt-2 mb-2 text text-center" id="nomError"></div>
                 <!-----------------------------------/NOM------------------------------------->
-
-
 
 
                 <!-----------------------------------PRENOM------------------------------------->

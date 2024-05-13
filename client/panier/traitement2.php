@@ -38,7 +38,7 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
         $articles = $query3->fetchAll();
         
         // Parcourir les articles associés à ce panier
-        foreach ($articles as $article) {
+        foreach ($articles as $index => $article) {
             // Récupérer les détails de l'article depuis la base de données
             $sql4 = 'SELECT * FROM `article` WHERE `idArticle`=:idArticle';
             $query4 = $db->prepare($sql4);
@@ -49,12 +49,15 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
 
             echo '<div  class="product">';
             echo'<div class="image-product">';
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($article_details["photo"]) . '">';
+            echo '<p style="opacity:0;" class="desc" id="description' . $index . '">' . $article_details["description"] . 'dt </p>';
+
+            echo '<img id="image' . $index . '" src="data:image/jpeg;base64,' . base64_encode($article_details["photo"]) . '">';
             echo '</div>';
             echo '<div class="content">';
-            echo '<h4 class="name">' . $article['quantite'] ." : ".$article_details['titre'] . '</h4>';
-            echo '<h2 class="price">' . $article['quantite']*$article_details['prix'] . 'Dt</h2>';
-            echo '<a href="#" class="id_product">Voir détails</a> <br> <br> ';
+            echo '<h4 class="name" id="titre' . $index . '">' . $article['quantite'] ." : ".$article_details['titre'] . '</h4>';
+            echo '<h2 class="price" id="prix' . $index . '">' . $article['quantite']*$article_details['prix'] . 'Dt</h2>';
+            echo '<a href="#" onclick="showDetails(' . $index . ')" class="id_product">Voir détails</a> <br> <br> ';
+
             echo '<form action="supprimer.php" method="POST">';
             echo '<button href="#" type="submit" class="btn btn-danger ">Supprimer</button>';
             echo '<input href="#" type="hidden" name="id" value="'.$article["id"].'"/>';

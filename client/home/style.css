@@ -196,3 +196,10 @@ section {
     font-size: 30px; /* Taille de l'icône */
 }
 
+.desc {
+    font-size: 17px;
+    color: black;
+    position: absolute;
+    top: 10px; /* Ajustez cette valeur selon votre préférence */
+    left: 10px; /* Ajustez cette valeur selon votre préférence */
+}

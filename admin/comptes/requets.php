@@ -1,7 +1,7 @@
 <?php
-function select($db)
+function select($db,$offset,$limitLignesPage )
 {
-    $sql = 'SELECT * FROM `client` where role ="client" order by date desc';
+    $sql = "SELECT * FROM `client` WHERE role = 'client' ORDER BY date DESC LIMIT $offset, $limitLignesPage";
     // On prépare la requête
     $query = $db->prepare($sql);
     // On exécute la requête
@@ -10,7 +10,6 @@ function select($db)
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
-
 
 function selectRecherche($db)
 {

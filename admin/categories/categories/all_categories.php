@@ -2,12 +2,16 @@
 // Inclure le fichier de connexion à la base de données
 require_once('../../../bd/connect.php');
 require("../requets.php");
+session_start();
 
-$result=select($db);
+
+$offset = $_SESSION['offset'];
+$limitLignesPage = $_SESSION['limitLignesPage'] ;
+$result = select($db,$offset,$limitLignesPage);
 
 // Fermer la connexion à la base de données
 require_once('../../../bd/close.php');
-$i = 1;
+$i = $offset+1;
 
 foreach ($result as $user) {
     echo "<tr>";
@@ -22,4 +26,6 @@ foreach ($result as $user) {
     echo "</tr>";
     $i++;
 }
+
 ?>
+

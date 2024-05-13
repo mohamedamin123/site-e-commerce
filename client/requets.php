@@ -1,8 +1,8 @@
 <?php
 session_start();
-function selectArticles($db)
+function selectArticles($db,$offset,$limitLignesPage)
 {
-    $sql = 'SELECT * FROM `article` where statut!=0';
+    $sql = 'SELECT * FROM `article` WHERE statut != 0 LIMIT ' . $offset . ',' . $limitLignesPage;
     // Préparer la requête
     $query = $db->prepare($sql);
     // Exécuter la requête
@@ -23,9 +23,9 @@ function selectFavoris($db, $idCL, $idA)
     return $favoris_exist;
 }
 
-function selectAllFavoris($db,$idClient) {
+function selectAllFavoris($db,$idClient,$offset,$limitLignesPage) {
     // Requête SQL pour récupérer tous les articles favoris d'un client
-$sql = 'SELECT * FROM `favoris` WHERE idClient = :idClient';
+    $sql = 'SELECT * FROM `favoris` WHERE idClient = :idClient LIMIT ' . $offset . ',' . $limitLignesPage;
 
 // Préparer la requête
 $query = $db->prepare($sql);
@@ -152,9 +152,9 @@ function selectCLient($db,$email) {
         $client = $query->fetch();
         return $client;
 }
-function selectArticle($db,$idC) {
+function selectArticle($db,$idC,$offset,$limitLignesPage) {
     // Requête SQL pour récupérer tous les articles du client
-    $sql2 = 'SELECT * FROM `article` WHERE `idClient`=:idClient';
+    $sql2 = 'SELECT * FROM `article` WHERE `idClient`=:idClient LIMIT ' . $offset . ',' . $limitLignesPage;
     // Préparer la requête
     $query2 = $db->prepare($sql2);
     // Attacher les valeurs

@@ -1,5 +1,5 @@
 <?php
-require_once('../bd/connect.php');
+require_once('../../bd/connect.php');
 
 // Initialisation de la session
 session_start();
@@ -66,5 +66,5 @@ if (
         exit();
     }
 }
-require_once('../bd/close.php');
+require_once('../../bd/close.php');
 ?>
