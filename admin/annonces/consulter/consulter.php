@@ -13,28 +13,52 @@
 
 <body style="background-color: #eee;">
     <?php
-    require_once('../../../securite/admin_check.php');
-    ?>
+require_once('../../../connexion/securite/admin_check.php');
+require("../../../bd/connect.php");
+require("../requets.php");
+$id=$_GET["id"];
+$article=articleById($db,$id);
 
-    <div class="list">
-
-        <div class="admin-icon-container">
-            <div *ngFor="let maison of maisons | rechercheAnnonce: searchText; let i = index" class="admin-icon" (click)="versHome(maison)">
-                <img [src]="photos[i] ? photos[i] : '/assets/images/home/no-photo.png'" width="400px" height="330px">
-                <div style="margin-left: 20px;">
-
-                    <p style=" margin-bottom: 0; font-weight: bold; margin-top: 10px;">{{maison.titre}}</p>
-                    <p style=" margin-bottom: 0; color: grey;">{{maison.prix}} dt <b style="color: black;"> {{duree}}</b> <i class="fas fa-star" style="color: rgb(87, 127, 213); margin-left: 250px; "></i> {{star}}
-
-                    </p>
-
-                    <p style="margin-bottom: 0;">{{maison.description}}</p>
-                </div>
-
-            </div>
-        </div>
+?>
+<div class="mt-2 text-center">
+<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="../annonce/annonce.php">Retour</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Consulter produit : <?php echo $article["titre"]  ?> </li>
+            </ol>
+        </nav>
     </div>
+<?php
 
+
+
+echo '<div class="list">';
+echo '<div class="admin-icon-container">';
+
+    echo '<div class="product" style="margin-right: 20px;">';
+    echo '<p style="opacity:0;" class="desc" id="description">' . $article["description"] . 'dt </p>';
+
+    echo '<div class="image-product">';
+    echo '<img class="img" id="image" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
+    echo '</div>';
+
+    echo '<div class="content">';
+    
+    echo '<h4 class="name" id="titre">' . $article["titre"] . '</h4>';
+    echo '<h2 class="price" id="prix">' . $article["prix"] . 'dt </h2>';
+    //
+
+    // Button to show details
+    echo '<button class="btn btn-primary" onclick="showDetails()">Voir détails</button>';
+    echo '</div>'; // .content
+    echo '</div>'; // .product
+
+
+echo '</div>';
+echo '</div>';
+
+?>
+<script src="script.js"></script>
 </body>
 
 </html>
