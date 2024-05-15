@@ -133,14 +133,46 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && 
 $prix_total = filter_var($_POST['prix-total'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 echo $prix_total;
 
-// Insérer la valeur correcte dans la colonne 'total'
-$sql_insert_facture = 'INSERT INTO `facture` (`idClient`, `total`, `mode_paiement`, `commentaire`) VALUES (:idClient, :total, :modePaiement, :commentaire)';
-$query_insert_facture = $db->prepare($sql_insert_facture);
-$query_insert_facture->bindValue(':idClient', $produit["idClient"], PDO::PARAM_STR);
-$query_insert_facture->bindValue(':total', $prix_total, PDO::PARAM_STR); // Utiliser le prix total corrigé
-$query_insert_facture->bindValue(':modePaiement', $modePaiement, PDO::PARAM_STR);
-$query_insert_facture->bindValue(':commentaire', $message, PDO::PARAM_STR);
-$query_insert_facture->execute();
+
+
+
+
+
+
+
+
+
+//insert commande
+$sql_insert_commande = 'INSERT INTO `commande` (`idClient`) VALUES (:idClient)';
+$query_insert_commande = $db->prepare($sql_insert_commande);
+$query_insert_commande->bindValue(':idClient', $produit["idClient"], PDO::PARAM_STR);
+
+if ($query_insert_commande->execute()) {
+    // Récupérer l'ID de la commande insérée
+    $idCommande = $db->lastInsertId();
+
+    foreach ($articles as $article) {
+        $sql_insert_commande_article = 'INSERT INTO `article_commande` (`idArticle`, `idCommande`) VALUES (:idArticle, :idCommande)';
+        $query_insert_commande_article = $db->prepare($sql_insert_commande_article);
+        $query_insert_commande_article->bindValue(':idArticle', $article["idArticle"], PDO::PARAM_STR);
+        $query_insert_commande_article->bindValue(':idCommande', $idCommande, PDO::PARAM_INT); // Utilisation de lastInsertId()
+        $query_insert_commande_article->execute();
+    }
+    // Utiliser cet ID dans la seconde requête
+
+        $sql_insert_facture = 'INSERT INTO `facture` (`idClient`, `total`, `mode_paiement`, `commentaire`,`idCommande`) VALUES (:idClient, :total, :modePaiement, :commentaire,:idCommande)';
+        $query_insert_facture = $db->prepare($sql_insert_facture);
+        $query_insert_facture->bindValue(':idClient', $produit["idClient"], PDO::PARAM_STR);
+        $query_insert_facture->bindValue(':total', $prix_total, PDO::PARAM_STR); // Utiliser le prix total corrigé
+        $query_insert_facture->bindValue(':modePaiement', $modePaiement, PDO::PARAM_STR);
+        $query_insert_facture->bindValue(':commentaire', $message, PDO::PARAM_STR);
+        $query_insert_facture->bindValue(':idCommande', $idCommande, PDO::PARAM_INT);
+        $query_insert_facture->execute();
+    
+} // Si succès, afficher "oui"
+
+
+
 header('Location: ../home/index.php');
 
 envoyer($produit["email"],$file_name);

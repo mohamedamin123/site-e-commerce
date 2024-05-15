@@ -277,3 +277,7 @@ $query_update_prix_total->bindValue(':prix_total', $prix_total, PDO::PARAM_STR);
 $query_update_prix_total->bindValue(':idPanier', $idP, PDO::PARAM_STR);
 $query_update_prix_total->execute();
 }
+
+function ajouter_commande($db) {
+    
+}
