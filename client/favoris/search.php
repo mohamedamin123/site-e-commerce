@@ -10,8 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
     $search = $_POST['search'];
 
     // Requête SQL pour rechercher les articles par titre ou catégorie
-    $sql = "SELECT * FROM `article` AS a JOIN `favoris` AS f ON (a.idArticle = f.idArticle)
-    WHERE (a.titre LIKE :search OR a.idCategories LIKE :search) AND statut != 0";
+    $sql = "SELECT a.* FROM `article` a
+    LEFT JOIN `categories` c ON a.idCategories = c.idCategories
+    JOIN `favoris` f ON a.idArticle = f.idArticle
+    WHERE (LOWER(a.titre) LIKE :search OR LOWER(c.titre) LIKE :search OR a.idCategories LIKE :search) AND a.statut != 0";
+
 
     // Préparer la requête
     $query = $db->prepare($sql);

@@ -17,7 +17,7 @@
     require("../../bd/connect.php");
     require_once('../requets.php');
     $produit=connect($db);
-    $limitLignesPage = isset($_SESSION['nbrLignesAffiche']) ? $_SESSION['nbrLignesAffiche'] : 9;
+    $limitLignesPage = isset($_SESSION['nbrLignesAffiche']) ? $_SESSION['nbrLignesAffiche'] : 6;
     // Obtenir le nombre total des 
 
     $reqSql = "SELECT COUNT(idFavoris) AS nbrLignes FROM favoris WHERE `idClient`='" . $produit["idClient"] . "'";
@@ -85,7 +85,7 @@
                                     echo '<img id="avatar" src="data:image/jpeg;base64,' . base64_encode($produit["photo"]) . '" alt="avatar" style="width: 30px; height: 30px; border-radius: 50%;">';
                                 } else {
                                     // Si la photo dans la base de données est vide, afficher l'image par défaut
-                                    echo '<img id="avatar" src="../assets/images/user.png" alt="avatar" style="width: 30px; height: 30px; border-radius: 50%;">';
+                                    echo '<img id="avatar" src="../../assets/images/user.png" alt="avatar" style="width: 30px; height: 30px; border-radius: 50%;">';
                                 }
                                 ?>
                             </label>
@@ -105,7 +105,7 @@
 
                         if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
                 
-                            echo "<i id='login' name='profile'>" . $client["prenom"] . " " . $client["nom"] . "</i>";
+                            echo "<i id='login' name='profile'>" . $produit["prenom"] . " " . $produit["nom"] . "</i>";
                             echo "<i class='deconexion' onclick='login()' > Déconnecte </i>";
 
                         } else {

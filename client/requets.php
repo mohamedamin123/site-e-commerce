@@ -209,9 +209,16 @@ function selectRechercheByIdCLient($db,$search,$idc) {
 
 function selectRecherche($db, $search)
 {
+
+
+    $search = strtolower($search);
+    
     // Requête SQL pour rechercher les articles par titre ou catégorie
-    $sql = "SELECT * FROM `article` WHERE (`titre` LIKE :search OR `idCategories` LIKE :search) and statut!=0";
-    // Préparer la requête
+    $sql = "SELECT a.* FROM `article` a
+            LEFT JOIN `categories` c ON a.idCategories = c.idCategories
+            WHERE (LOWER(a.titre) LIKE :search OR LOWER(c.titre) LIKE :search) AND a.statut != 0";
+    
+// Préparer la requête
     $query = $db->prepare($sql);
     // Attacher les valeurs et exécuter la requête
     $query->execute(array(':search' => '%' . $search . '%'));

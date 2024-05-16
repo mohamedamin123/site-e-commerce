@@ -14,7 +14,7 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
 
     $client=selectCLient($db,$email);
 
-    $articles=selectArticle($db,$client["idClient"],$offset,9);
+    $articles=selectArticle($db,$client["idClient"],$offset,6);
     
     echo '<div class="list">';
     echo '<div class="admin-icon-container">';

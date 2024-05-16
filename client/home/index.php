@@ -18,7 +18,7 @@
     require_once('../requets.php');
     $client=connect($db);
 
-    $limitLignesPage = isset($_SESSION['nbrLignesAffiche']) ? $_SESSION['nbrLignesAffiche'] : 9;
+    $limitLignesPage = isset($_SESSION['nbrLignesAffiche']) ? $_SESSION['nbrLignesAffiche'] : 6;
     // Obtenir le nombre total des 
 
     $reqSql = "SELECT count(idArticle) AS nbrLignes FROM article where statut = 1";

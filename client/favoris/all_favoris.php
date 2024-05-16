@@ -9,7 +9,7 @@ session_start();
 
 $offset = $_SESSION['offset'];
 $limitLignesPage = $_SESSION['limitLignesPage'] ;
-$favoris=selectAllFavoris($db,$idClient,$offset,9);
+$favoris=selectAllFavoris($db,$idClient,$offset,6);
 
 foreach ($favoris as $fv) {
         // Afficher les articles

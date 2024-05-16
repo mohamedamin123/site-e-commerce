@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
         echo '<div class="image-product">';
         echo '<img class="img" id="image' . $index . '" src="data:image/jpeg;base64,' . base64_encode($article["photo"]) . '" alt="Image">';
         echo '</div>';
-    
+        if(!empty($_SESSION["email"])) {
+
         echo '<form id="favoris" action="../favoris/ajouter_favoris.php" method="POST">';
         echo '<button id="favoriteButton" onclick="toggleFavorite(' . $index . ')">';
         echo "<input type='hidden' name='idArt' value='" . $article["idArticle"] . "'>";
@@ -37,18 +38,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search']) && !empty($_
         }
         echo '</button>';
         echo '</form>';
-    
+        }
         echo '<div class="content">';
         
         echo '<h4 class="name" id="titre' . $index . '">' . $article["titre"] . '</h4>';
         echo '<h2 class="price" id="prix' . $index . '">' . $article["prix"] . 'dt </h2>';
         //
-    
+        if(!empty($_SESSION["email"])) {
         echo '<form id="ajouterPanierForm" action="../panier/ajouter_panier.php" method="POST">';
         echo '<input type="button" id="panier' . $index . '" value="Ajouter au panier" class="btn btn-info" style="margin-bottom:20px" onclick="ajouterAuPanier(' . $article["idArticle"] . ');"/> <br>';
         echo "<input type='hidden' id='idArticle' name='id' value='" . $article["idArticle"] . "'>";
         echo '</form>';
-    
+        }
         // Button to show details
         echo '<button class="btn btn-primary" onclick="showDetails(' . $index . ')">Voir détails</button>';
         echo '</div>'; // .content

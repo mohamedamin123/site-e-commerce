@@ -117,12 +117,16 @@ $pdf->Cell(0,10,'Total general: $'.$total_general,0,1,'R');
 $file_name = 'facture_produits.pdf';
 
 // Créer le fichier PDF
-$pdf->Output($file_name,'F');
+$pdf->Output($file_name, 'F');
 
 // Forcer le téléchargement du fichier PDF
 header('Content-Type: application/pdf');
 header('Content-Disposition: attachment; filename="'.$file_name.'"');
 readfile($file_name);
+
+
+
+
 if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['tel']) && isset($_POST['date']) && isset($_POST['prix-total']) && isset($_POST['modePaiement']) && isset($_POST['message'])) {
     $prix_total = $_POST['prix-total'];
     $modePaiement = $_POST['modePaiement'];
@@ -132,15 +136,6 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && 
 // Convertir la chaîne '2 dt' en un nombre en retirant les caractères non numériques
 $prix_total = filter_var($_POST['prix-total'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 echo $prix_total;
-
-
-
-
-
-
-
-
-
 
 //insert commande
 $sql_insert_commande = 'INSERT INTO `commande` (`idClient`) VALUES (:idClient)';
@@ -170,6 +165,10 @@ if ($query_insert_commande->execute()) {
         $query_insert_facture->execute();
     
 } // Si succès, afficher "oui"
+
+// Créer le fichier PDF
+$pdf->Output('F', $file_name);
+
 
 
 

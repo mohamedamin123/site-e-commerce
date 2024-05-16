@@ -18,7 +18,7 @@
     require("../../bd/connect.php");
     require_once('../requets.php');
     $produit=connect($db);
-    $limitLignesPage = isset($_SESSION['nbrLignesAffiche']) ? $_SESSION['nbrLignesAffiche'] : 9;
+    $limitLignesPage = isset($_SESSION['nbrLignesAffiche']) ? $_SESSION['nbrLignesAffiche'] : 6;
     // Obtenir le nombre total des 
 
     $reqSql = "SELECT COUNT(idArticle) AS nbrLignes FROM article WHERE idClient='" . $produit["idClient"] . "'";
